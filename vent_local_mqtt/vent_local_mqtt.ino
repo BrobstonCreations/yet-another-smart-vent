@@ -8,51 +8,52 @@ int servoSensorPin = A0;
 int upperLimit = 100;
 int threshold = 165;
 
-Servo servo;
-
 int globalStartPosition = 90;
+int minDegreesTraveled = 40;
+
+Servo servo;
 
 void setup() {
   Serial.begin(9600);
   pinMode(INPUT, servoSensorPin);
+  pinMode(OUTPUT, servoSensorPin);
 }
 
 void loop() {
-  Serial.print("globalStartPosition:");
-  Serial.println(globalStartPosition);
-  close(globalStartPosition);
-  open(globalStartPosition);
+  open();
+  close();
 }
 
-void close(int startPosition) {
+void open() {
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-  for(int position = startPosition; position > 40; position--) {
-    if (turnOneDegreeUnlessAtEndStop(position)) {
-      break;
-    }  
-  }
-}
-
-void open(int startPosition) {
-  servo.attach(servoOutputPin, servoMin, servoMax);
-
+  int startPosition = globalStartPosition;
   for(int position = startPosition; position < 180; position++) {
-    if (turnOneDegreeUnlessAtEndStop(position)) {
+    int degreesTraveled = position - startPosition;
+    if (turnOneDegreeUnlessAtEndStop(position, degreesTraveled)) {
       break;
     }  
   }
 }
 
-bool turnOneDegreeUnlessAtEndStop(int position) {
-  Serial.print("position:");
-  Serial.print(position);
-  int servoSensorValue = analogRead(servoSensorPin);
-  Serial.print(" | ");
-  Serial.print("servoSensorValue:");
-  Serial.println(servoSensorValue);
+void close() {
+  servo.attach(servoOutputPin, servoMin, servoMax);
 
-  if (servoSensorValue >= threshold) {
+  int startPosition = globalStartPosition;
+  for(int position = startPosition; position > 40; position--) {
+    int degreesTraveled = startPosition - position;
+    if (turnOneDegreeUnlessAtEndStop(position, degreesTraveled)) {
+      break;
+    }  
+  }
+}
+
+bool turnOneDegreeUnlessAtEndStop(int position, int degreesTraveled) {
+  bool hasTraveledFarEnough = degreesTraveled >= minDegreesTraveled;
+  int servoSensorValue = analogRead(servoSensorPin);
+  bool hasHitVoltageThreshold = servoSensorValue >= threshold;
+
+  if (hasTraveledFarEnough && hasHitVoltageThreshold) {
     servo.detach();
     globalStartPosition = position;
     return true;
