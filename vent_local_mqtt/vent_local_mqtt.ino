@@ -28,8 +28,7 @@ void close(int startPosition) {
   servo.attach(servoOutputPin, servoMin, servoMax);
 
   for(int position = startPosition; position > 40; position--) {
-    bool shouldBreak = turnOneDegreeUnlessAtEndStop(position);
-    if (shouldBreak) {
+    if (turnOneDegreeUnlessAtEndStop(position)) {
       break;
     }  
   }
@@ -39,10 +38,9 @@ void open(int startPosition) {
   servo.attach(servoOutputPin, servoMin, servoMax);
 
   for(int position = startPosition; position < 180; position++) {
-    bool shouldBreak = turnOneDegreeUnlessAtEndStop(position);
-    if (shouldBreak) {
+    if (turnOneDegreeUnlessAtEndStop(position)) {
       break;
-    }
+    }  
   }
 }
 
