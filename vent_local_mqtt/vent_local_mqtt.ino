@@ -10,31 +10,63 @@ int threshold = 165;
 
 Servo servo;
 
-bool hasHitEndStop = false;
+int startPosition = 90;
 
 void setup() {
   Serial.begin(9600);
-  servo.attach(servoOutputPin, servoMin, servoMax);
   pinMode(INPUT, servoSensorPin);
-  servo.write(90);
 }
 
 void loop() {
-  for(int i = 90; i < 180; i++) {
+  Serial.print("startPosition:");
+  Serial.println(startPosition);
+  close(startPosition);
+  open(startPosition);
+}
+
+void close(int bar) {
+  servo.attach(servoOutputPin, servoMin, servoMax);
+
+  for(int position = bar; position > 40; position--) {
+    Serial.print("position:");
+    Serial.print(position);
     int servoSensorValue = analogRead(servoSensorPin);
+    Serial.print(" | ");
     Serial.print("servoSensorValue:");
     Serial.println(servoSensorValue);
-    Serial.print("hasHitEndStop:");
-    Serial.println(hasHitEndStop);
-
-    if (!hasHitEndStop) {
-      if (servoSensorValue >= threshold) {
-        hasHitEndStop = true;
-      } else {
-        servo.write(i);
-      }
+  
+    if (servoSensorValue >= threshold) {
+      servo.detach();
+      startPosition = position;
+      break;
+    } else {
+      servo.write(position);
     }
-    
-    delay(250);
+ 
+    delay(100); 
   }
 }
+
+void open(int bar) {
+  servo.attach(servoOutputPin, servoMin, servoMax);
+
+  for(int position = bar; position < 180; position++) {
+    Serial.print("position:");
+    Serial.print(position);
+    int servoSensorValue = analogRead(servoSensorPin);
+    Serial.print(" | ");
+    Serial.print("servoSensorValue:");
+    Serial.println(servoSensorValue);
+  
+    if (servoSensorValue >= threshold) {
+      servo.detach();
+      startPosition = position;
+      break;
+    } else {
+      servo.write(position);
+    }
+  
+    delay(100); 
+  }
+}
+
