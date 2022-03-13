@@ -10,7 +10,7 @@ int threshold = 165;
 
 Servo servo;
 
-int startPosition = 90;
+int globalStartPosition = 90;
 
 void setup() {
   Serial.begin(9600);
@@ -18,55 +18,50 @@ void setup() {
 }
 
 void loop() {
-  Serial.print("startPosition:");
-  Serial.println(startPosition);
-  close(startPosition);
-  open(startPosition);
+  Serial.print("globalStartPosition:");
+  Serial.println(globalStartPosition);
+  close(globalStartPosition);
+  open(globalStartPosition);
 }
 
-void close(int bar) {
+void close(int startPosition) {
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-  for(int position = bar; position > 40; position--) {
-    Serial.print("position:");
-    Serial.print(position);
-    int servoSensorValue = analogRead(servoSensorPin);
-    Serial.print(" | ");
-    Serial.print("servoSensorValue:");
-    Serial.println(servoSensorValue);
-  
-    if (servoSensorValue >= threshold) {
-      servo.detach();
-      startPosition = position;
+  for(int position = startPosition; position > 40; position--) {
+    bool shouldBreak = turnOneDegreeUnlessAtEndStop(position);
+    if (shouldBreak) {
       break;
-    } else {
-      servo.write(position);
-    }
- 
-    delay(100); 
+    }  
   }
 }
 
-void open(int bar) {
+void open(int startPosition) {
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-  for(int position = bar; position < 180; position++) {
-    Serial.print("position:");
-    Serial.print(position);
-    int servoSensorValue = analogRead(servoSensorPin);
-    Serial.print(" | ");
-    Serial.print("servoSensorValue:");
-    Serial.println(servoSensorValue);
-  
-    if (servoSensorValue >= threshold) {
-      servo.detach();
-      startPosition = position;
+  for(int position = startPosition; position < 180; position++) {
+    bool shouldBreak = turnOneDegreeUnlessAtEndStop(position);
+    if (shouldBreak) {
       break;
-    } else {
-      servo.write(position);
     }
-  
-    delay(100); 
   }
 }
 
+bool turnOneDegreeUnlessAtEndStop(int position) {
+  Serial.print("position:");
+  Serial.print(position);
+  int servoSensorValue = analogRead(servoSensorPin);
+  Serial.print(" | ");
+  Serial.print("servoSensorValue:");
+  Serial.println(servoSensorValue);
+
+  if (servoSensorValue >= threshold) {
+    servo.detach();
+    globalStartPosition = position;
+    return true;
+  } else {
+    servo.write(position);
+  }
+
+  delay(100); 
+  return false;
+}
