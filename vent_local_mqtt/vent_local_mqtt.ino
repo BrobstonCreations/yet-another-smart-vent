@@ -7,6 +7,8 @@ const int servoSensorPin = A0;
 
 const int servoSensorValueThreshold = 165;
 
+const int minPosition = 0;
+const int maxPosition = 180;
 const int positionOffset = 7;
 
 int openedPosition;
@@ -29,7 +31,6 @@ void loop() {
 
 int close(int startPosition, int minDegreesTraveled) {
   servo.attach(servoOutputPin, servoMin, servoMax);
-  int minPosition = 0;
 
   for(int position = startPosition; position > minPosition; position--) {
     int degreesTraveled = startPosition - position;
@@ -43,7 +44,6 @@ int close(int startPosition, int minDegreesTraveled) {
 
 int open(int startPosition, int minDegreesTraveled) {
   servo.attach(servoOutputPin, servoMin, servoMax);
-  int maxPosition = 180;
 
   for(int position = startPosition; position < maxPosition; position++) {
     int degreesTraveled = position - startPosition;
