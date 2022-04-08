@@ -34,7 +34,7 @@ int close(int startPosition, int minDegreesTraveled) {
 
   for(int position = startPosition; position > minPosition; position--) {
     int degreesTraveled = startPosition - position;
-    if (turnOneDegreeUnlessAtEndStop(position, degreesTraveled, minDegreesTraveled)) {
+    if (hasHitEndstopAndTurnOneDegree(position, degreesTraveled, minDegreesTraveled)) {
       return position;
     }  
   }
@@ -47,7 +47,7 @@ int open(int startPosition, int minDegreesTraveled) {
 
   for(int position = startPosition; position < maxPosition; position++) {
     int degreesTraveled = position - startPosition;
-    if (turnOneDegreeUnlessAtEndStop(position, degreesTraveled, minDegreesTraveled)) {
+    if (hasHitEndstopAndTurnOneDegree(position, degreesTraveled, minDegreesTraveled)) {
       return position;
     }  
   }
@@ -55,7 +55,7 @@ int open(int startPosition, int minDegreesTraveled) {
   return maxPosition;
 }
 
-bool turnOneDegreeUnlessAtEndStop(int position, int degreesTraveled, int minDegreesTraveled) {
+bool hasHitEndstopAndTurnOneDegree(int position, int degreesTraveled, int minDegreesTraveled) {
   bool hasTraveledFarEnough = degreesTraveled >= minDegreesTraveled;
   int servoSensorValue = analogRead(servoSensorPin);
   bool hasHitVoltageThreshold = servoSensorValue >= servoSensorValueThreshold;
