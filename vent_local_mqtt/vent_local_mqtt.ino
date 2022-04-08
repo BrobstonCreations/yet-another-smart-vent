@@ -10,6 +10,7 @@ int threshold = 165;
 
 int openedPosition;
 int closedPosition;
+int currentPosition;
 
 int positionOffset = 7;
 
@@ -21,18 +22,10 @@ void setup() {
   pinMode(OUTPUT, servoSensorPin);
 
   closedPosition = close(90, 45) + positionOffset;
-  Serial.print("closedPosition: ");
-  Serial.println(closedPosition);
-  openedPosition = open(closedPosition) - positionOffset;
-  Serial.print("openedPosition: ");
-  Serial.println(openedPosition);
+  openedPosition = open(currentPosition, 90) - positionOffset;
 }
 
 void loop() {
-}
-
-int open(int startPosition) {
-  return open(startPosition, 90);
 }
 
 int open(int startPosition, int minDegreesTraveled) {
@@ -47,10 +40,6 @@ int open(int startPosition, int minDegreesTraveled) {
   }
 
   return maxPosition;
-}
-
-int close(int startPosition) {
-  return close(startPosition, 90);
 }
 
 int close(int startPosition, int minDegreesTraveled) {
@@ -77,6 +66,7 @@ bool turnOneDegreeUnlessAtEndStop(int position, int degreesTraveled, int minDegr
     return true;
   } else {
     servo.write(position);
+    currentPosition = position;
   }
 
   delay(100); 
