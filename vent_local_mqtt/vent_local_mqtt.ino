@@ -27,20 +27,6 @@ void setup() {
 void loop() {
 }
 
-int open(int startPosition, int minDegreesTraveled) {
-  servo.attach(servoOutputPin, servoMin, servoMax);
-  int maxPosition = 180;
-
-  for(int position = startPosition; position < maxPosition; position++) {
-    int degreesTraveled = position - startPosition;
-    if (turnOneDegreeUnlessAtEndStop(position, degreesTraveled, minDegreesTraveled)) {
-      return position;
-    }  
-  }
-
-  return maxPosition;
-}
-
 int close(int startPosition, int minDegreesTraveled) {
   servo.attach(servoOutputPin, servoMin, servoMax);
   int minPosition = 0;
@@ -53,6 +39,20 @@ int close(int startPosition, int minDegreesTraveled) {
   }
 
   return minPosition;
+}
+
+int open(int startPosition, int minDegreesTraveled) {
+  servo.attach(servoOutputPin, servoMin, servoMax);
+  int maxPosition = 180;
+
+  for(int position = startPosition; position < maxPosition; position++) {
+    int degreesTraveled = position - startPosition;
+    if (turnOneDegreeUnlessAtEndStop(position, degreesTraveled, minDegreesTraveled)) {
+      return position;
+    }  
+  }
+
+  return maxPosition;
 }
 
 bool turnOneDegreeUnlessAtEndStop(int position, int degreesTraveled, int minDegreesTraveled) {
