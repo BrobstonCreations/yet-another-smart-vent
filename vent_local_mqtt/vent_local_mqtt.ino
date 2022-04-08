@@ -21,24 +21,22 @@ void setup() {
   pinMode(INPUT, servoSensorPin);
   pinMode(OUTPUT, servoSensorPin);
   servo.attach(servoOutputPin, servoMin, servoMax);
-  open();
-  close();
-  servo.detach();
-  Serial.print("openedPosition: ");
-  Serial.println(openedPosition);
+
+  close(globalStartPosition);
   Serial.print("closedPosition: ");
   Serial.println(closedPosition);
+  open(closedPosition);
+  Serial.print("openedPosition: ");
+  Serial.println(openedPosition);
 }
 
 void loop() {
 }
 
-void open() {
+void open(int startPosition) {
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-  int startPosition = globalStartPosition;
   for(int position = startPosition; position < 180; position++) {
-    Serial.println(position);
     int degreesTraveled = position - startPosition;
     if (turnOneDegreeUnlessAtEndStop(position, degreesTraveled)) {
       openedPosition = position;
@@ -47,12 +45,10 @@ void open() {
   }
 }
 
-void close() {
+void close(int startPosition) {
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-  int startPosition = openedPosition;
-  for(int position = startPosition; position > 40; position--) {
-    Serial.println(position);
+  for(int position = startPosition; position > 0; position--) {
     int degreesTraveled = startPosition - position;
     if (turnOneDegreeUnlessAtEndStop(position, degreesTraveled)) {
       closedPosition = position;
