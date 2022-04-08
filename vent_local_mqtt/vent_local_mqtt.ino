@@ -67,7 +67,6 @@ bool turnOneDegreeUnlessAtEndStop(int position, int degreesTraveled) {
 
   if (hasTraveledFarEnough && hasHitVoltageThreshold) {
     servo.detach();
-    globalStartPosition = position;
     return true;
   } else {
     servo.write(position);
