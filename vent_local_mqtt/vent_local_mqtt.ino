@@ -1,18 +1,17 @@
 #include <Servo.h>
 
-int servoOutputPin = 0;
-int servoMin = 450;
-int servoMax = 2600;
-int servoSensorPin = A0;
+const int servoOutputPin = 0;
+const int servoMin = 450;
+const int servoMax = 2600;
+const int servoSensorPin = A0;
 
-int upperLimit = 100;
-int threshold = 165;
+const int servoSensorValueThreshold = 165;
+
+const int positionOffset = 7;
 
 int openedPosition;
 int closedPosition;
 int currentPosition;
-
-int positionOffset = 7;
 
 Servo servo;
 
@@ -59,7 +58,7 @@ int close(int startPosition, int minDegreesTraveled) {
 bool turnOneDegreeUnlessAtEndStop(int position, int degreesTraveled, int minDegreesTraveled) {
   bool hasTraveledFarEnough = degreesTraveled >= minDegreesTraveled;
   int servoSensorValue = analogRead(servoSensorPin);
-  bool hasHitVoltageThreshold = servoSensorValue >= threshold;
+  bool hasHitVoltageThreshold = servoSensorValue >= servoSensorValueThreshold;
 
   if (hasTraveledFarEnough && hasHitVoltageThreshold) {
     servo.detach();
