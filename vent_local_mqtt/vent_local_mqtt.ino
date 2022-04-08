@@ -11,6 +11,8 @@ int threshold = 165;
 int openedPosition;
 int closedPosition;
 
+int positionOffset = 7;
+
 Servo servo;
 
 void setup() {
@@ -18,10 +20,10 @@ void setup() {
   pinMode(INPUT, servoSensorPin);
   pinMode(OUTPUT, servoSensorPin);
 
-  closedPosition = close(90, 40);
+  closedPosition = close(90, 45) + positionOffset;
   Serial.print("closedPosition: ");
   Serial.println(closedPosition);
-  openedPosition = open(closedPosition);
+  openedPosition = open(closedPosition) - positionOffset;
   Serial.print("openedPosition: ");
   Serial.println(openedPosition);
 }
