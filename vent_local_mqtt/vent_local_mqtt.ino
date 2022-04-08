@@ -20,7 +20,6 @@ void setup() {
   Serial.begin(9600);
   pinMode(INPUT, servoSensorPin);
   pinMode(OUTPUT, servoSensorPin);
-  servo.attach(servoOutputPin, servoMin, servoMax);
 
   close(globalStartPosition);
   Serial.print("closedPosition: ");
