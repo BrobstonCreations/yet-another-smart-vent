@@ -69,6 +69,6 @@ bool turnOneDegreeUnlessAtEndStop(int position, int degreesTraveled, int minDegr
     currentPosition = position;
   }
 
-  delay(100); 
+  delay(30); 
   return false;
 }
