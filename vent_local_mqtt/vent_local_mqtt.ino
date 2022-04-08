@@ -80,8 +80,14 @@ void setup() {
 
   mqttReconnect();
 
-  closedPosition = close(90, 45) + positionOffset;
-  openedPosition = open(currentPosition, 90) - positionOffset;
+  closedPosition = calibrateClose(90, 45) + positionOffset;
+  openedPosition = calibrateOpen(currentPosition, 90) - positionOffset;
+  Serial.print("currentPosition: ");
+  Serial.print(currentPosition);
+  Serial.print(" | closedPosition: ");
+  Serial.print(closedPosition);
+  Serial.print(" | openedPosition: ");
+  Serial.println(openedPosition);
 }
 
 void loop() {
@@ -150,16 +156,19 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
     snprintf(payloadText, length + 1, "%s", payload);
 
     if (isOpen(payloadText) || isClose(payloadText)) {
-      for (int i = 0; i < 100; i++)
-      {
-        if (isOpen(payloadText)) {
-          open(currentPosition, 90);
-        } else if (isClose(payloadText)) {
-          close(currentPosition, 90);
+      if (isOpen(payloadText)) {
+        open();
+        if (isOpened()) {
+          mqttClient.publish(MQTT_STATE_TOPIC, "opened", true);
         }
-
-        delay(10);
+      } else if (isClose(payloadText)) {
+        close();
+        if (isClosed()) {
+          mqttClient.publish(MQTT_STATE_TOPIC, "closed", true);
+        }
       }
+
+      delay(10);
     }
   }
 }
@@ -168,13 +177,33 @@ boolean isMqttConnected() {
   return mqttClient.connected();
 }
 
-int close(int startPosition, int minDegreesTraveled) {
-  Serial.println("closing");
+void close() {
+  servo.attach(servoOutputPin, servoMin, servoMax);
+
+  for(int position = currentPosition - 1; position >= closedPosition; position--) {
+    currentPosition = position;
+    servo.write(position);
+  }
+
+  servo.detach();
+}
+
+int calibrateClose(int startPosition, int minDegreesTraveled) {
   return turnServoUntilEndStop(startPosition, maxClosedPosition, startPosition, -1, maxClosedPosition, minDegreesTraveled);
 }
 
-int open(int startPosition, int minDegreesTraveled) {
-  Serial.println("opening");
+void open() {
+  servo.attach(servoOutputPin, servoMin, servoMax);
+
+  for(int position = currentPosition + 1; position <= openedPosition; position++) {
+    currentPosition = position;
+    servo.write(position);
+  }
+
+  servo.detach();
+}
+
+int calibrateOpen(int startPosition, int minDegreesTraveled) {
   return turnServoUntilEndStop(startPosition, startPosition, maxOpenedPosition, 1, maxOpenedPosition, minDegreesTraveled);
 }
 
@@ -196,12 +225,20 @@ bool hasHitEndstopAndTurnOneDegree(int position, int degreesTraveled, int minDeg
   int servoSensorValue = analogRead(servoSensorPin);
   bool hasHitVoltageThreshold = servoSensorValue >= servoSensorValueThreshold;
 
+  currentPosition = position;
+
+  Serial.print("currentPosition: ");
+  Serial.print(currentPosition);
+  Serial.print(" | degreesTraveled: ");
+  Serial.print(degreesTraveled);
+  Serial.print(" | minDegreesTraveled: ");
+  Serial.println(minDegreesTraveled);
+
   if (hasTraveledFarEnough && hasHitVoltageThreshold) {
     servo.detach();
     return true;
   } else {
     servo.write(position);
-    currentPosition = position;
   }
 
   delay(30); 
@@ -216,11 +253,19 @@ boolean isClose(char* payloadText) {
   return strcmp(payloadText, "close") == 0;
 }
 
-//boolean isOpened() {
-//  return digitalRead(opened_pin) == 0;
-//}
-//
-//boolean isClosed() {
-//  return digitalRead(closed_pin) == 0;
-//}
+boolean isOpened() {
+  Serial.print("currentPosition: ");
+  Serial.print(currentPosition);
+  Serial.print(" | openedPosition: ");
+  Serial.println(openedPosition);
+  return currentPosition == openedPosition;
+}
+
+boolean isClosed() {
+  Serial.print("currentPosition: ");
+  Serial.print(currentPosition);
+  Serial.print(" | closedPosition: ");
+  Serial.println(closedPosition);
+  return currentPosition == closedPosition;
+}
 
