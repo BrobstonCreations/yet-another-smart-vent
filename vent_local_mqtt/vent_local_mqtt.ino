@@ -21,12 +21,16 @@ void setup() {
   closedPosition = close(90, 40);
   Serial.print("closedPosition: ");
   Serial.println(closedPosition);
-  openedPosition = open(closedPosition, 90);
+  openedPosition = open(closedPosition);
   Serial.print("openedPosition: ");
   Serial.println(openedPosition);
 }
 
 void loop() {
+}
+
+int open(int startPosition) {
+  return open(startPosition, 90);
 }
 
 int open(int startPosition, int minDegreesTraveled) {
@@ -41,6 +45,10 @@ int open(int startPosition, int minDegreesTraveled) {
   }
 
   return maxPosition;
+}
+
+int close(int startPosition) {
+  return close(startPosition, 90);
 }
 
 int close(int startPosition, int minDegreesTraveled) {
