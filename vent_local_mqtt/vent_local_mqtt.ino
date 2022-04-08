@@ -7,8 +7,8 @@ const int servoSensorPin = A0;
 
 const int servoSensorValueThreshold = 165;
 
-const int minPosition = 0;
-const int maxPosition = 180;
+const int maxClosedPosition = 0;
+const int maxOpenedPosition = 180;
 const int positionOffset = 7;
 
 int openedPosition;
@@ -30,23 +30,18 @@ void loop() {
 }
 
 int close(int startPosition, int minDegreesTraveled) {
-  servo.attach(servoOutputPin, servoMin, servoMax);
-
-  for(int position = startPosition; position > minPosition; position--) {
-    int degreesTraveled = startPosition - position;
-    if (hasHitEndstopAndTurnOneDegree(position, degreesTraveled, minDegreesTraveled)) {
-      return position;
-    }  
-  }
-
-  return minPosition;
+  return turnServoUntilEndStop(startPosition, maxClosedPosition, startPosition, -1, maxClosedPosition, minDegreesTraveled);
 }
 
 int open(int startPosition, int minDegreesTraveled) {
+  return turnServoUntilEndStop(startPosition, startPosition, maxOpenedPosition, 1, maxOpenedPosition, minDegreesTraveled);
+}
+
+int turnServoUntilEndStop(int startPosition, int leftNumber, int rightNumber, int incrementBy, int maxPosition, int minDegreesTraveled) {
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-  for(int position = startPosition; position < maxPosition; position++) {
-    int degreesTraveled = position - startPosition;
+  for(int position = startPosition; leftNumber < rightNumber; position += incrementBy) {
+    int degreesTraveled = (position - startPosition) * incrementBy;
     if (hasHitEndstopAndTurnOneDegree(position, degreesTraveled, minDegreesTraveled)) {
       return position;
     }  
