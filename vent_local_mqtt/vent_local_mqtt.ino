@@ -79,15 +79,15 @@ void setup() {
 
   mqttReconnect();
 
-  closedPosition = calibrateClose(90, 45);
-  openedPosition = calibrateOpen(currentPosition, 90);
-
   Serial.print("MQTT_COMMAND_TOPIC: ");
   Serial.print(MQTT_COMMAND_TOPIC);
   Serial.print(" | MQTT_STATE_TOPIC: ");
   Serial.print(MQTT_STATE_TOPIC);
   Serial.print(" | MQTT_AVAILABILITY_TOPIC: ");
   Serial.print(MQTT_AVAILABILITY_TOPIC);
+
+  closedPosition = calibrateClose(90, 45);
+  openedPosition = calibrateOpen(currentPosition, 90);
 }
 
 void loop() {
