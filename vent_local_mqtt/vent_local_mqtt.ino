@@ -189,7 +189,16 @@ void close() {
 }
 
 int calibrateClose(int startPosition, int minDegreesTraveled) {
-  return turnServoUntilEndStop(startPosition, maxClosedPosition, startPosition, -1, maxClosedPosition, minDegreesTraveled);
+  servo.attach(servoOutputPin, servoMin, servoMax);
+
+  for(int position = startPosition; position > maxClosedPosition; position--) {
+    int degreesTraveled = startPosition - position;
+    if (hasHitEndstopAndTurnOneDegree(position, degreesTraveled, minDegreesTraveled)) {
+      return position;
+    }  
+  }
+
+  return maxClosedPosition;
 }
 
 void open() {
@@ -204,20 +213,16 @@ void open() {
 }
 
 int calibrateOpen(int startPosition, int minDegreesTraveled) {
-  return turnServoUntilEndStop(startPosition, startPosition, maxOpenedPosition, 1, maxOpenedPosition, minDegreesTraveled);
-}
-
-int turnServoUntilEndStop(int startPosition, int leftNumber, int rightNumber, int incrementBy, int maxPosition, int minDegreesTraveled) {
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-  for(int position = startPosition; leftNumber < rightNumber; position += incrementBy) {
-    int degreesTraveled = (position - startPosition) * incrementBy;
+  for(int position = startPosition; position < maxOpenedPosition; position++) {
+    int degreesTraveled = position - startPosition;
     if (hasHitEndstopAndTurnOneDegree(position, degreesTraveled, minDegreesTraveled)) {
       return position;
     }  
   }
 
-  return maxPosition;
+  return maxOpenedPosition;
 }
 
 bool hasHitEndstopAndTurnOneDegree(int position, int degreesTraveled, int minDegreesTraveled) {
