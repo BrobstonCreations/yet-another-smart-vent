@@ -81,6 +81,13 @@ void setup() {
 
   closedPosition = calibrateClose(90, 45);
   openedPosition = calibrateOpen(currentPosition, 90);
+
+  Serial.print("MQTT_COMMAND_TOPIC: ");
+  Serial.print(MQTT_COMMAND_TOPIC);
+  Serial.print(" | MQTT_STATE_TOPIC: ");
+  Serial.print(MQTT_STATE_TOPIC);
+  Serial.print(" | MQTT_AVAILABILITY_TOPIC: ");
+  Serial.print(MQTT_AVAILABILITY_TOPIC);
 }
 
 void loop() {
@@ -251,4 +258,3 @@ boolean isOpened() {
 boolean isClosed() {
   return currentPosition == closedPosition;
 }
-
