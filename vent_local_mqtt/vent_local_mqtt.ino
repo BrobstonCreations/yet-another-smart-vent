@@ -176,10 +176,10 @@ boolean isMqttConnected() {
   return mqttClient.connected();
 }
 
-void close() {
+void open() {
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-  for(int position = currentPosition - 1; position >= closedPosition; position--) {
+  for(int position = currentPosition + 1; position <= openedPosition; position++) {
     currentPosition = position;
     servo.write(position);
   }
@@ -187,23 +187,10 @@ void close() {
   servo.detach();
 }
 
-int calibrateClose(int startPosition, int minDegreesTraveled) {
+void close() {
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-  for(int position = startPosition; position > maxClosedPosition; position--) {
-    int degreesTraveled = startPosition - position;
-    if (hasHitEndstopAndTurnOneDegree(position, degreesTraveled, minDegreesTraveled)) {
-      return position;
-    }  
-  }
-
-  return maxClosedPosition;
-}
-
-void open() {
-  servo.attach(servoOutputPin, servoMin, servoMax);
-
-  for(int position = currentPosition + 1; position <= openedPosition; position++) {
+  for(int position = currentPosition - 1; position >= closedPosition; position--) {
     currentPosition = position;
     servo.write(position);
   }
@@ -222,6 +209,19 @@ int calibrateOpen(int startPosition, int minDegreesTraveled) {
   }
 
   return maxOpenedPosition;
+}
+
+int calibrateClose(int startPosition, int minDegreesTraveled) {
+  servo.attach(servoOutputPin, servoMin, servoMax);
+
+  for(int position = startPosition; position > maxClosedPosition; position--) {
+    int degreesTraveled = startPosition - position;
+    if (hasHitEndstopAndTurnOneDegree(position, degreesTraveled, minDegreesTraveled)) {
+      return position;
+    }  
+  }
+
+  return maxClosedPosition;
 }
 
 bool hasHitEndstopAndTurnOneDegree(int position, int degreesTraveled, int minDegreesTraveled) {
