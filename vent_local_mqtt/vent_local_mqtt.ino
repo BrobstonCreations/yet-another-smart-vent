@@ -201,7 +201,7 @@ void close() {
 int calibrateOpen(int startPosition, int minDegreesTraveled) {
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-  for(int position = startPosition; position < maxOpenedPosition; position++) {
+  for(int position = startPosition; position <= maxOpenedPosition; position++) {
     int degreesTraveled = position - startPosition;
     if (hasHitEndstopAndTurnOneDegree(position, degreesTraveled, minDegreesTraveled)) {
       return position;
@@ -214,7 +214,7 @@ int calibrateOpen(int startPosition, int minDegreesTraveled) {
 int calibrateClose(int startPosition, int minDegreesTraveled) {
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-  for(int position = startPosition; position > maxClosedPosition; position--) {
+  for(int position = startPosition; position >= maxClosedPosition; position--) {
     int degreesTraveled = startPosition - position;
     if (hasHitEndstopAndTurnOneDegree(position, degreesTraveled, minDegreesTraveled)) {
       return position;
