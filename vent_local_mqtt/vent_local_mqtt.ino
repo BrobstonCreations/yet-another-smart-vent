@@ -81,12 +81,6 @@ void setup() {
 
   closedPosition = calibrateClose(90, 45);
   openedPosition = calibrateOpen(currentPosition, 90);
-  Serial.print("currentPosition: ");
-  Serial.print(currentPosition);
-  Serial.print(" | closedPosition: ");
-  Serial.print(closedPosition);
-  Serial.print(" | openedPosition: ");
-  Serial.println(openedPosition);
 }
 
 void loop() {
@@ -231,13 +225,6 @@ bool hasHitEndstopAndTurnOneDegree(int position, int degreesTraveled, int minDeg
 
   currentPosition = position;
 
-  Serial.print("currentPosition: ");
-  Serial.print(currentPosition);
-  Serial.print(" | degreesTraveled: ");
-  Serial.print(degreesTraveled);
-  Serial.print(" | minDegreesTraveled: ");
-  Serial.println(minDegreesTraveled);
-
   if (hasTraveledFarEnough && hasHitVoltageThreshold) {
     servo.detach();
     return true;
@@ -258,18 +245,10 @@ boolean isClose(char* payloadText) {
 }
 
 boolean isOpened() {
-  Serial.print("currentPosition: ");
-  Serial.print(currentPosition);
-  Serial.print(" | openedPosition: ");
-  Serial.println(openedPosition);
   return currentPosition == openedPosition;
 }
 
 boolean isClosed() {
-  Serial.print("currentPosition: ");
-  Serial.print(currentPosition);
-  Serial.print(" | closedPosition: ");
-  Serial.println(closedPosition);
   return currentPosition == closedPosition;
 }
 
