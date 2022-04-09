@@ -19,7 +19,6 @@ const int servoSensorValueThreshold = 165;
 
 const int maxClosedPosition = 0;
 const int maxOpenedPosition = 180;
-const int positionOffset = 7;
 
 int openedPosition;
 int closedPosition;
@@ -80,8 +79,8 @@ void setup() {
 
   mqttReconnect();
 
-  closedPosition = calibrateClose(90, 45) + positionOffset;
-  openedPosition = calibrateOpen(currentPosition, 90) - positionOffset;
+  closedPosition = calibrateClose(90, 45);
+  openedPosition = calibrateOpen(currentPosition, 90);
   Serial.print("currentPosition: ");
   Serial.print(currentPosition);
   Serial.print(" | closedPosition: ");
