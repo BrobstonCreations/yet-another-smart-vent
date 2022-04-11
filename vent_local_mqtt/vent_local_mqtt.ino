@@ -142,7 +142,6 @@ void setupWifi() {
 
   if (shouldSaveConfig) {
     saveConfig();
-    delay(2000);
     ESP.restart();
   } else {
     //For some reason, the read values get overwritten in this function
