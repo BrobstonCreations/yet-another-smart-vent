@@ -91,14 +91,13 @@ void setup() {
 }
 
 void loop() {
+  drd.loop();
   mqttClient.loop();
 
   if (!mqttClient.connected() && (mqttConnectionInterval <= (millis() - lastMqttConnectionAttempt)) )  {
     lastMqttConnectionAttempt = millis();
     mqttReconnect();
   }
-
-  drd.loop();
 }
 
 void configModeCallback (WiFiManager *wifiManager) {
