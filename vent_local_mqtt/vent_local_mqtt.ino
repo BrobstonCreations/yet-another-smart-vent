@@ -1,3 +1,4 @@
+#include <FS.h>
 #include <Servo.h>
 #include "wifi.h"
 
@@ -8,7 +9,7 @@
 #include <ArduinoJson.h>
 #include <WiFiManager.h>
 #include <PubSubClient.h>
-#include <FS.h>
+#include <DoubleResetDetector.h>
 
 const int servoOutputPin = 0;
 const int servoMin = 450;
@@ -48,46 +49,53 @@ char MQTT_COMMAND_TOPIC[128];
 char MQTT_STATE_TOPIC[128];
 char MQTT_AVAILABILITY_TOPIC[128];
 
-bool shouldSaveConfig = false;
+#define DRD_TIMEOUT 10
+#define DRD_ADDRESS 0
+DoubleResetDetector drd(DRD_TIMEOUT, DRD_ADDRESS);
 
-void saveConfigCallback () {
-  shouldSaveConfig = true;
-}
+bool shouldSaveConfig = false;
 
 void setup() {
   Serial.begin(9600);
-  pinMode(INPUT, servoSensorPin);
-  pinMode(OUTPUT, servoSensorPin);
 
-  delay(3000);
-
-  snprintf(identifier, sizeof(identifier), "VENT-%X", ESP.getChipId());
-
-  WiFi.hostname(identifier);
-
-  loadConfig();
-
-  snprintf(MQTT_COMMAND_TOPIC, 127, "%s/%s", "cmd", mqtt_topic);
-  snprintf(MQTT_STATE_TOPIC, 127, "%s/%s", "stat", mqtt_topic);
-  snprintf(MQTT_AVAILABILITY_TOPIC, 127, "%s/%s/%s", "tele", mqtt_topic, "LWT");
-
-  setupWifi();
-  mqttClient.setServer(mqtt_server, std::strtol(mqtt_port, nullptr, 10));
-  mqttClient.setKeepAlive(10);
-  mqttClient.setBufferSize(2048);
-  mqttClient.setCallback(mqttCallback);
-
-  mqttReconnect();
-
-  Serial.print("MQTT_COMMAND_TOPIC: ");
-  Serial.print(MQTT_COMMAND_TOPIC);
-  Serial.print(" | MQTT_STATE_TOPIC: ");
-  Serial.print(MQTT_STATE_TOPIC);
-  Serial.print(" | MQTT_AVAILABILITY_TOPIC: ");
-  Serial.print(MQTT_AVAILABILITY_TOPIC);
-
-  closedPosition = calibrateClose(90, 45);
-  openedPosition = calibrateOpen(currentPosition, 90);
+  if (drd.detectDoubleReset()) {
+    Serial.println("YES double reset");
+    resetWifiSettingsAndReboot();
+  } else {
+    Serial.println("NO  double reset");
+    pinMode(INPUT, servoSensorPin);
+    pinMode(OUTPUT, servoSensorPin);
+  
+    delay(3000);
+  
+    snprintf(identifier, sizeof(identifier), "VENT-%X", ESP.getChipId());
+  
+    WiFi.hostname(identifier);
+  
+    loadConfig();
+  
+    snprintf(MQTT_COMMAND_TOPIC, 127, "%s/%s", "cmd", mqtt_topic);
+    snprintf(MQTT_STATE_TOPIC, 127, "%s/%s", "stat", mqtt_topic);
+    snprintf(MQTT_AVAILABILITY_TOPIC, 127, "%s/%s/%s", "tele", mqtt_topic, "LWT");
+  
+    setupWifi();
+    mqttClient.setServer(mqtt_server, std::strtol(mqtt_port, nullptr, 10));
+    mqttClient.setKeepAlive(10);
+    mqttClient.setBufferSize(2048);
+    mqttClient.setCallback(mqttCallback);
+  
+    mqttReconnect();
+  
+    Serial.print("MQTT_COMMAND_TOPIC: ");
+    Serial.print(MQTT_COMMAND_TOPIC);
+    Serial.print(" | MQTT_STATE_TOPIC: ");
+    Serial.print(MQTT_STATE_TOPIC);
+    Serial.print(" | MQTT_AVAILABILITY_TOPIC: ");
+    Serial.println(MQTT_AVAILABILITY_TOPIC);
+  
+    closedPosition = calibrateClose(90, 45);
+    openedPosition = calibrateOpen(currentPosition, 90);
+  }
 }
 
 void loop() {
@@ -97,10 +105,23 @@ void loop() {
     lastMqttConnectionAttempt = millis();
     mqttReconnect();
   }
+
+  drd.loop();
+}
+
+void configModeCallback (WiFiManager *wifiManager) {
+  Serial.println("Entered config mode");
+  Serial.println(WiFi.softAPIP());
+  drd.stop();
+}
+
+void saveConfigCallback () {
+  shouldSaveConfig = true;
 }
 
 void setupWifi() {
   wifiManager.setDebugOutput(false);
+  wifiManager.setAPCallback(configModeCallback);
   wifiManager.setSaveConfigCallback(saveConfigCallback);
 
   wifiManager.addParameter(&custom_mqtt_server);
@@ -121,6 +142,8 @@ void setupWifi() {
 
   if (shouldSaveConfig) {
     saveConfig();
+    delay(2000);
+    ESP.restart();
   } else {
     //For some reason, the read values get overwritten in this function
     //To combat this, we just reload the config
@@ -130,8 +153,12 @@ void setupWifi() {
 }
 
 void resetWifiSettingsAndReboot() {
-  wifiManager.resetSettings();
+  //WiFi.mode(WIFI_STA);
+  //WiFi.disconnect(true);
+  ESP.eraseConfig();
+  SPIFFS.format();
   delay(3000);
+  //ESP.reset();
   ESP.restart();
 }
 

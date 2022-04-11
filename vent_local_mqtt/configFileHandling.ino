@@ -17,10 +17,8 @@ void saveConfig() {
 
 void loadConfig() {
   if (SPIFFS.begin()) {
-
     if (SPIFFS.exists("/config.json")) {
       File configFile = SPIFFS.open("/config.json", "r");
-
       if (configFile) {
         const size_t size = configFile.size();
         std::unique_ptr<char[]> buf(new char[size]);
