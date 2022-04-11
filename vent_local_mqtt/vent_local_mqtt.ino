@@ -66,8 +66,6 @@ void setup() {
     pinMode(INPUT, servoSensorPin);
     pinMode(OUTPUT, servoSensorPin);
   
-    delay(3000);
-  
     snprintf(identifier, sizeof(identifier), "VENT-%X", ESP.getChipId());
   
     WiFi.hostname(identifier);
@@ -77,7 +75,9 @@ void setup() {
     snprintf(MQTT_COMMAND_TOPIC, 127, "%s/%s", "cmd", mqtt_topic);
     snprintf(MQTT_STATE_TOPIC, 127, "%s/%s", "stat", mqtt_topic);
     snprintf(MQTT_AVAILABILITY_TOPIC, 127, "%s/%s/%s", "tele", mqtt_topic, "LWT");
-  
+
+    printMqttTopicValues();
+
     setupWifi();
     mqttClient.setServer(mqtt_server, std::strtol(mqtt_port, nullptr, 10));
     mqttClient.setKeepAlive(10);
@@ -85,13 +85,6 @@ void setup() {
     mqttClient.setCallback(mqttCallback);
   
     mqttReconnect();
-  
-    Serial.print("MQTT_COMMAND_TOPIC: ");
-    Serial.print(MQTT_COMMAND_TOPIC);
-    Serial.print(" | MQTT_STATE_TOPIC: ");
-    Serial.print(MQTT_STATE_TOPIC);
-    Serial.print(" | MQTT_AVAILABILITY_TOPIC: ");
-    Serial.println(MQTT_AVAILABILITY_TOPIC);
   
     closedPosition = calibrateClose(90, 45);
     openedPosition = calibrateOpen(currentPosition, 90);
@@ -280,4 +273,13 @@ boolean isOpened() {
 
 boolean isClosed() {
   return currentPosition == closedPosition;
+}
+
+void printMqttTopicValues() {
+  Serial.print("MQTT_COMMAND_TOPIC: ");
+  Serial.println(MQTT_COMMAND_TOPIC);
+  Serial.print("MQTT_STATE_TOPIC: ");
+  Serial.println(MQTT_STATE_TOPIC);
+  Serial.print("MQTT_AVAILABILITY_TOPIC: ");
+  Serial.println(MQTT_AVAILABILITY_TOPIC);
 }
