@@ -167,23 +167,18 @@ void mqttReconnect()
 void mqttCallback(char* topic, byte* payload, unsigned int length) {
   if (strcmp(topic, MQTT_COMMAND_TOPIC) == 0) {
     char payloadText[length + 1];
-
     snprintf(payloadText, length + 1, "%s", payload);
 
-    if (isOpen(payloadText) || isClose(payloadText)) {
-      if (isOpen(payloadText)) {
-        open();
-        if (isOpened()) {
-          mqttClient.publish(MQTT_STATE_TOPIC, "opened", true);
-        }
-      } else if (isClose(payloadText)) {
-        close();
-        if (isClosed()) {
-          mqttClient.publish(MQTT_STATE_TOPIC, "closed", true);
-        }
+    if (isOpen(payloadText)) {
+      open();
+      if (isOpened()) {
+        mqttClient.publish(MQTT_STATE_TOPIC, "opened", true);
       }
-
-      delay(10);
+    } else if (isClose(payloadText)) {
+      close();
+      if (isClosed()) {
+        mqttClient.publish(MQTT_STATE_TOPIC, "closed", true);
+      }
     }
   }
 }
