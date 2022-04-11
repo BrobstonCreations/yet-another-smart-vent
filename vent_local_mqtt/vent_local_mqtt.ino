@@ -58,11 +58,7 @@ bool shouldSaveConfig = false;
 void setup() {
   Serial.begin(9600);
 
-  if (drd.detectDoubleReset()) {
-    Serial.println("YES double reset");
-    resetWifiSettingsAndReboot();
-  } else {
-    Serial.println("NO  double reset");
+  if (!drd.detectDoubleReset()) {
     pinMode(INPUT, servoSensorPin);
     pinMode(OUTPUT, servoSensorPin);
   
@@ -88,6 +84,9 @@ void setup() {
   
     closedPosition = calibrateClose(90, 45);
     openedPosition = calibrateOpen(currentPosition, 90);
+  } else {
+    Serial.println("Double click of reset detected. Clearing config and formatting storage...");
+    resetWifiSettingsAndReboot();
   }
 }
 
