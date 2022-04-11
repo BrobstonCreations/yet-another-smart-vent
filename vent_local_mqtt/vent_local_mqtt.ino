@@ -72,8 +72,6 @@ void setup() {
     snprintf(MQTT_STATE_TOPIC, 127, "%s/%s", "stat", mqtt_topic);
     snprintf(MQTT_AVAILABILITY_TOPIC, 127, "%s/%s/%s", "tele", mqtt_topic, "LWT");
 
-    printMqttTopicValues();
-
     setupWifi();
     mqttClient.setServer(mqtt_server, std::strtol(mqtt_port, nullptr, 10));
     mqttClient.setKeepAlive(10);
@@ -82,6 +80,8 @@ void setup() {
   
     mqttReconnect();
   
+    printMqttTopicValues();
+
     closedPosition = calibrateClose(90, 45);
     openedPosition = calibrateOpen(currentPosition, 90);
   } else {
@@ -102,8 +102,12 @@ void loop() {
 }
 
 void configModeCallback (WiFiManager *wifiManager) {
-  Serial.println("Entered config mode");
-  Serial.println(WiFi.softAPIP());
+  Serial.print("Entering WiFi Access Point config mode. Use a device to connect to Access Point ");
+  Serial.print(identifier);
+  Serial.println(".");
+  Serial.print("Navigate to ");
+  Serial.print(WiFi.softAPIP());
+  Serial.println(" if not redirected to enter configuration values.");
   drd.stop();
 }
 
