@@ -139,9 +139,6 @@ void setupWifi() {
     saveConfig();
     ESP.restart();
   } else {
-    //For some reason, the read values get overwritten in this function
-    //To combat this, we just reload the config
-    //This is most likely a logic error which could be fixed otherwise
     loadConfig();
   }
 }
