@@ -153,12 +153,9 @@ void setupWifi() {
 }
 
 void resetWifiSettingsAndReboot() {
-  //WiFi.mode(WIFI_STA);
-  //WiFi.disconnect(true);
   ESP.eraseConfig();
   SPIFFS.format();
   delay(3000);
-  //ESP.reset();
   ESP.restart();
 }
 
