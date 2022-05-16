@@ -83,7 +83,9 @@ void setup() {
     printMqttTopicValues();
 
     closedPosition = calibrateClose(90, 45);
+    mqttClient.publish(MQTT_STATE_TOPIC, "closed", true);
     openedPosition = calibrateOpen(currentPosition, 90);
+    mqttClient.publish(MQTT_STATE_TOPIC, "opened", true);
   } else {
     Serial.println("Double click of reset detected. Clearing config and formatting storage...");
     resetWifiSettingsAndReboot();
