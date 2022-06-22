@@ -59,8 +59,8 @@ void setup() {
   Serial.begin(9600);
 
   if (!drd.detectDoubleReset()) {
-    pinMode(INPUT, servoSensorPin);
-    pinMode(OUTPUT, servoSensorPin);
+    pinMode(servoSensorPin, INPUT);
+    pinMode(servoOutputPin, OUTPUT);
   
     snprintf(identifier, sizeof(identifier), "VENT-%X", ESP.getChipId());
   
