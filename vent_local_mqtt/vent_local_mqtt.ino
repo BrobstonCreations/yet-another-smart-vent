@@ -196,6 +196,7 @@ void open() {
 //    currentPosition = position;
 //    servo.write(position);
 //  }
+  currentPosition = openedPosition;
   servo.write(openedPosition);
 
   delay(300);
@@ -209,6 +210,7 @@ void close() {
 //    currentPosition = position;
 //    servo.write(position);
 //  }
+  currentPosition = closedPosition;
   servo.write(closedPosition);
 
   delay(300);
