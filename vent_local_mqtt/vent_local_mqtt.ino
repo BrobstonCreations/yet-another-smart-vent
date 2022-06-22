@@ -192,22 +192,26 @@ boolean isMqttConnected() {
 void open() {
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-  for(int position = currentPosition + 1; position <= openedPosition; position++) {
-    currentPosition = position;
-    servo.write(position);
-  }
+//  for(int position = currentPosition + 1; position <= openedPosition; position++) {
+//    currentPosition = position;
+//    servo.write(position);
+//  }
+  servo.write(openedPosition);
 
+  delay(300);
   servo.detach();
 }
 
 void close() {
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-  for(int position = currentPosition - 1; position >= closedPosition; position--) {
-    currentPosition = position;
-    servo.write(position);
-  }
+//  for(int position = currentPosition - 1; position >= closedPosition; position--) {
+//    currentPosition = position;
+//    servo.write(position);
+//  }
+  servo.write(closedPosition);
 
+  delay(300);
   servo.detach();
 }
 
@@ -251,7 +255,7 @@ bool hasHitEndstopAndTurnOneDegree(int position, int degreesTraveled, int minDeg
     servo.write(position);
   }
 
-  delay(30); 
+  delay(20); 
   return false;
 }
 
