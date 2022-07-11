@@ -83,9 +83,7 @@ void setup() {
     printMqttTopicValues();
 
     closedPosition = calibrateClose(90, 45);
-    mqttClient.publish(MQTT_STATE_TOPIC, "closed", true);
     openedPosition = calibrateOpen(currentPosition, 90);
-    mqttClient.publish(MQTT_STATE_TOPIC, "opened", true);
   } else {
     Serial.println("Double click of reset detected. Clearing config and formatting storage...");
     resetWifiSettingsAndReboot();
@@ -171,12 +169,12 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
     char payloadText[length + 1];
     snprintf(payloadText, length + 1, "%s", payload);
 
-    if (isOpen(payloadText)) {
+    if (isOpen(payloadText) && !isOpened()) {
       open();
       if (isOpened()) {
         mqttClient.publish(MQTT_STATE_TOPIC, "opened", true);
       }
-    } else if (isClose(payloadText)) {
+    } else if (isClose(payloadText) && !isClosed()) {
       close();
       if (isClosed()) {
         mqttClient.publish(MQTT_STATE_TOPIC, "closed", true);
@@ -190,6 +188,7 @@ boolean isMqttConnected() {
 }
 
 void open() {
+  mqttClient.publish(MQTT_STATE_TOPIC, "opening", true);
   servo.attach(servoOutputPin, servoMin, servoMax);
 
 //  for(int position = currentPosition + 1; position <= openedPosition; position++) {
@@ -204,6 +203,7 @@ void open() {
 }
 
 void close() {
+  mqttClient.publish(MQTT_STATE_TOPIC, "closing", true);
   servo.attach(servoOutputPin, servoMin, servoMax);
 
 //  for(int position = currentPosition - 1; position >= closedPosition; position--) {
@@ -218,6 +218,7 @@ void close() {
 }
 
 int calibrateOpen(int startPosition, int minDegreesTraveled) {
+  mqttClient.publish(MQTT_STATE_TOPIC, "opening", true);
   servo.attach(servoOutputPin, servoMin, servoMax);
 
   for(int position = startPosition; position <= maxOpenedPosition; position++) {
@@ -227,10 +228,13 @@ int calibrateOpen(int startPosition, int minDegreesTraveled) {
     }  
   }
 
+  mqttClient.publish(MQTT_STATE_TOPIC, "opened", true);
+
   return maxOpenedPosition;
 }
 
 int calibrateClose(int startPosition, int minDegreesTraveled) {
+  mqttClient.publish(MQTT_STATE_TOPIC, "closing", true);
   servo.attach(servoOutputPin, servoMin, servoMax);
 
   for(int position = startPosition; position >= maxClosedPosition; position--) {
@@ -239,6 +243,8 @@ int calibrateClose(int startPosition, int minDegreesTraveled) {
       return position;
     }  
   }
+
+  mqttClient.publish(MQTT_STATE_TOPIC, "closing", true);
 
   return maxClosedPosition;
 }
