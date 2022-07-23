@@ -49,7 +49,7 @@ char MQTT_COMMAND_TOPIC[128];
 char MQTT_STATE_TOPIC[128];
 char MQTT_AVAILABILITY_TOPIC[128];
 
-#define DRD_TIMEOUT 10
+#define DRD_TIMEOUT 1
 #define DRD_ADDRESS 0
 DoubleResetDetector drd(DRD_TIMEOUT, DRD_ADDRESS);
 
@@ -191,13 +191,14 @@ void open() {
   mqttClient.publish(MQTT_STATE_TOPIC, "opening", true);
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-//  for(int position = currentPosition + 1; position <= openedPosition; position++) {
-//    currentPosition = position;
-//    servo.write(position);
-//  }
-  currentPosition = openedPosition;
-  servo.write(openedPosition);
-  delay(300);
+  for(int position = currentPosition + 1; position <= openedPosition; position++) {
+    currentPosition = position;
+    servo.write(position);
+    delay(15);
+  }
+//  currentPosition = openedPosition;
+//  servo.write(openedPosition);
+//  delay(300);
 
   servo.detach();
 }
@@ -206,13 +207,14 @@ void close() {
   mqttClient.publish(MQTT_STATE_TOPIC, "closing", true);
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-//  for(int position = currentPosition - 1; position >= closedPosition; position--) {
-//    currentPosition = position;
-//    servo.write(position);
-//  }
-  currentPosition = closedPosition;
-  servo.write(closedPosition);
-  delay(300);
+  for(int position = currentPosition - 1; position >= closedPosition; position--) {
+    currentPosition = position;
+    servo.write(position);
+    delay(15);
+  }
+//  currentPosition = closedPosition;
+//  servo.write(closedPosition);
+//  delay(300);
 
   servo.detach();
 }
