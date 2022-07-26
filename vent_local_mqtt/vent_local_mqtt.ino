@@ -23,6 +23,7 @@ const int maxOpenedPosition = 180;
 
 const int delayBetweenMoves = 40;
 
+const int initialMoveOffset = 4;
 const int endstopOffset = 5;
 int openedPosition;
 int closedPosition;
@@ -194,7 +195,7 @@ void open() {
   mqttClient.publish(MQTT_STATE_TOPIC, "opening", true);
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-  for(int position = currentPosition + 1; position <= openedPosition; position++) {
+  for(int position = currentPosition + initialMoveOffset; position <= openedPosition; position++) {
     currentPosition = position;
     servo.write(position);
     delay(delayBetweenMoves);
@@ -210,7 +211,7 @@ void close() {
   mqttClient.publish(MQTT_STATE_TOPIC, "closing", true);
   servo.attach(servoOutputPin, servoMin, servoMax);
 
-  for(int position = currentPosition - 1; position >= closedPosition; position--) {
+  for(int position = currentPosition - initialMoveOffset; position >= closedPosition; position--) {
     currentPosition = position;
     servo.write(position);
     delay(delayBetweenMoves);
