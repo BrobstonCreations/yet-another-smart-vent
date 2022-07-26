@@ -23,7 +23,7 @@ const int maxOpenedPosition = 180;
 
 const int delayBetweenMoves = 40;
 
-const int initialMoveOffset = 4;
+const int initialMoveOffset = 3;
 const int closeEndstopOffset = 12;
 const int openEndstopOffset = 4;
 int openedPosition;
