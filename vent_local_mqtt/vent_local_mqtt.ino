@@ -21,6 +21,8 @@ const int servoSensorValueThreshold = 165;
 const int maxClosedPosition = 0;
 const int maxOpenedPosition = 180;
 
+const int delayBetweenMoves = 150;
+
 int openedPosition;
 int closedPosition;
 int currentPosition;
@@ -194,7 +196,7 @@ void open() {
   for(int position = currentPosition + 1; position <= openedPosition; position++) {
     currentPosition = position;
     servo.write(position);
-    delay(15);
+    delay(delayBetweenMoves);
   }
 //  currentPosition = openedPosition;
 //  servo.write(openedPosition);
@@ -210,7 +212,7 @@ void close() {
   for(int position = currentPosition - 1; position >= closedPosition; position--) {
     currentPosition = position;
     servo.write(position);
-    delay(15);
+    delay(delayBetweenMoves);
   }
 //  currentPosition = closedPosition;
 //  servo.write(closedPosition);
@@ -246,7 +248,7 @@ int calibrateClose(int startPosition, int minDegreesTraveled) {
     }  
   }
 
-  mqttClient.publish(MQTT_STATE_TOPIC, "closing", true);
+  mqttClient.publish(MQTT_STATE_TOPIC, "closed", true);
 
   return maxClosedPosition;
 }
@@ -265,7 +267,7 @@ bool hasHitEndstopAndTurnOneDegree(int position, int degreesTraveled, int minDeg
     servo.write(position);
   }
 
-  delay(20); 
+  delay(delayBetweenMoves);
   return false;
 }
 
