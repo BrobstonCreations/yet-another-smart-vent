@@ -201,9 +201,6 @@ void open() {
     servo.write(position);
     delay(delayBetweenMoves);
   }
-//  currentPosition = openedPosition;
-//  servo.write(openedPosition);
-//  delay(300);
 
   servo.detach();
 }
@@ -217,9 +214,6 @@ void close() {
     servo.write(position);
     delay(delayBetweenMoves);
   }
-//  currentPosition = closedPosition;
-//  servo.write(closedPosition);
-//  delay(300);
 
   servo.detach();
 }
