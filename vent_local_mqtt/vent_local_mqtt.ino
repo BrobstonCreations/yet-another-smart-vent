@@ -24,7 +24,8 @@ const int maxOpenedPosition = 180;
 const int delayBetweenMoves = 40;
 
 const int initialMoveOffset = 4;
-const int endstopOffset = 5;
+const int closeEndstopOffset = 12;
+const int openEndstopOffset = 4;
 int openedPosition;
 int closedPosition;
 int currentPosition;
@@ -230,7 +231,7 @@ int calibrateOpen(int startPosition, int minDegreesTraveled) {
   for(int position = startPosition; position <= maxOpenedPosition; position++) {
     int degreesTraveled = position - startPosition;
     if (hasHitEndstopAndTurnOneDegree(position, degreesTraveled, minDegreesTraveled)) {
-      return position - endstopOffset;
+      return position - openEndstopOffset;
     }  
   }
 
@@ -246,7 +247,7 @@ int calibrateClose(int startPosition, int minDegreesTraveled) {
   for(int position = startPosition; position >= maxClosedPosition; position--) {
     int degreesTraveled = startPosition - position;
     if (hasHitEndstopAndTurnOneDegree(position, degreesTraveled, minDegreesTraveled)) {
-      return position + endstopOffset;
+      return position + closeEndstopOffset;
     }
   }
 
