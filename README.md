@@ -1,18 +1,22 @@
 # yet-another-smart-vent
 
-This project contains most everything needed to 3d print, assemble, and flash an MQTT Smart Vent.
+This project contains most everything needed to 3D print, assemble, and flash an MQTT Smart Vent.
 
 ## Getting Started
 1. Electronics
 - Components
 - Assembly
-2. 3d Printing
+2. 3D Printing
 - Printing
 - Assembly
 3. Compile/Flash/Upload
 4. Testing 
 
 ## Future features
+- Subscribe to an MQTT topic to rerun the initial open/close calibration.
+- Subscribe to an MQTT topic published by the central vent system to open the vent when that system is offline.
+- Publish debug information to an MQTT topic for easier troubleshooting.
+- Add retain as an option to initial WiFi/MQTT setup.
 
 ## Philosophy
 
