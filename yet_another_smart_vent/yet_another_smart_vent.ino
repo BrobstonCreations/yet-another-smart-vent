@@ -11,26 +11,29 @@
 #include <PubSubClient.h>
 #include <DoubleResetDetector.h>
 
-const int servoOutputPin = 0;
-const int servoMin = 450;
-const int servoMax = 2600;
-const int servoSensorPin = A0;
+Servo servo;
+const int servoPin = 0;
+const int servoPotentiometerPin = A0;
+const int servoMin = 500;
+const int servoMax = 3750;
 
-const int servoSensorValueThreshold = 165;
+const int maxOpenedPosition = 0;
+const int maxClosedPosition = 120;
+const int mediumPosition = maxClosedPosition / 2;
 
-const int maxClosedPosition = 0;
-const int maxOpenedPosition = 180;
+const int positionErrorTolerance = 2;
 
-const int delayBetweenMoves = 40;
-
-const int initialMoveOffset = 3;
-const int closeEndstopOffset = 12;
-const int openEndstopOffset = 4;
 int openedPosition;
 int closedPosition;
-int currentPosition;
+int openedPotentionmeterPosition;
+int closedPotentionmeterPosition;
 
-Servo servo;
+const int positionsLength = 5;
+struct POSITION {
+  int targetPosition;
+  int potentiometerPosition;
+};
+POSITION positions[positionsLength];
 
 uint8_t mqttRetryCounter = 0;
 
@@ -64,8 +67,8 @@ void setup() {
   Serial.begin(9600);
 
   if (!drd.detectDoubleReset()) {
-    pinMode(servoSensorPin, INPUT);
-    pinMode(servoOutputPin, OUTPUT);
+    pinMode(servoPin, OUTPUT);
+    pinMode(servoPotentiometerPin, INPUT);
   
     snprintf(identifier, sizeof(identifier), "VENT-%X", ESP.getChipId());
   
@@ -87,8 +90,9 @@ void setup() {
   
     printMqttTopicValues();
 
-    closedPosition = calibrateClose(90, 45);
-    openedPosition = calibrateOpen(currentPosition, 90);
+    calibrateClose(mediumPosition);
+    clearPositions();
+    calibrateOpen(mediumPosition);
   } else {
     Serial.println("Double click of reset detected. Clearing config and formatting storage...");
     resetWifiSettingsAndReboot();
@@ -176,14 +180,8 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
 
     if (isOpen(payloadText) && !isOpened()) {
       open();
-      if (isOpened()) {
-        mqttClient.publish(MQTT_STATE_TOPIC, "opened", true);
-      }
     } else if (isClose(payloadText) && !isClosed()) {
       close();
-      if (isClosed()) {
-        mqttClient.publish(MQTT_STATE_TOPIC, "closed", true);
-      }
     }
   }
 }
@@ -194,78 +192,80 @@ boolean isMqttConnected() {
 
 void open() {
   mqttClient.publish(MQTT_STATE_TOPIC, "opening", true);
-  servo.attach(servoOutputPin, servoMin, servoMax);
+  servo.attach(servoPin, servoMin, servoMax);
 
-  for(int position = currentPosition + initialMoveOffset; position <= openedPosition; position++) {
-    currentPosition = position;
+  int currentPosition = getCurrentPosition();
+  for(int position = currentPosition; position >= openedPosition; position--) {
     servo.write(position);
-    delay(delayBetweenMoves);
+    delay(20);
   }
 
   servo.detach();
+
+  if (isOpened()) {
+    mqttClient.publish(MQTT_STATE_TOPIC, "opened", true);
+  }
 }
 
 void close() {
   mqttClient.publish(MQTT_STATE_TOPIC, "closing", true);
-  servo.attach(servoOutputPin, servoMin, servoMax);
+  servo.attach(servoPin, servoMin, servoMax);
 
-  for(int position = currentPosition - initialMoveOffset; position >= closedPosition; position--) {
-    currentPosition = position;
+  int currentPosition = getCurrentPosition();
+  for(int position = currentPosition; position <= closedPosition; position++) {
     servo.write(position);
-    delay(delayBetweenMoves);
+    delay(20);
   }
 
   servo.detach();
-}
 
-int calibrateOpen(int startPosition, int minDegreesTraveled) {
-  mqttClient.publish(MQTT_STATE_TOPIC, "opening", true);
-  servo.attach(servoOutputPin, servoMin, servoMax);
-
-  for(int position = startPosition; position <= maxOpenedPosition; position++) {
-    int degreesTraveled = position - startPosition;
-    if (hasHitEndstopAndTurnOneDegree(position, degreesTraveled, minDegreesTraveled)) {
-      return position - openEndstopOffset;
-    }  
+  if (isClosed()) {
+    mqttClient.publish(MQTT_STATE_TOPIC, "closed", true);
   }
-
-  mqttClient.publish(MQTT_STATE_TOPIC, "opened", true);
-
-  return maxOpenedPosition;
 }
 
-int calibrateClose(int startPosition, int minDegreesTraveled) {
-  mqttClient.publish(MQTT_STATE_TOPIC, "closing", true);
-  servo.attach(servoOutputPin, servoMin, servoMax);
+void calibrateOpen(int startPosition) {
+  mqttClient.publish(MQTT_STATE_TOPIC, "opening", true);
+  servo.attach(servoPin, servoMin, servoMax);
 
-  for(int position = startPosition; position >= maxClosedPosition; position--) {
-    int degreesTraveled = startPosition - position;
-    if (hasHitEndstopAndTurnOneDegree(position, degreesTraveled, minDegreesTraveled)) {
-      return position + closeEndstopOffset;
+  for(int position = startPosition; position >= maxOpenedPosition; position--) {
+    delayServoWrite(position);
+    const int servoPotentiometerPosition = readServoPotentionmeterPosition();
+    updatePreviousPositions(position, servoPotentiometerPosition);
+    if (hasHitEndStop()) {
+      openedPosition = determineEndStopPosition();
+      openedPotentionmeterPosition = servoPotentiometerPosition;
+      break;
     }
   }
 
-  mqttClient.publish(MQTT_STATE_TOPIC, "closed", true);
+  servo.detach();
 
-  return maxClosedPosition;
+  if (isOpened()) {
+    mqttClient.publish(MQTT_STATE_TOPIC, "opened", true);
+  }
 }
 
-bool hasHitEndstopAndTurnOneDegree(int position, int degreesTraveled, int minDegreesTraveled) {
-  bool hasTraveledFarEnough = degreesTraveled >= minDegreesTraveled;
-  int servoSensorValue = analogRead(servoSensorPin);
-  bool hasHitVoltageThreshold = servoSensorValue >= servoSensorValueThreshold;
+void calibrateClose(int startPosition) {
+  mqttClient.publish(MQTT_STATE_TOPIC, "closing", true);
+  servo.attach(servoPin, servoMin, servoMax);
 
-  currentPosition = position;
-
-  if (hasTraveledFarEnough && hasHitVoltageThreshold) {
-    servo.detach();
-    return true;
-  } else {
-    servo.write(position);
+  for(int position = startPosition; position <= maxClosedPosition; position++) {
+    delayServoWrite(position);
+    const int servoPotentiometerPosition = readServoPotentionmeterPosition();
+    updatePreviousPositions(position, servoPotentiometerPosition);
+    if (hasHitEndStop()) {
+      closedPosition = determineEndStopPosition();
+      closedPotentionmeterPosition = servoPotentiometerPosition;
+      break;
+    }
   }
 
-  delay(delayBetweenMoves);
-  return false;
+  servo.detach();
+  
+  if (isClosed()) {
+    mqttClient.publish(MQTT_STATE_TOPIC, "closed", true);
+  }
 }
 
 boolean isOpen(char* payloadText) {
@@ -277,11 +277,84 @@ boolean isClose(char* payloadText) {
 }
 
 boolean isOpened() {
-  return currentPosition == openedPosition;
+  const int currentPosition = getCurrentPosition();
+  const int upperTolerance = openedPosition + positionErrorTolerance;
+  const int lowerTolerance = openedPosition - positionErrorTolerance;
+  return currentPosition >= lowerTolerance && currentPosition <= upperTolerance;
 }
 
 boolean isClosed() {
-  return currentPosition == closedPosition;
+  const int currentPosition = getCurrentPosition();
+  const int upperTolerance = closedPosition + positionErrorTolerance;
+  const int lowerTolerance = closedPosition - positionErrorTolerance;
+  return currentPosition >= lowerTolerance && currentPosition <= upperTolerance;
+}
+
+int getCurrentPosition() {
+  const int servoPotentiometerPosition = readServoPotentionmeterPosition();
+  return map(servoPotentiometerPosition, openedPotentionmeterPosition, closedPotentionmeterPosition, openedPosition, closedPosition);
+}
+
+boolean hasHitEndStop() {
+  const int currentPotentiometerPosition = positions[0].potentiometerPosition;
+  for (int index = positionsLength - 1; index >= 1; index--) {
+    if (currentPotentiometerPosition == positions[index].potentiometerPosition) {
+      return true;
+    }
+  }
+  return false;
+}
+
+int determineEndStopPosition() {
+  const int currentPotentiometerPosition = positions[0].potentiometerPosition;
+  for (int index = positionsLength - 1; index >= 1; index--) {
+    if (currentPotentiometerPosition == positions[index].potentiometerPosition) {
+      return positions[index].targetPosition;
+    }
+  }
+  return positions[0].targetPosition;
+}
+
+void clearPositions() {
+  for (int index = 0; index < positionsLength; index++) {
+    positions[index].targetPosition = NULL;
+    positions[index].potentiometerPosition = NULL;
+  }
+}
+
+void updatePreviousPositions(int targetPosition, int potentiometerPosition) {
+  for (int index = positionsLength - 1; index >= 1; index--) {
+    const int nextIndex = index - 1;
+    positions[index].targetPosition = positions[nextIndex].targetPosition;
+    positions[index].potentiometerPosition = positions[nextIndex].potentiometerPosition;
+  }
+  positions[0].targetPosition = targetPosition;
+  positions[0].potentiometerPosition = potentiometerPosition;
+}
+
+void delayServoWrite(int targetPosition) {
+  servo.write(targetPosition);
+  delayUntilStoppedMoving();
+}
+
+void delayUntilStoppedMoving() {
+  while(!hasStoppedMoving());
+}
+
+boolean hasStoppedMoving() {
+  const int servoPotentiometerPosition1 = readServoPotentionmeterPosition();
+  const int servoPotentiometerPosition2 = readServoPotentionmeterPosition();
+  const int servoPotentiometerPosition3 = readServoPotentionmeterPosition();
+  if (servoPotentiometerPosition1 == servoPotentiometerPosition2 || servoPotentiometerPosition1 == servoPotentiometerPosition3 || servoPotentiometerPosition2 == servoPotentiometerPosition3) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+int readServoPotentionmeterPosition() {
+  delay(10);
+  return analogRead(servoPotentiometerPin);
 }
 
 void printMqttTopicValues() {
