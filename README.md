@@ -13,10 +13,12 @@ This project contains most everything needed to 3D print, assemble, and flash an
 4. Testing 
 
 ## Future features
+- Subscribe to an MQTT topic to clear the configuration.
 - Subscribe to an MQTT topic to rerun the initial open/close calibration.
 - Subscribe to an MQTT topic published by the central vent system to open the vent when that system is offline.
 - Publish debug information to an MQTT topic for easier troubleshooting.
 - Add retain as an option to initial WiFi/MQTT setup.
+- Implement ArduinoOTA.
 
 ## Philosophy
 
