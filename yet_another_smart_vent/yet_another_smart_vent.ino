@@ -21,7 +21,7 @@ const int maxOpenedPosition = 0;
 const int maxClosedPosition = 120;
 const int mediumPosition = maxClosedPosition / 2;
 
-const int positionErrorTolerance = 2;
+const int positionErrorTolerance = 3;
 
 int openedPosition;
 int closedPosition;
