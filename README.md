@@ -3,6 +3,22 @@
 This project contains most everything needed to 3d print, assemble, and flash an MQTT Smart Vent.
 
 ## Getting Started
+1. Electronics
+- Components
+- Assembly
+2. 3d Printing
+- Printing
+- Assembly
+3. Compile/Flash/Upload
+4. Testing 
+
+## Future features
+
+## Philosophy
+
+## Pull Requests
+
+## Bugs
 
 ## Dependencies
 - ArduinoJson 6.10.1
@@ -25,4 +41,4 @@ minicom -D /dev/ttyUSB0 -b 9600
 `CTRL-A` then  `x` to exit.
 
 ## References
-This repo is copy/modifcation of [Hypfer's Midea Dehumidifier](https://github.com/Hypfer/esp8266-midea-dehumidifier).
+This repo is a modifcation of [Hypfer's Midea Dehumidifier](https://github.com/Hypfer/esp8266-midea-dehumidifier).
