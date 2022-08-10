@@ -16,6 +16,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 - Subscribe to an MQTT topic to clear the configuration.
 - Subscribe to an MQTT topic to rerun the initial open/close calibration.
 - Subscribe to an MQTT topic published by the central vent system to open the vent when that system is offline.
+- Publish automatic configuration. [example](https://github.com/Hypfer/esp8266-midea-dehumidifier/blob/ff869266c660657da25dc90e801d583ad34b6a8d/src/esp8266-midea-dehumidifier/esp8266-midea-dehumidifier.ino#L270)
 - Publish debug information to an MQTT topic for easier troubleshooting.
 - Add retain as an option to initial WiFi/MQTT setup.
 - Implement ArduinoOTA.
