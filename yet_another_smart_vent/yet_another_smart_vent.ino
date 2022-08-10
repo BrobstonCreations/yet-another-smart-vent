@@ -2,7 +2,6 @@
 #include <Servo.h>
 #include "wifi.h"
 
-#include <WEMOS_Motor.h>
 #include <ESP8266WiFi.h>
 #include <DNSServer.h>
 #include <ESP8266WebServer.h>
