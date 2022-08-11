@@ -13,6 +13,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 4. Testing 
 
 ## Future features
+- Investigate power saving options for battery pack use.
 - Subscribe to an MQTT topic to clear the configuration.
 - Subscribe to an MQTT topic to rerun the initial open/close calibration.
 - Subscribe to an MQTT topic published by the central vent system to open the vent when that system is offline.
