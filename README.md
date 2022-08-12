@@ -21,6 +21,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 - Publish debug information to an MQTT topic for easier troubleshooting.
 - Add retain as an option to initial WiFi/MQTT setup.
 - Implement ArduinoOTA.
+- Update repo to use latest dependencies.
 
 ## Philosophy
 
