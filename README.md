@@ -22,9 +22,13 @@ This project contains most everything needed to 3D print, assemble, and flash an
     11. Tin the wires on the Batan B2122 and each of the pins (5V, GND, D3, and A0).
     12. Solder the red wire to 5V, the Brown wire to GND, the yellow wire to D3, and the white wire to A0.
 2. 3D Printing
-- [Printing Advice](/VENT_PRINTING.md)
-- [Assembly Pictures](/VENT_ASSEMBLY.md)
-3. Compile/Flash/Upload
+    - [Printing Advice](/VENT_PRINTING.md)
+    - [Assembly Pictures](/VENT_ASSEMBLY.md)
+3. Compile/Flash/Upload/Dependencies
+    - ArduinoJson 6.10.1
+    - PubSubClient 2.8.0
+    - WiFiManager 0.15.0
+    - DoubleResetDetector 1.0.3
 4. Testing 
 
 ## Future features
@@ -43,12 +47,6 @@ This project contains most everything needed to 3D print, assemble, and flash an
 ## Pull Requests
 
 ## Bugs
-
-## Dependencies
-- ArduinoJson 6.10.1
-- PubSubClient 2.8.0
-- WiFiManager 0.15.0
-- DoubleResetDetector 1.0.3
 
 ## Development
 To compile from command line:
