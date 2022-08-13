@@ -26,11 +26,13 @@ This project contains most everything needed to 3D print, assemble, and flash an
 2. 3D Printing
     - [Printing Advice](/VENT_PRINTING.md)
     - [Assembly Pictures](/VENT_ASSEMBLY.md)
-3. Compile/Flash/Upload/Dependencies
-    - ArduinoJson 6.10.1
-    - PubSubClient 2.8.0
-    - WiFiManager 0.15.0
-    - DoubleResetDetector 1.0.3
+3. Compile/Flash/Upload
+    - TODO: Add Instructions
+    - Dependencies
+        - ArduinoJson 6.10.1
+        - PubSubClient 2.8.0
+        - WiFiManager 0.15.0
+        - DoubleResetDetector 1.0.3
 4. [Setup](/SETUP.md)
 5. [Testing](/TESTING.md) 
 
