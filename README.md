@@ -10,6 +10,10 @@ This project contains most everything needed to 3D print, assemble, and flash an
         - ESP8266 D1 Mini
         - DC Power Shield
         - Batan B2122
+        - Power Source Options
+            - AC Adapter
+            - Centralized 24V Power Supply
+            - Battery Pack (needs development).
     - [Assembly Instructions](/ELECTRONICS_ASSEMBLY.md)
 2. 3D Printing
     - [Printing Advice](/VENT_PRINTING.md)
