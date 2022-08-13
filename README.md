@@ -22,8 +22,8 @@ This project contains most everything needed to 3D print, assemble, and flash an
     11. Tin the wires on the Batan B2122 and each of the pins (5V, GND, D3, and A0).
     12. Solder the red wire to 5V, the Brown wire to GND, the yellow wire to D3, and the white wire to A0.
 2. 3D Printing
-- [Printing Advice](/VENT_PRINTING.MD)
-- [Assembly Pictures](/VENT_ASSEMBLY.MD)
+- [Printing Advice](/VENT_PRINTING.md)
+- [Assembly Pictures](/VENT_ASSEMBLY.md)
 3. Compile/Flash/Upload
 4. Testing 
 
