@@ -9,8 +9,8 @@ This project contains most everything needed to 3D print, assemble, and flash an
     - DC Power Shield
     - Batan B2122
 - Assembly
-    - Make header pin sets for 5V, GND, D3, and A0 at a minimum.
-    - I would recommend pressing these headers into a breadboard in the correct pattern for the above noted pins on the D1 Mini, this will make soldering the pins to the D1 mini much easier.
+    - Make header pin sets for 5V, GND, D3, A0, and 3V3. The first four are needed, the 3V3 pin is just to add stability.
+    - I would recommend pressing these header pins into a breadboard in the correct pattern for the above noted pins on the D1 Mini, this will make soldering the pins to the D1 mini much easier.
     - Once these 4 pins are soldered, I would recommend removing the D1 Mini from the breadboard and clip it into a third hard.
     - Now you should be able to press the DC Power Shield onto the pins. Be sure to insert the spacer, there will be an STL file provided to print this.
     - Solder the pins to the DC Power Shield.
