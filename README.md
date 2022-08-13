@@ -24,6 +24,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 2. 3D Printing
 - Printing
 - Assembly
+    - [Pictures Here](/VENT_ASSEMBLY.MD)
 3. Compile/Flash/Upload
 4. Testing 
 
