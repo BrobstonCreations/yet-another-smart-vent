@@ -22,6 +22,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
         - WiFiManager 0.15.0
         - DoubleResetDetector 1.0.3
 4. MQTT Broker
+    - [Everything Smart Home](https://www.youtube.com/c/EverythingSmartHome) has a good [MQTT Broker Setup Video](https://www.youtube.com/watch?v=dqTn-Gk4Qeo).
 5. [Setup](/SETUP.md)
 6. [Testing](/TESTING.md) 
 
