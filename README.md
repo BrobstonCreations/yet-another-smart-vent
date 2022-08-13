@@ -30,7 +30,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
     - WiFiManager 0.15.0
     - DoubleResetDetector 1.0.3
 4. [Setup](/SETUP.md)
-5. Testing 
+5. [Testing](/TESTING.md) 
 
 ## Future features
 - Investigate power saving options for battery pack use.
