@@ -5,7 +5,20 @@ This project contains most everything needed to 3D print, assemble, and flash an
 ## Getting Started
 1. Electronics
 - Components
+    - ESP8266 D1 Mini
+    - DC Power Shield
+    - Batan B2122
 - Assembly
+    - Make header pin sets for 5V, GND, D3, and A0 at a minimum.
+    - I would recommend pressing these headers into a breadboard in the correct pattern for the above noted pins on the D1 Mini, this will make soldering the pins to the D1 mini much easier.
+    - Once these 4 pins are soldered, I would recommend removing the D1 Mini from the breadboard and clip it into a third hard.
+    - Now you should be able to press the DC Power Shield onto the pins. Be sure to insert the spacer, there will be an STL file provided to print this.
+    - Solder the pins to the DC Power Shield.
+    - Remove the spacer.
+    - Cut the wires on the Batan B2122 to a length of 2-2.5 inches.
+    - Strip the last 1/4-3/8 of an inch off the end of each wire on the Batan B2122.
+    - Tin the wires on the Batan B2122 and each of the pins (5V, GND, D3, and A0).
+    - Solder the red wire to 5V, the Brown wire to GND, the yellow wire to D3, and the white wire to A0.
 2. 3D Printing
 - Printing
 - Assembly
