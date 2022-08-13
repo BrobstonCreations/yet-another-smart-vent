@@ -13,7 +13,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
         - Power Source Options
             - AC Adapter
             - Centralized 24V Power Supply
-            - Battery Pack (needs development).
+            - Battery Pack (needs development for power saving mode).
     - [Assembly Instructions](/docs/ELECTRONICS_ASSEMBLY.md)
 2. 3D Printing
     - [Printing Advice](/docs/VENT_PRINTING.md)
