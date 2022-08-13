@@ -30,7 +30,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 5. [Setup](/docs/SETUP.md)
 6. [Testing](/docs/TESTING.md) 
 
-## Future features
+## Future Features
 - Investigate power saving options for battery pack use.
 - Subscribe to an MQTT topic to clear the configuration.
 - Subscribe to an MQTT topic to rerun the initial open/close calibration.
