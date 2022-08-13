@@ -33,8 +33,9 @@ This project contains most everything needed to 3D print, assemble, and flash an
         - PubSubClient 2.8.0
         - WiFiManager 0.15.0
         - DoubleResetDetector 1.0.3
-4. [Setup](/SETUP.md)
-5. [Testing](/TESTING.md) 
+4. MQTT Broker
+5. [Setup](/SETUP.md)
+6. [Testing](/TESTING.md) 
 
 ## Future features
 - Investigate power saving options for battery pack use.
