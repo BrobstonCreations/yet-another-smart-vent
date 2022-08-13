@@ -14,10 +14,10 @@ This project contains most everything needed to 3D print, assemble, and flash an
             - AC Adapter
             - Centralized 24V Power Supply
             - Battery Pack (needs development).
-    - [Assembly Instructions](/ELECTRONICS_ASSEMBLY.md)
+    - [Assembly Instructions](/docs/ELECTRONICS_ASSEMBLY.md)
 2. 3D Printing
-    - [Printing Advice](/VENT_PRINTING.md)
-    - [Assembly Pictures](/VENT_ASSEMBLY.md)
+    - [Printing Advice](/docs/VENT_PRINTING.md)
+    - [Assembly Pictures](/docs/VENT_ASSEMBLY.md)
 3. Compile/Flash/Upload
     - TODO: Add Instructions
     - Dependencies
@@ -27,8 +27,8 @@ This project contains most everything needed to 3D print, assemble, and flash an
         - DoubleResetDetector 1.0.3
 4. MQTT Broker
     - [Everything Smart Home](https://www.youtube.com/c/EverythingSmartHome) has a good [MQTT Broker Setup Video](https://www.youtube.com/watch?v=dqTn-Gk4Qeo).
-5. [Setup](/SETUP.md)
-6. [Testing](/TESTING.md) 
+5. [Setup](/docs/SETUP.md)
+6. [Testing](/docs/TESTING.md) 
 
 ## Future features
 - Investigate power saving options for battery pack use.
