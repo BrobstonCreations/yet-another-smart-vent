@@ -22,7 +22,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
         9. Cut the wires on the Batan B2122 to a length of 2-2.5 inches.
         10. Strip 1/4-3/8 of an inch of insulation off the end of each wire on the Batan B2122.
         11. Tin the wires on the Batan B2122 and each of the pins (5V, GND, D3, and A0).
-        12. Solder the red wire to 5V, the Brown wire to GND, the yellow wire to D3, and the white wire to A0.
+        12. Solder the red wire to 5V, the brown wire to GND, the yellow wire to D3, and the white wire to A0.
 2. 3D Printing
     - [Printing Advice](/VENT_PRINTING.md)
     - [Assembly Pictures](/VENT_ASSEMBLY.md)
