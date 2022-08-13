@@ -14,7 +14,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
     3. Press the D1 Mini on to the pins in the breadboard.
     4. Solder the pins to the D1 Mini.
     5. Once these pins are soldered, I would recommend removing the D1 Mini from the breadboard and clip it into a third hard.
-    6. Now you should be able to press the DC Power Shield onto the pins you soldered to the D1 Mini. Be sure to insert the spacer, there will be an STL file provided to print this.
+    6. Now you should be able to press the DC Power Shield onto the pins you soldered to the D1 Mini. Be sure to insert the spacer, there will be an STL file provided to print this; this is also pictured in the Assembly instructions.
     7. Solder the pins to the DC Power Shield.
     8. Remove the spacer.
     9. Cut the wires on the Batan B2122 to a length of 2-2.5 inches.
