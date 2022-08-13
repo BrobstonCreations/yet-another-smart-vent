@@ -18,7 +18,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
     - Solder the pins to the DC Power Shield.
     - Remove the spacer.
     - Cut the wires on the Batan B2122 to a length of 2-2.5 inches.
-    - Strip 1/4-3/8 of an inch off of wire insulation off the end of each wire on the Batan B2122.
+    - Strip 1/4-3/8 of an inch of insulation off the end of each wire on the Batan B2122.
     - Tin the wires on the Batan B2122 and each of the pins (5V, GND, D3, and A0).
     - Solder the red wire to 5V, the Brown wire to GND, the yellow wire to D3, and the white wire to A0.
 2. 3D Printing
