@@ -18,7 +18,7 @@ The next time I print the levers I will add more pictures, in general the proces
 8. At this point each lever should spin freely on the linkage.
 
 ### Vent Top
-1. If you have a big enough printer, use the STL that is a one piece vent top.
-2. If you have a printer that is too small to print the vent top as one piece, use the STL that is split in two with tabs added to each corner.
-3. In either case, the vent top should be printed upside down.
-4. In the case of the split vent supports are needed for the corner tabs.
+- If you have a big enough printer, use the STL that is a one piece vent top.
+- If you have a printer that is too small to print the vent top as one piece, use the STL that is split in two with tabs added to each corner.
+- In either case, the vent top should be printed upside down.
+- In the case of the split vent supports are needed for the corner tabs.
