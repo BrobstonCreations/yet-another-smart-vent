@@ -13,3 +13,17 @@ Eventually I'll move this project to use [PlatformIO](https://platformio.org/), 
 ![3-search-for-dependency-select-version-and-install](https://user-images.githubusercontent.com/4724577/184547098-8651182c-6294-4bf6-acbf-b583bdf46c55.png)
 8. You should now be ready to Compile/Upload. Be sure the ESP8266 D1 Mini is connected and click "Upload" button (right arrow circle).
 ![4-compile-and-upload](https://user-images.githubusercontent.com/4724577/184547135-c7d94468-5f53-41a3-a154-10e2e9e69214.png)
+9. Alternatively it is also possible to compile and upload from command line:
+    
+    To compile from command line:
+    `arduino-cli compile --fqbn esp8266:esp8266:d1 yet_another_smart_vent`
+
+    To upload from command line:
+    `arduino-cli upload -p /dev/ttyUSB0 --fqbn esp8266:esp8266:d1 yet_another_smart_vent`
+
+    To monitor serial output from command line:
+    ```
+    sudo apt-get install minicom
+    minicom -D /dev/ttyUSB0 -b 9600
+    ```
+    `CTRL-A` then  `x` to exit.
