@@ -19,7 +19,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
     - [Printing Advice](/docs/VENT_PRINTING.md)
     - [Assembly Pictures](/docs/VENT_ASSEMBLY.md)
 3. Compile/Upload
-    - TODO: Add Instructions
+    - [Instructions](/docs/COMPILE_AND_UPLOAD.md)
     - Dependencies
         - ArduinoJson 6.10.1
         - PubSubClient 2.8.0
