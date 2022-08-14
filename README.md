@@ -17,6 +17,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
             - Battery Pack (needs development for power saving mode).
     - [Assembly Instructions](/docs/ELECTRONICS_ASSEMBLY.md)
 2. 3D Printing
+    - [STL](https://www.printables.com/model/259241-yet-another-smart-vent-4x10)
     - [Printing Advice](/docs/VENT_PRINTING.md)
     - [Assembly Pictures](/docs/VENT_ASSEMBLY.md)
 3. Compile/Upload
