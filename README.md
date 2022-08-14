@@ -36,6 +36,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 7. [Implementation Options](/docs/IMPLEMENTATION_OPTIONS.md)
 
 ## Future Features
+- Create more vent variations (2x10, 2x12, 4x12, 6x12, 6x14?).
 - Investigate power saving options for battery pack use.
 - Subscribe to an MQTT topic to clear the configuration.
 - Subscribe to an MQTT topic to rerun the initial open/close calibration.
