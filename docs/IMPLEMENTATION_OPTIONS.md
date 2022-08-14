@@ -17,3 +17,5 @@
         availability_topic: tele/office/vent/LWT
         device_class: damper
     ```
+
+*If you know of some other options, feel free to add them here.*
