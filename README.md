@@ -29,7 +29,8 @@ This project contains most everything needed to 3D print, assemble, and flash an
 4. MQTT Broker
     - [Everything Smart Home](https://www.youtube.com/c/EverythingSmartHome) has a good [MQTT Broker Setup Video](https://www.youtube.com/watch?v=dqTn-Gk4Qeo).
 5. [Setup](/docs/SETUP.md)
-6. [Testing](/docs/TESTING.md) 
+6. [Testing](/docs/TESTING.md)
+7. [Implementation Options](/docs/IMPLEMENTATION_OPTIONS.md)
 
 ## Future Features
 - Investigate power saving options for battery pack use.
