@@ -42,24 +42,19 @@ This project contains most everything needed to 3D print, assemble, and flash an
 - Update repo to use latest dependencies.
 
 ## Philosophy
+- Local Control
+- External Integration
+- Easy of Use (this will improve over time)
+- Community Feedback
+- Community Contributions
+- Agile, Lean, and Extreme Programming Practices
+- Test Driven Development (hopefully in the future)
 
 ## Pull Requests
+Pull Requests are always welcome. I would recommend starting with an [issue](https://github.com/TonyBrobston/yet-another-smart-vent/issues), so that we can discuss viability and implementation.
 
-## Bugs
-
-## Development
-To compile from command line:
-`arduino-cli compile --fqbn esp8266:esp8266:d1 yet_another_smart_vent`
-
-To upload from command line:
-`arduino-cli upload -p /dev/ttyUSB0 --fqbn esp8266:esp8266:d1 yet_another_smart_vent`
-
-To monitor serial output from command line:
-```
-sudo apt-get install minicom
-minicom -D /dev/ttyUSB0 -b 9600
-```
-`CTRL-A` then  `x` to exit.
+## Issues
+Feel free to open an [issue](https://github.com/TonyBrobston/yet-another-smart-vent/issues) and I will respond as I have time. The hope is to create a system that gives consumers what they want, your feedback is important. 
 
 ## References
 This repo is a modifcation of [Hypfer's Midea Dehumidifier](https://github.com/Hypfer/esp8266-midea-dehumidifier).
