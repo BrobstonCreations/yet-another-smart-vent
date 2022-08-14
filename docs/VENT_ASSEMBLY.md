@@ -9,9 +9,6 @@ Tools/Fasteners:
 - 9/32 Drill Bit
 
 ![1-components-and-tools](https://user-images.githubusercontent.com/4724577/184462531-667b9df4-d63b-407b-8c9b-19ecc8d036df.jpg)
-![2-electronics-and-spacer](https://user-images.githubusercontent.com/4724577/184462537-a2b78668-7f86-4ea0-98f0-43a03e7348ec.jpg)
-![3-electronics-and-spacer-inserted](https://user-images.githubusercontent.com/4724577/184462541-0ec240d3-f7c3-4e77-ba08-74e298b98570.jpg)
-![4-electronics-and-spacer-inserted-side](https://user-images.githubusercontent.com/4724577/184462880-a24e45a4-a4ad-46f9-a712-220e4b8e3bc7.jpg)
 ![5-louvers-linkage-levers](https://user-images.githubusercontent.com/4724577/184462881-ade796a5-642c-44fd-abaf-ae8b13524a54.jpg)
 ![6-levers-and-linkage](https://user-images.githubusercontent.com/4724577/184462875-54018eb9-bec2-44ae-b4f3-b0edea4305a6.jpg)
 ![7-levers-and-linkage-one-louver-inserted](https://user-images.githubusercontent.com/4724577/184462876-e6f353f0-f5b2-4266-836b-71edce61a03d.jpg)
