@@ -42,6 +42,8 @@ This project contains most everything needed to 3D print, assemble, and flash an
 - Add retain as an option to initial WiFi/MQTT setup.
 - Implement ArduinoOTA.
 - Update repo to use latest dependencies.
+- Use PlatformIO for dependencies.
+- Publish a distributable to Releases.
 
 ## Philosophy
 - Local Control
