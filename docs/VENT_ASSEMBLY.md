@@ -1,5 +1,7 @@
 ## Vent Assembly
-Before attaching the servo arm/wiper to the servo, it is important that you compile/upload the [`turn-to-60`](/turn_to_60/turn_to_60.ino) code. Right after the code turns the servo to 60 degrees, attach the arm/wiper so that it is straight up, pointing towards the Batan B2122 logo. The Batan B2122 has 120 degrees of travel, the louvers turn around 90; this process ensures proper function of the vent.
+### Notes
+- All *Yet Another Smart Vent*'s assemble in a very similar manner.
+- Before attaching the servo arm/wiper to the servo, it is important that you compile/upload the [`turn-to-60`](/turn_to_60/turn_to_60.ino) code. Right after the code turns the servo to 60 degrees, attach the arm/wiper so that it is straight up, pointing towards the Batan B2122 logo. The Batan B2122 has 120 degrees of travel, the louvers turn around 90; this process ensures proper function of the vent.
 
 Tools:
 - M5x0.8 Tap
