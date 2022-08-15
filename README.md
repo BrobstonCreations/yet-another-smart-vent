@@ -54,6 +54,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 - Community Contributions
 - Agile, Lean, and Extreme Programming Practices
 - Test Driven Development (hopefully in the future)
+- Mostly Decentralized Manufacturing.
 
 ## Pull Requests
 Pull Requests are always welcome. I would recommend starting with an [issue](https://github.com/TonyBrobston/yet-another-smart-vent/issues), so that we can discuss viability and implementation.
