@@ -22,7 +22,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
         - [6x10 Vent](https://www.printables.com/model/259323-yet-another-smart-vent-6x10)
         - [6x12 Vent](https://www.printables.com/model/259622-yet-another-smart-vent-6x12) (needs testing)
     - [Printing Advice](/docs/VENT_PRINTING.md)
-    - [Assembly Pictures](/docs/VENT_ASSEMBLY.md)
+    - [Assembly Instructions](/docs/VENT_ASSEMBLY.md)
 3. [Compile and Upload Instructions](/docs/COMPILE_AND_UPLOAD.md)
 4. MQTT Broker
     - [Everything Smart Home](https://www.youtube.com/c/EverythingSmartHome) has a good [MQTT Broker Setup Video](https://www.youtube.com/watch?v=dqTn-Gk4Qeo).
