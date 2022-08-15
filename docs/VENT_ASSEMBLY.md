@@ -1,12 +1,17 @@
 ## Vent Assembly
 Before attaching the servo arm/wiper to the servo, it is important that you compile/upload the [`turn-to-60`](/turn_to_60/turn_to_60.ino) code. Right after the code turns the servo to 60 degrees, attach the arm/wiper so that it is straight up, pointing towards the Batan B2122 logo. The Batan B2122 has 120 degrees of travel, the louvers turn around 90; this process ensures proper function of the vent.
 
-Tools/Fasteners:
+Tools:
 - M5x0.8 Tap
-- M5x0.8 6mm Long Socket Head Screw
 - M3x0.5 Tap
-- M3x0.5 6mm Long Flat Head Machine Screws Inner Hex Screw
+- M5 Allen Key
+- M3 Allen Key
 - 9/32 Drill Bit
+
+Fasteners:
+- (2) M5x0.8 6mm Long Socket Head Screw
+- (4) M3x0.5 6mm Long Flat Head Machine Screws Inner Hex Screw
+
 
 ![1-components-and-tools](https://user-images.githubusercontent.com/4724577/184462531-667b9df4-d63b-407b-8c9b-19ecc8d036df.jpg)
 ![5-louvers-linkage-levers](https://user-images.githubusercontent.com/4724577/184462881-ade796a5-642c-44fd-abaf-ae8b13524a54.jpg)
