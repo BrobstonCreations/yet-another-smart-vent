@@ -8,6 +8,11 @@ Eventually I'll move this project to use [PlatformIO](https://platformio.org/), 
 4. Select the correct board. Tools > Board > ESP8266 Board > Generic ESP8266 Module.
 5. Select the correct port. Tools > Port. On Linux this will be something like `/dev/ttyUSB0`, on Windows it will probably be something else.
 6. Install the few libraries that are required. Tools > Manage Libraries.
+    - ArduinoJson 6.10.1
+    - PubSubClient 2.8.0
+    - WiFiManager 0.15.0
+    - DoubleResetDetector 1.0.3
+
 ![2-open-manage-libraries](https://user-images.githubusercontent.com/4724577/184547065-ed91cf55-c1cf-47e8-b1eb-d43fd1830433.png)
 7. Search for the Dependencies listed in the [main README](/README.md), select the correct version, and install. Repeat for all dependencies listed.
 ![3-search-for-dependency-select-version-and-install](https://user-images.githubusercontent.com/4724577/184547098-8651182c-6294-4bf6-acbf-b583bdf46c55.png)
