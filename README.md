@@ -34,6 +34,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 - Integrate a lever to manually open/close vent louvers.
 - Create more vent variations (2x10, 2x12, 4x12, 6x12, 6x14?).
 - Investigate power saving options for battery pack use.
+- Investigate ESPHome as a potential option to decrease this project's complexity.
 - Subscribe to an MQTT topic to clear the configuration.
 - Subscribe to an MQTT topic to rerun the initial open/close calibration.
 - Subscribe to an MQTT topic published by the central vent system to open the vent when that system is offline.
