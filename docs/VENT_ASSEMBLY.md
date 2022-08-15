@@ -7,6 +7,7 @@ Tools:
 - M5 Allen Key
 - M3 Allen Key
 - 9/32 Drill Bit
+- The end of any DC Power Connector (this helps aide in alignment of the D1 Mini when installing the electronics enclosure top)
 
 Fasteners:
 - (2) M5x0.8 6mm Long Socket Head Screw
