@@ -19,6 +19,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 2. 3D Printing
     - STLs
         - [2x10 Vent](https://www.printables.com/model/259777-yet-another-smart-vent-2x10) (testing at the moment)
+        - 2x12 Vent (coming soon)
         - [4x10 Vent](https://www.printables.com/model/259241-yet-another-smart-vent-4x10)
         - [4x12 Vent](https://www.printables.com/model/259924-yet-another-smart-vent-4x12) (needs testing)
         - [6x10 Vent](https://www.printables.com/model/259323-yet-another-smart-vent-6x10)
@@ -33,7 +34,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 7. [Implementation Options](/docs/IMPLEMENTATION_OPTIONS.md)
 
 ## Future Features
-- Create more vent variations (2x12 and 6x14?).
+- Create 2x12 vent variation.
 - Make open/close calibration slightly less sensitive.
 - Integrate a lever to manually open/close vent louvers.
 - Investigate power saving options for battery pack use.
