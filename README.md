@@ -34,6 +34,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 7. [Implementation Options](/docs/IMPLEMENTATION_OPTIONS.md)
 
 ## Future Features
+- Experiment with designing/printing 2x12, 4x12, and 6x12 vent shells as two snap-together parts.
 - Make open/close calibration slightly less sensitive.
 - Integrate a lever to manually open/close vent louvers.
 - Investigate power saving options for battery pack use.
