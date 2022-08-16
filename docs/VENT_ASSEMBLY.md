@@ -1,6 +1,7 @@
 ## Vent Assembly
 ### Notes
 - All *Yet Another Smart Vent*'s assemble in a very similar manner.
+- Be sure to drill out the holes in the vent shell that the louvers rotate on. Use a 9/32 drill bit.
 - Before attaching the servo arm/wiper to the servo, it is important that you compile/upload the [`turn-to-60`](/turn_to_60/turn_to_60.ino) code. Right after the code turns the servo to 60 degrees, attach the arm/wiper so that it is straight up, pointing towards the Batan B2122 logo. The Batan B2122 has 120 degrees of travel, the louvers turn around 90; this process ensures proper function of the vent.
 
 Tools:
