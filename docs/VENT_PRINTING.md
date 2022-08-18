@@ -1,5 +1,7 @@
 ## Vent Printing
 
+Currently I have been printing with [3DFuel Pro PLA+](https://www.3dfuel.com/products/pro-pla-midnight-black-1-75mm) for it's heat resistance. I have not had a chance to test this filament with the furnace on (it is currently summer). If anyone has experience with this sort of thing please open an issue to discuss.
+
 Here is the correct orientation to print things. Nothing in this picture requires supports, as long as bridging works fine on the ends of the louvers. What is not pictured includes: four levers (for 4x10) and the vent top.
 ![4x10-on-build-plate](https://user-images.githubusercontent.com/4724577/184463112-e18aceac-d279-469a-ad77-89d0d91e50bf.jpg)
 
