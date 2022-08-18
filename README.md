@@ -35,6 +35,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 
 ## Future Features
 - Experiment with designing/printing 2x12, 4x12, and 6x12 vent shells as two snap-together parts.
+- Add the ability to move the vent to a specific position between 0% and 100%.
 - Test vents when furnace is heating. (I'm currently printing with [3DFuel Pro PLA+](https://www.3dfuel.com/collections/pro-pla/products/pro-pla-midnight-black-1-75mm) which should work just fine.)
 - Make open/close calibration slightly less sensitive.
 - Integrate a lever to manually open/close vent louvers.
