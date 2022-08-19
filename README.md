@@ -34,7 +34,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 7. [Implementation Options](/docs/IMPLEMENTATION_OPTIONS.md)
 
 ## Other Notes
-- It is recommended to have a [Static Pressure Regulating Damper](https://www.zonefirst.com/product/sprddd/) installed between the main return and the main plenum. This will even out the static pressure that increases or decreases by opening or closing vents.
+- It is recommended to have a [Static Pressure Regulating Damper](https://www.zonefirst.com/product/sprddd/) installed between the main return and the main plenum. This will even out the static pressure that changes in the ducting, from opening or closing vents.
 - If the previous recommendation is not possible, it may be possible to partially mitigate the static pressure issue by only closing vents (that are in a closed state) to 80% closed, when the number of closed vents is greater than 75%. This will be a feature implemented in [mqtt-hvac-vent-control](https://github.com/TonyBrobston/mqtt-hvac-vent-control) in the future.
 
 ## Future Features
