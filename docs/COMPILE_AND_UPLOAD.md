@@ -4,10 +4,10 @@ Eventually I'll move this project to use [PlatformIO](https://platformio.org/), 
 1. Install the [Arduino IDE](https://www.arduino.cc/en/software).
 2. Open `yet_another_smart_vent`.
 ![1-open-project-in-arduino-ide](https://user-images.githubusercontent.com/4724577/184546875-843e9e3f-1aba-46c1-abf2-17a903b34bd5.png)
-3. Install "Additional Boards Manager URLs". File > Preferences. Add `http://arduino.esp8266.com/stable/package_esp8266com_index.json` to "Additional Boards Manager URLs". If there is more than one, add a comma in between (`,`). Click "OK".
-4. Select the correct board. Tools > Board > ESP8266 Board > Generic ESP8266 Module.
-5. Select the correct port. Tools > Port. On Linux this will be something like `/dev/ttyUSB0`, on Windows it will probably be something else.
-6. Install the few libraries that are required. Tools > Manage Libraries.
+3. Install "Additional Boards Manager URLs". File -> Preferences. Add `http://arduino.esp8266.com/stable/package_esp8266com_index.json` to "Additional Boards Manager URLs". If there is more than one, add a comma in between (`,`). Click "OK".
+4. Select the correct board. Tools -> Board -> ESP8266 Board -> Generic ESP8266 Module.
+5. Select the correct port. Tools -> Port. On Linux this will be something like `/dev/ttyUSB0`, on Windows it will probably be something else.
+6. Install the few libraries that are required. Tools -> Manage Libraries.
     - ArduinoJson 6.10.1
     - PubSubClient 2.8.0
     - WiFiManager 0.15.0
