@@ -14,7 +14,7 @@ Eventually I'll move this project to use [PlatformIO](https://platformio.org/), 
     - DoubleResetDetector 1.0.3
 
 ![2-open-manage-libraries](https://user-images.githubusercontent.com/4724577/184547065-ed91cf55-c1cf-47e8-b1eb-d43fd1830433.png)
-7. Search for the Dependencies listed in the [main README](/README.md), select the correct version, and install. Repeat for all dependencies listed.
+7. Search for the Dependencies listed above, select the correct version, and install. Repeat for all dependencies listed.
 ![3-search-for-dependency-select-version-and-install](https://user-images.githubusercontent.com/4724577/184547098-8651182c-6294-4bf6-acbf-b583bdf46c55.png)
 8. You should now be ready to Compile/Upload. Be sure the ESP8266 D1 Mini is connected and click "Upload" button (right arrow circle).
 ![4-compile-and-upload](https://user-images.githubusercontent.com/4724577/184547135-c7d94468-5f53-41a3-a154-10e2e9e69214.png)
