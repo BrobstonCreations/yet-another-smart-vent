@@ -3,7 +3,8 @@
 This project contains most everything needed to 3D print, assemble, and flash an MQTT Smart Vent.
 
 ![PXL_20220812_211906955](https://user-images.githubusercontent.com/4724577/184465351-95fdbfe1-2a6a-43a4-8e92-827d9840c7b6.jpg)
-[Here is a short video demonstration on YouTube.](https://youtu.be/ANneINQjgso)
+[Here is a short video demonstration on YouTube.](https://youtu.be/ANneINQjgso) 
+(Consider subscribing for future updates)
 
 ## Getting Started
 1. Electronics
