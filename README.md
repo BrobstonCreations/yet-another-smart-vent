@@ -9,8 +9,8 @@ This project contains most everything needed to 3D print, assemble, and flash an
 ## Getting Started
 1. Electronics
     - Components
-        - ESP8266 D1 Mini
-        - DC Power Shield
+        - D1 Mini ESP8266
+        - D1 Mini DC Power Shield
         - Batan B2122
         - Power Source Options
             - AC Adapter
