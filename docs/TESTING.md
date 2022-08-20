@@ -5,7 +5,7 @@
 
 In this example I will use the MQTT Integration in Home Assistant to test that my vent is working end-to-end.
 1. Be sure to have gone through the previous steps to connect the vent to your WiFi and MQTT Broker.
-2. When you power the vent on, after it successfully connects to WiFi it will go through a calibration step. It will turn to half open, then turn to closing endstop. This is determined by continuting to turn the louvers until the program no longer sees any changes from the servo's potentiometer; it will then record the position, turn back to half open, and repeat for the opening endstop.
+2. When you power the vent on, after it successfully connects to WiFi it will go through a calibration step. It will turn to half open, then turn to closing endstop. This is determined by continuing to turn the louvers until the program no longer sees any changes from the servo's potentiometer; it will then record the position, turn back to half open, and repeat for the opening endstop.
 3. Now we will test the MQTT side of things. Subscribe to the vent's state. When the state changes, the vent will publish `open`, `opening`, `closed`, or `closing`. For example, this message will be published on `stat/office/vent` if you set your `mqtt_topic` to `office/vent` in the setup.
 
 ![image](https://user-images.githubusercontent.com/4724577/184465255-e21ebf35-4800-4758-9e98-7b0005417a44.png)
