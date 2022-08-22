@@ -26,6 +26,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
         - [4x12 Vent](https://www.printables.com/model/259924-yet-another-smart-vent-4x12) (needs testing)
         - [6x10 Vent](https://www.printables.com/model/259323-yet-another-smart-vent-6x10)
         - [6x12 Vent](https://www.printables.com/model/259622-yet-another-smart-vent-6x12) (needs testing)
+        - [ESP D1 Mini Shield Solder Spacer](https://www.printables.com/model/259295-esp-d1-mini-shield-solder-spacer)
     - [Printing Advice](/docs/VENT_PRINTING.md)
     - [Assembly Instructions](/docs/VENT_ASSEMBLY.md)
 3. [Compile and Upload Instructions](/docs/COMPILE_AND_UPLOAD.md)
