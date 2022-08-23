@@ -23,7 +23,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
         - [2x12 Vent](https://www.printables.com/model/260300-yet-another-smart-vent-2x12) (now with two-piece shell)
         - [3x10 Vent](https://www.printables.com/model/262311-yet-another-smart-vent-3x10) (needs testing)
         - [4x10 Vent](https://www.printables.com/model/259241-yet-another-smart-vent-4x10)
-        - [4x12 Vent](https://www.printables.com/model/259924-yet-another-smart-vent-4x12) (two-piece shell coming soon)
+        - [4x12 Vent](https://www.printables.com/model/259924-yet-another-smart-vent-4x12) (needs testing) (now with two-piece shell)
         - 6x8 Vent (coming soon)
         - [6x10 Vent](https://www.printables.com/model/259323-yet-another-smart-vent-6x10)
         - [6x12 Vent](https://www.printables.com/model/259622-yet-another-smart-vent-6x12) (two-piece shell coming soon)
