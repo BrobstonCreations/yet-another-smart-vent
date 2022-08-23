@@ -24,6 +24,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
         - [3x10 Vent](https://www.printables.com/model/262311-yet-another-smart-vent-3x10) (needs testing)
         - [4x10 Vent](https://www.printables.com/model/259241-yet-another-smart-vent-4x10)
         - [4x12 Vent](https://www.printables.com/model/259924-yet-another-smart-vent-4x12) (needs testing)
+        - 6x8 Vent (coming soon)
         - [6x10 Vent](https://www.printables.com/model/259323-yet-another-smart-vent-6x10)
         - [6x12 Vent](https://www.printables.com/model/259622-yet-another-smart-vent-6x12) (needs testing)
         - [ESP D1 Mini Shield Solder Spacer](https://www.printables.com/model/259295-esp-d1-mini-shield-solder-spacer)
@@ -42,9 +43,10 @@ This project contains most everything needed to 3D print, assemble, and flash an
 
 ## Future Features
 - Adjust 4x12 and 6x12 vent shells to use the same two piece snap-together design as the 2x12.
+- Make open/close calibration slightly less sensitive.
+- Experiment with 12x12 vent.
 - Add the ability to move the vent to a specific position between 0% and 100%.
 - Test vents when furnace is heating. (I'm currently printing with [3DFuel Pro PLA+](https://www.3dfuel.com/collections/pro-pla/products/pro-pla-midnight-black-1-75mm) which should work just fine.)
-- Make open/close calibration slightly less sensitive.
 - Integrate a lever to manually open/close vent louvers.
 - Investigate power saving options for battery pack use.
 - Investigate ESPHome as a potential option to decrease this project's complexity.
