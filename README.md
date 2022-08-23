@@ -18,6 +18,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
             - Battery Pack (needs development for power saving mode).
     - [Assembly Instructions](/docs/ELECTRONICS_ASSEMBLY.md)
 2. 3D Printing
+    - [Printing Advice](/docs/VENT_PRINTING.md)
     - [STLs](https://www.printables.com/social/337332-tonyb/collections/241144)
         - [2x10 Vent](https://www.printables.com/model/259777-yet-another-smart-vent-2x10)
         - [2x12 Vent](https://www.printables.com/model/260300-yet-another-smart-vent-2x12) (now with two-piece shell)
@@ -28,7 +29,6 @@ This project contains most everything needed to 3D print, assemble, and flash an
         - [6x10 Vent](https://www.printables.com/model/259323-yet-another-smart-vent-6x10)
         - [6x12 Vent](https://www.printables.com/model/259622-yet-another-smart-vent-6x12) (needs testing) (now with two-piece shell)
         - [ESP D1 Mini Shield Solder Spacer](https://www.printables.com/model/259295-esp-d1-mini-shield-solder-spacer)
-    - [Printing Advice](/docs/VENT_PRINTING.md)
     - [Assembly Instructions](/docs/VENT_ASSEMBLY.md)
 3. [Compile and Upload Instructions](/docs/COMPILE_AND_UPLOAD.md)
 4. MQTT Broker
