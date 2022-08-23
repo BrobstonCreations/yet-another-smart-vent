@@ -18,7 +18,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
             - Battery Pack (needs development for power saving mode).
     - [Assembly Instructions](/docs/ELECTRONICS_ASSEMBLY.md)
 2. 3D Printing
-    - STLs
+    - [STLs](https://www.printables.com/social/337332-tonyb/collections/241144)
         - [2x10 Vent](https://www.printables.com/model/259777-yet-another-smart-vent-2x10)
         - [2x12 Vent](https://www.printables.com/model/260300-yet-another-smart-vent-2x12) (now with two-piece shell)
         - [3x10 Vent](https://www.printables.com/model/262311-yet-another-smart-vent-3x10) (needs testing)
