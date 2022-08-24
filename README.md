@@ -14,7 +14,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
         - [Batan B2122](https://www.adafruit.com/product/1450)
         - Power Source Options:
             - [AC Adapter](https://amzn.to/3Ctc5ri)
-            - Centralized Power Supply Components (consult an electrician if needed):
+            - Centralized Power Supply Components (consult an electrician if needed) (eventually I'll put out an STL for an enclosure for the Power Supply):
                 - [DC 24V15A 360W Switching Power Supply](https://amzn.to/3Am2Er9)
                 - [Power Supply Fused Power Injection Board](https://www.holidaycoro.com/product-p/1308.htm) (needs testing)
                 - [IEC Fused Power Socket and Switch](https://amzn.to/3chQffL)
