@@ -43,12 +43,11 @@ This project contains most everything needed to 3D print, assemble, and flash an
 
 ## Future Features
 - Make open/close calibration slightly less sensitive.
-- Experiment with 12x12 vent.
 - Add the ability to move the vent to a specific position between 0% and 100%.
-- Test vents when furnace is heating. (I'm currently printing with [3DFuel Pro PLA+](https://www.3dfuel.com/collections/pro-pla/products/pro-pla-midnight-black-1-75mm) which should work just fine.)
+- Investigate ESPHome as a potential option to decrease this project's complexity.
+- Test vents when furnace is heating. (I'm currently printing with [3DFuel Pro PLA+](https://www.3dfuel.com/collections/pro-pla/products/pro-pla-midnight-black-1-75mm) which should work just fine)
 - Integrate a lever to manually open/close vent louvers.
 - Investigate power saving options for battery pack use.
-- Investigate ESPHome as a potential option to decrease this project's complexity.
 - Subscribe to an MQTT topic to clear the configuration.
 - Subscribe to an MQTT topic to rerun the initial open/close calibration.
 - Subscribe to an MQTT topic published by the central vent system to open the vent when that system is offline.
@@ -59,6 +58,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 - Update repo to use latest dependencies.
 - Use PlatformIO for dependencies.
 - Publish a distributable to Releases.
+- Experiment with 12x12 vent.
 
 ## Philosophy
 - Local Control
