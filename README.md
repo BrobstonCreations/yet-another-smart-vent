@@ -19,7 +19,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
                 - [Power Supply Fused Power Injection Board](https://www.holidaycoro.com/product-p/1308.htm) (needs testing)
                 - [IEC Fused Power Socket and Switch](https://amzn.to/3chQffL)
                 - [IEC Power Cable 5ft](https://amzn.to/3pHTsZc)
-                - Fork spade crimp terminals, fully insulated female spade connectors, and some stranded power wire for load/neutral/ground between the IEC Socket and the Power Supply.
+                - Fork spade crimp terminals, fully insulated female spade connectors, and some stranded wire for load/neutral/ground between the IEC Socket and the Power Supply.
                 - [Wiring to run through duct work](https://github.com/TonyBrobston/yet-another-smart-vent/issues/7#issuecomment-1221660336).
             - [Battery Pack](https://amzn.to/3AHrQd2) (not currently recommended, needs development for power saving mode).
     - [Assembly Instructions](/docs/ELECTRONICS_ASSEMBLY.md)
