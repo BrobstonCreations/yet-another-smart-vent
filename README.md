@@ -19,7 +19,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
                 - [Power Supply Fused Power Injection Board](https://www.holidaycoro.com/product-p/1308.htm) (needs testing)
                 - [IEC Fused Power Socket and Switch](https://amzn.to/3chQffL)
                 - [IEC Power Cable 5ft](https://amzn.to/3pHTsZc)
-                - Fork spade crimp terminals, fully insulated female spade connectors, and some stranded wire for load/neutral/ground between the IEC Socket and the Power Supply.
+                - Fork spade crimp terminals, fully insulated female spade terminal, and some stranded wire for load/neutral/ground between the IEC Socket and the Power Supply.
                 - [Wiring to run through duct work](https://github.com/TonyBrobston/yet-another-smart-vent/issues/7#issuecomment-1221660336).
             - [Battery Pack](https://amzn.to/3AHrQd2) (not currently recommended, needs development for power saving mode).
     - [Assembly Instructions](/docs/ELECTRONICS_ASSEMBLY.md)
@@ -48,9 +48,9 @@ This project contains most everything needed to 3D print, assemble, and flash an
 - If the previous recommendation is not possible, it may be possible to partially mitigate the static pressure issue by only closing vents (that are in a closed state) to 80% closed, when the number of closed vents is greater than 75%. This will be a feature implemented in [mqtt-hvac-vent-control](https://github.com/TonyBrobston/mqtt-hvac-vent-control) in the future.
 
 ## Future Features
+- Investigate ESPHome as a potential option to decrease this project's complexity.
 - Make open/close calibration slightly less sensitive.
 - Add the ability to move the vent to a specific position between 0% and 100%.
-- Investigate ESPHome as a potential option to decrease this project's complexity.
 - Test vents when furnace is heating. (I'm currently printing with [3DFuel Pro PLA+](https://www.3dfuel.com/collections/pro-pla/products/pro-pla-midnight-black-1-75mm) which should work just fine)
 - Integrate a lever to manually open/close vent louvers.
 - Investigate power saving options for battery pack use.
