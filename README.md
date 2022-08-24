@@ -7,19 +7,19 @@ This project contains most everything needed to 3D print, assemble, and flash an
 (Consider subscribing for future updates)
 
 ## Getting Started
-1. Electronics
-    - Components
-        - D1 Mini ESP8266
-        - D1 Mini DC Power Shield
-        - Batan B2122
-        - Power Source Options
-            - AC Adapter
-            - Centralized 24V Power Supply
-            - Battery Pack (needs development for power saving mode).
+1. Electronics:
+    - Components (below are some Amazon Affiliate links, they help me support this project at no cost to you):
+        - [D1 Mini ESP8266](https://amzn.to/3AmQJJu)
+        - [D1 Mini DC Power Shield](https://amzn.to/3AiCEwD)
+        - [Batan B2122](https://www.adafruit.com/product/1450)
+        - Power Source Options:
+            - [AC Adapter](https://amzn.to/3Ctc5ri)
+            - [Centralized 24V Power Supply](https://amzn.to/3Am2Er9) (needs testing but would recommend pairing with a [fused power injection board](https://www.holidaycoro.com/product-p/1308.htm))
+            - [Battery Pack](https://amzn.to/3AHrQd2) (not currently recommended, needs development for power saving mode).
     - [Assembly Instructions](/docs/ELECTRONICS_ASSEMBLY.md)
-2. 3D Printing
+2. 3D Printing:
     - [Printing Advice](/docs/VENT_PRINTING.md)
-    - [STLs](https://www.printables.com/social/337332-tonyb/collections/241144)
+    - [STLs](https://www.printables.com/social/337332-tonyb/collections/241144):
         - [2x10 Vent](https://www.printables.com/model/259777-yet-another-smart-vent-2x10)
         - [2x12 Vent](https://www.printables.com/model/260300-yet-another-smart-vent-2x12) (now with two-piece shell)
         - [3x10 Vent](https://www.printables.com/model/262311-yet-another-smart-vent-3x10) (needs testing)
@@ -31,7 +31,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
         - [ESP D1 Mini Shield Solder Spacer](https://www.printables.com/model/259295-esp-d1-mini-shield-solder-spacer)
     - [Assembly Instructions](/docs/VENT_ASSEMBLY.md)
 3. [Compile and Upload Instructions](/docs/COMPILE_AND_UPLOAD.md)
-4. MQTT Broker
+4. MQTT Broker:
     - [Everything Smart Home](https://www.youtube.com/c/EverythingSmartHome) has a good [MQTT Broker Setup Video](https://www.youtube.com/watch?v=dqTn-Gk4Qeo).
 5. [Setup](/docs/SETUP.md)
 6. [Testing](/docs/TESTING.md)
