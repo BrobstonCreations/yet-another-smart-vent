@@ -38,6 +38,8 @@ number:
 servo:
   - id: vent_servo
     output: pwm_output
+    auto_detach_time: 250ms
+    transition_length: 25s
     
 light:
   - platform: binary
