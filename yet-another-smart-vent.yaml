@@ -23,6 +23,12 @@ mqtt:
   username: !secret mqtt_username
   password: !secret mqtt_password
 
+sensor:
+  - platform: adc
+    pin: A0
+    name: Potentiometer
+    update_interval: 25ms
+
 number:
   - platform: template
     name: Servo Control
@@ -43,7 +49,7 @@ servo:
     
 light:
   - platform: binary
-    name: "ESPHome Development LED"
+    name: ESP8266 Built-in LED
     output: light_output
 
 output:
