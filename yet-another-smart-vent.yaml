@@ -22,6 +22,22 @@ mqtt:
   broker: !secret mqtt_broker
   username: !secret mqtt_username
   password: !secret mqtt_password
+
+number:
+  - platform: template
+    name: Servo Control
+    min_value: -100
+    max_value: 50
+    step: 1
+    set_action:
+      then:
+        - servo.write:
+            id: vent_servo
+            level: !lambda 'return x / 100.0;'
+
+servo:
+  - id: vent_servo
+    output: pwm_output
     
 light:
   - platform: binary
@@ -29,6 +45,10 @@ light:
     output: light_output
 
 output:
+  - platform: esp8266_pwm
+    id: pwm_output
+    pin: D3
+    frequency: 50 Hz
   - id: light_output
     platform: gpio
     pin: GPIO2
