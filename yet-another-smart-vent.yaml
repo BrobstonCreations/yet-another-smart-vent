@@ -43,25 +43,17 @@ number:
 
 servo:
   - id: vent_servo
-    output: pwm_output
+    output: vent_servo_output
     auto_detach_time: 250ms
-    transition_length: 25s
-    
-light:
-  - platform: binary
-    name: ESP8266 Built-in LED
-    output: light_output
+    transition_length: 5s
+
 
 output:
   - platform: esp8266_pwm
-    id: pwm_output
+    id: vent_servo_output
     pin: D3
     frequency: 50 Hz
-  - id: light_output
-    platform: gpio
-    pin: GPIO2
-    inverted: true
-    
+
 web_server:
 
 api:
@@ -69,4 +61,4 @@ api:
 ota:
 
 logger:
-  level: NONE
+  level: DEBUG
