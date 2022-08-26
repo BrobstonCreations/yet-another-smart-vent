@@ -4,6 +4,10 @@ substitutions:
 esphome:
   name: $name
 #  name_add_mac_suffix: true
+  on_boot:
+    then:
+    - lambda: |-
+        ESP_LOGD("custom", "Hello World!!!!");
 
 esp8266:
   board: d1_mini
@@ -23,30 +27,11 @@ mqtt:
   username: !secret mqtt_username
   password: !secret mqtt_password
 
-sensor:
-  - platform: adc
-    pin: A0
-    name: Potentiometer
-    update_interval: 25ms
-
-number:
-  - platform: template
-    name: Servo Control
-    min_value: -100
-    max_value: 50
-    step: 1
-    set_action:
-      then:
-        - servo.write:
-            id: vent_servo
-            level: !lambda 'return x / 100.0;'
-
 servo:
   - id: vent_servo
     output: vent_servo_output
+    transition_length: 3s
     auto_detach_time: 250ms
-    transition_length: 5s
-
 
 output:
   - platform: esp8266_pwm
