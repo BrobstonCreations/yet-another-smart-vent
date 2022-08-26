@@ -48,7 +48,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 - If the previous recommendation is not possible, it may be possible to partially mitigate the static pressure issue by only closing vents (that are in a closed state) to 80% closed, when the number of closed vents is greater than 75%. This will be a feature implemented in [mqtt-hvac-vent-control](https://github.com/TonyBrobston/mqtt-hvac-vent-control) in the future.
 
 ## Future Features
-- Investigate ESPHome as a potential option to decrease this project's complexity.
+- Investigate ESPHome as a potential option to decrease this project's complexity (this is looking promising).
 - Make open/close calibration slightly less sensitive.
 - Add the ability to move the vent to a specific position between 0% and 100%.
 - Test vents when furnace is heating. (I'm currently printing with [3DFuel Pro PLA+](https://www.3dfuel.com/collections/pro-pla/products/pro-pla-midnight-black-1-75mm) which should work just fine)
