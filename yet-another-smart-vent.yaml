@@ -26,6 +26,9 @@ esphome:
               id: move_servo_to_position
               value: !lambda 'return id(move_servo_to_position) + 0.01;'
           - delay: 25ms
+          - lambda: |-
+              ESP_LOGD("custom", "analogRead: %d", analogRead(A0));
+          - servo.detach: vent_servo
     - while:
         condition:
           lambda: |-
@@ -38,6 +41,9 @@ esphome:
               id: move_servo_to_position
               value: !lambda 'return id(move_servo_to_position) - 0.01;'
           - delay: 25ms
+          - lambda: |-
+              ESP_LOGD("custom", "analogRead: %d", analogRead(A0));
+          - servo.detach: vent_servo
 
 wifi:
   ssid: !secret wifi_ssid
@@ -58,7 +64,12 @@ servo:
   - id: vent_servo
     output: vent_servo_output
     transition_length: 3s
-    # auto_detach_time: 250ms
+    
+# sensor:
+#   - platform: adc
+#     pin: A0
+#     name: Potentiometer
+#     update_interval: 50ms
 
 output:
   - platform: esp8266_pwm
