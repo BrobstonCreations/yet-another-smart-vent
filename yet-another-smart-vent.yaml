@@ -1,13 +1,40 @@
 substitutions:
   name: yet-another-smart-vent
 
+globals:
+  - id: move_servo_to_position
+    type: float
+    initial_value: '0'
+
 esphome:
   name: $name
-#  name_add_mac_suffix: true
   on_boot:
+    priority: -100
     then:
-    - lambda: |-
-        ESP_LOGD("custom", "Hello World!!!!");
+    - while:
+        condition:
+          lambda: |-
+            return id(move_servo_to_position) <= 0.75;
+        then:
+          - servo.write:
+              id: vent_servo
+              level: !lambda 'return id(move_servo_to_position);'
+          - globals.set:
+              id: move_servo_to_position
+              value: !lambda 'return id(move_servo_to_position) + 0.01;'
+          - delay: 25ms
+    - while:
+        condition:
+          lambda: |-
+            return id(move_servo_to_position) >= -1;
+        then:
+          - servo.write:
+              id: vent_servo
+              level: !lambda 'return id(move_servo_to_position);'
+          - globals.set:
+              id: move_servo_to_position
+              value: !lambda 'return id(move_servo_to_position) - 0.01;'
+          - delay: 25ms
 
 esp8266:
   board: d1_mini
@@ -31,7 +58,7 @@ servo:
   - id: vent_servo
     output: vent_servo_output
     transition_length: 3s
-    auto_detach_time: 250ms
+    # auto_detach_time: 250ms
 
 output:
   - platform: esp8266_pwm
