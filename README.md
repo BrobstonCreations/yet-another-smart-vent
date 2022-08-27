@@ -49,7 +49,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 
 ## Future Features
 - Investigate ESPHome as a potential option to decrease this project's complexity (this is looking promising).
-- Look into supporting [DMS-MG90-A](https://www.mouser.com/ProductDetail/DFRobot/SER0046) Servo Motor.
+- Look into supporting [DMS-MG90-A](https://www.mouser.com/ProductDetail/DFRobot/SER0046?qs=vHuUswq2%252BsyGXvdy%2FXoNTA%3D%3D) Servo Motor.
 - Make open/close calibration slightly less sensitive.
 - Add the ability to move the vent to a specific position between 0% and 100%.
 - Test vents when furnace is heating. (I'm currently printing with [3DFuel Pro PLA+](https://www.3dfuel.com/collections/pro-pla/products/pro-pla-midnight-black-1-75mm) which should work just fine)
