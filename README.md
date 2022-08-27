@@ -25,7 +25,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
     - [Assembly Instructions](/docs/ELECTRONICS_ASSEMBLY.md)
 2. 3D Printing:
     - [Printing Advice](/docs/VENT_PRINTING.md)
-    - [STLs](https://www.printables.com/social/337332-tonyb/collections/241144):
+    - [STLs](https://www.printables.com/social/337332-tonyb/collections/241144?o=download_count):
         - [2x10 Vent](https://www.printables.com/model/259777-yet-another-smart-vent-2x10)
         - [2x12 Vent](https://www.printables.com/model/260300-yet-another-smart-vent-2x12) (now with two-piece shell)
         - [3x10 Vent](https://www.printables.com/model/262311-yet-another-smart-vent-3x10) (needs testing)
