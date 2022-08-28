@@ -78,8 +78,8 @@ esphome:
                   const int current_position = id(previous_potentiometer_value1);
                   const int upper_tolerance1 = id(previous_potentiometer_value2) + id(position_error_tolerance);
                   const int lower_tolerance1 = id(previous_potentiometer_value2) - id(position_error_tolerance);
-                  const int upper_tolerance2 = id(previous_potentiometer_value3); + id(position_error_tolerance);
-                  const int lower_tolerance2 = id(previous_potentiometer_value3); - id(position_error_tolerance);
+                  const int upper_tolerance2 = id(previous_potentiometer_value3) + id(position_error_tolerance);
+                  const int lower_tolerance2 = id(previous_potentiometer_value3) - id(position_error_tolerance);
                   return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
                     && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
               then: 
@@ -137,8 +137,8 @@ esphome:
                   const int current_position = id(previous_potentiometer_value1);
                   const int upper_tolerance1 = id(previous_potentiometer_value2) + id(position_error_tolerance);
                   const int lower_tolerance1 = id(previous_potentiometer_value2) - id(position_error_tolerance);
-                  const int upper_tolerance2 = id(previous_potentiometer_value3); + id(position_error_tolerance);
-                  const int lower_tolerance2 = id(previous_potentiometer_value3); - id(position_error_tolerance);
+                  const int upper_tolerance2 = id(previous_potentiometer_value3) + id(position_error_tolerance);
+                  const int lower_tolerance2 = id(previous_potentiometer_value3) - id(position_error_tolerance);
                   return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
                     && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
               then: 
