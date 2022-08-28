@@ -170,6 +170,7 @@ cover:
   - platform: template
     device_class: damper
     name: Vent
+    # lambda: 'return analogRead(A0) == id(closed_potentionmeter_position) ? COVER_CLOSED : COVER_OPEN;'
     open_action:
       - servo.write:
           id: vent_servo
@@ -182,6 +183,7 @@ cover:
     #   - servo.write:
     #       id: vent_servo
     #       level: !lambda 'return map(analogRead(A0), long(opened_potentionmeter_position), long(closed_potentionmeter_position), long(opened_position), long(closed_position));'
+    optimistic: true
 
 servo:
   - id: vent_servo
