@@ -5,6 +5,36 @@ globals:
   - id: move_servo_to_position
     type: float
     initial_value: '0'
+  - id: previous_potentiometer_value1
+    type: int
+    initial_value: '0'
+  - id: previous_potentiometer_value2
+    type: int
+    initial_value: '0'
+  - id: previous_potentiometer_value3
+    type: int
+    initial_value: '0'
+  - id: previous_potentiometer_value4
+    type: int
+    initial_value: '0'
+  - id: max_closed_position
+    type: float
+    initial_value: '0.75'
+  - id: max_opened_position
+    type: float
+    initial_value: '-1'
+  - id: closed_position
+    type: float
+    initial_value: '0'
+  - id: closed_potentionmeter_position
+    type: int
+    initial_value: '0'
+  - id: opened_position
+    type: float
+    initial_value: '0'
+  - id: opened_potentionmeter_position
+    type: int
+    initial_value: '0'
 
 esp8266:
   board: d1_mini
@@ -17,33 +47,83 @@ esphome:
     - while:
         condition:
           lambda: |-
-            return id(move_servo_to_position) <= 0.75;
+            return id(move_servo_to_position) < id(max_closed_position);
         then:
           - servo.write:
               id: vent_servo
               level: !lambda 'return id(move_servo_to_position);'
+          - delay: 25ms
           - globals.set:
               id: move_servo_to_position
               value: !lambda 'return id(move_servo_to_position) + 0.01;'
-          - delay: 25ms
+          - globals.set:
+              id: previous_potentiometer_value1
+              value: !lambda 'return analogRead(A0);'
+          - globals.set:
+              id: previous_potentiometer_value2
+              value: !lambda 'return id(previous_potentiometer_value1);'
+          - globals.set:
+              id: previous_potentiometer_value3
+              value: !lambda 'return id(previous_potentiometer_value2);'
+          - globals.set:
+              id: previous_potentiometer_value4
+              value: !lambda 'return id(previous_potentiometer_value3);'
           - lambda: |-
               ESP_LOGD("custom", "analogRead: %d", analogRead(A0));
-          - servo.detach: vent_servo
+          # - if:
+          #     condition:
+          #       lambda: 'return id(previous_potentiometer_value1) == id(previous_potentiometer_value2) || id(previous_potentiometer_value1) == id(previous_potentiometer_value3) || id(previous_potentiometer_value1) == id(previous_potentiometer_value4);'
+          #     then: 
+          #       - globals.set:
+          #           id: move_servo_to_position
+          #           value: !lambda 'return id(max_closed_position);'
+    - globals.set:
+        id: previous_potentiometer_value1
+        value: '0'
+    - globals.set:
+        id: previous_potentiometer_value2
+        value: '0'
+    - globals.set:
+        id: previous_potentiometer_value3
+        value: '0'
+    - globals.set:
+        id: previous_potentiometer_value4
+        value: '0'
     - while:
         condition:
           lambda: |-
-            return id(move_servo_to_position) >= -1;
+            return id(move_servo_to_position) >= id(max_opened_position);
         then:
           - servo.write:
               id: vent_servo
               level: !lambda 'return id(move_servo_to_position);'
+          - delay: 25ms
           - globals.set:
               id: move_servo_to_position
               value: !lambda 'return id(move_servo_to_position) - 0.01;'
-          - delay: 25ms
+          - globals.set:
+              id: previous_potentiometer_value1
+              value: !lambda 'return analogRead(A0);'
+          - globals.set:
+              id: previous_potentiometer_value2
+              value: !lambda 'return id(previous_potentiometer_value1);'
+          - globals.set:
+              id: previous_potentiometer_value3
+              value: !lambda 'return id(previous_potentiometer_value2);'
+          - globals.set:
+              id: previous_potentiometer_value4
+              value: !lambda 'return id(previous_potentiometer_value3);'
           - lambda: |-
               ESP_LOGD("custom", "analogRead: %d", analogRead(A0));
-          - servo.detach: vent_servo
+          # - if:
+          #     condition:
+          #       lambda: 'return id(previous_potentiometer_value1) == id(previous_potentiometer_value2) || id(previous_potentiometer_value1) == id(previous_potentiometer_value3) || id(previous_potentiometer_value1) == id(previous_potentiometer_value4);'
+          #     then: 
+          #       - globals.set:
+          #           id: move_servo_to_position
+          #           value: !lambda 'return id(max_opened_position);'
+    - delay: 500ms
+    - servo.detach: vent_servo
 
 wifi:
   ssid: !secret wifi_ssid
@@ -55,10 +135,13 @@ wifi:
 #  ap:
 #    ssid: $upper_name
     
-mqtt:
-  broker: !secret mqtt_broker
-  username: !secret mqtt_username
-  password: !secret mqtt_password
+# mqtt:
+#   broker: !secret mqtt_broker
+#   username: !secret mqtt_username
+#   password: !secret mqtt_password
+
+mdns:
+  disabled: false
 
 servo:
   - id: vent_servo
@@ -77,9 +160,9 @@ output:
     pin: D3
     frequency: 50 Hz
 
-web_server:
+#web_server:
 
-api:
+#api:
     
 ota:
 
