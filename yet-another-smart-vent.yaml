@@ -7,16 +7,13 @@ globals:
     initial_value: '0'
   - id: previous_potentiometer_value1
     type: int
-    initial_value: '0'
+    initial_value: '999999'
   - id: previous_potentiometer_value2
     type: int
-    initial_value: '0'
+    initial_value: '999998'
   - id: previous_potentiometer_value3
     type: int
-    initial_value: '0'
-  - id: previous_potentiometer_value4
-    type: int
-    initial_value: '0'
+    initial_value: '999996'
   - id: max_closed_position
     type: float
     initial_value: '0.75'
@@ -46,8 +43,7 @@ esphome:
     then:
     - while:
         condition:
-          lambda: |-
-            return id(move_servo_to_position) < id(max_closed_position);
+          lambda: 'return id(move_servo_to_position) < id(max_closed_position);'
         then:
           - servo.write:
               id: vent_servo
@@ -57,42 +53,44 @@ esphome:
               id: move_servo_to_position
               value: !lambda 'return id(move_servo_to_position) + 0.01;'
           - globals.set:
-              id: previous_potentiometer_value1
-              value: !lambda 'return analogRead(A0);'
+              id: previous_potentiometer_value3
+              value: !lambda 'return id(previous_potentiometer_value2);'
           - globals.set:
               id: previous_potentiometer_value2
               value: !lambda 'return id(previous_potentiometer_value1);'
           - globals.set:
-              id: previous_potentiometer_value3
-              value: !lambda 'return id(previous_potentiometer_value2);'
-          - globals.set:
-              id: previous_potentiometer_value4
-              value: !lambda 'return id(previous_potentiometer_value3);'
-          - lambda: |-
-              ESP_LOGD("custom", "analogRead: %d", analogRead(A0));
-          # - if:
-          #     condition:
-          #       lambda: 'return id(previous_potentiometer_value1) == id(previous_potentiometer_value2) || id(previous_potentiometer_value1) == id(previous_potentiometer_value3) || id(previous_potentiometer_value1) == id(previous_potentiometer_value4);'
-          #     then: 
-          #       - globals.set:
-          #           id: move_servo_to_position
-          #           value: !lambda 'return id(max_closed_position);'
+              id: previous_potentiometer_value1
+              value: !lambda 'return analogRead(A0);'
+          - lambda: 'ESP_LOGD("custom", "%d | %d | %d", id(previous_potentiometer_value1), id(previous_potentiometer_value2), id(previous_potentiometer_value3));'
+          - if:
+              condition:
+                lambda: 'return id(previous_potentiometer_value1) == id(previous_potentiometer_value2) && id(previous_potentiometer_value1) == id(previous_potentiometer_value3);'
+              then: 
+                - logger.log: 'opened | TRUE!'
+                - globals.set:
+                    id: max_closed_position
+                    value: !lambda 'return id(move_servo_to_position);'
+              else:
+                - logger.log: 'opened | FALSE!'
     - globals.set:
-        id: previous_potentiometer_value1
-        value: '0'
-    - globals.set:
-        id: previous_potentiometer_value2
+        id: move_servo_to_position
         value: '0'
     - globals.set:
         id: previous_potentiometer_value3
-        value: '0'
+        value: '999997'
     - globals.set:
-        id: previous_potentiometer_value4
-        value: '0'
+        id: previous_potentiometer_value2
+        value: '999998'
+    - globals.set:
+        id: previous_potentiometer_value1
+        value: '999999'
+    - servo.write:
+        id: vent_servo
+        level: !lambda 'return id(move_servo_to_position);'
+    - delay: 500ms
     - while:
         condition:
-          lambda: |-
-            return id(move_servo_to_position) >= id(max_opened_position);
+          lambda: 'return id(move_servo_to_position) > id(max_opened_position);'
         then:
           - servo.write:
               id: vent_servo
@@ -102,27 +100,26 @@ esphome:
               id: move_servo_to_position
               value: !lambda 'return id(move_servo_to_position) - 0.01;'
           - globals.set:
-              id: previous_potentiometer_value1
-              value: !lambda 'return analogRead(A0);'
+              id: previous_potentiometer_value3
+              value: !lambda 'return id(previous_potentiometer_value2);'
           - globals.set:
               id: previous_potentiometer_value2
               value: !lambda 'return id(previous_potentiometer_value1);'
           - globals.set:
-              id: previous_potentiometer_value3
-              value: !lambda 'return id(previous_potentiometer_value2);'
-          - globals.set:
-              id: previous_potentiometer_value4
-              value: !lambda 'return id(previous_potentiometer_value3);'
-          - lambda: |-
-              ESP_LOGD("custom", "analogRead: %d", analogRead(A0));
-          # - if:
-          #     condition:
-          #       lambda: 'return id(previous_potentiometer_value1) == id(previous_potentiometer_value2) || id(previous_potentiometer_value1) == id(previous_potentiometer_value3) || id(previous_potentiometer_value1) == id(previous_potentiometer_value4);'
-          #     then: 
-          #       - globals.set:
-          #           id: move_servo_to_position
-          #           value: !lambda 'return id(max_opened_position);'
-    - delay: 500ms
+              id: previous_potentiometer_value1
+              value: !lambda 'return analogRead(A0);'
+          - lambda: 'ESP_LOGD("custom", "%d | %d | %d", id(previous_potentiometer_value1), id(previous_potentiometer_value2), id(previous_potentiometer_value3));'
+          - if:
+              condition:
+                lambda: 'return id(previous_potentiometer_value1) == id(previous_potentiometer_value2) && id(previous_potentiometer_value1) == id(previous_potentiometer_value3);'
+              then: 
+                - logger.log: 'closed | TRUE!'
+                - globals.set:
+                    id: max_opened_position
+                    value: !lambda 'return id(move_servo_to_position);'
+              else:
+                - logger.log: 'closed | FALSE!'
+    - delay: 1s
     - servo.detach: vent_servo
 
 wifi:
