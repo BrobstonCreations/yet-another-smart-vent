@@ -37,7 +37,7 @@ globals:
     initial_value: '0'
   - id: position_error_tolerance
     type: float
-    initial_value: '1.5'
+    initial_value: '1'
 
 esp8266:
   board: d1_mini
