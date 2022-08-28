@@ -97,10 +97,6 @@ esphome:
     - globals.set:
         id: move_servo_to_position
         value: '0'
-    - servo.write:
-        id: vent_servo
-        level: !lambda 'return id(move_servo_to_position);'
-    - delay: 1s
     - globals.set:
         id: previous_potentiometer_value3
         value: '999997'
@@ -110,7 +106,10 @@ esphome:
     - globals.set:
         id: previous_potentiometer_value1
         value: '999999'
-    # - delay: 1s
+    - servo.write:
+        id: vent_servo
+        level: !lambda 'return id(move_servo_to_position);'
+    - delay: 200ms
     - while:
         condition:
           lambda: 'return id(move_servo_to_position) > id(max_opened_position);'
@@ -185,14 +184,10 @@ cover:
       - servo.write:
           id: vent_servo
           level: !lambda 'return id(opened_position);'
-      - delay: 2s
-      - servo.detach: vent_servo
     close_action:
       - servo.write:
           id: vent_servo
           level: !lambda 'return id(closed_position);'
-      - delay: 2s
-      - servo.detach: vent_servo
     # stop_action:
     #   - switch.turn_on: stop_cover_switch
 
@@ -200,6 +195,7 @@ servo:
   - id: vent_servo
     output: vent_servo_output
     transition_length: 3s
+    auto_detach_time: 250ms
     
 # sensor:
 #   - platform: adc
