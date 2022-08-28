@@ -25,19 +25,15 @@ globals:
     initial_value: '-1'
   - id: closed_position
     type: float
-    initial_value: '0'
   - id: closed_potentionmeter_position
     type: float
-    initial_value: '0'
   - id: opened_position
     type: float
-    initial_value: '0'
   - id: opened_potentionmeter_position
     type: float
-    initial_value: '0'
   - id: position_error_tolerance
     type: float
-    initial_value: '1.5'
+    initial_value: '1'
 
 esp8266:
   board: d1_mini
@@ -185,7 +181,7 @@ cover:
     # stop_action:
     #   - servo.write:
     #       id: vent_servo
-    #       level: !lambda 'return map(analogRead(A0), opened_potentionmeter_position, closed_potentionmeter_position, opened_position, closed_position);'
+    #       level: !lambda 'return map(analogRead(A0), long(opened_potentionmeter_position), long(closed_potentionmeter_position), long(opened_position), long(closed_position));'
 
 servo:
   - id: vent_servo
