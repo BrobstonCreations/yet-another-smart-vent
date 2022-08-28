@@ -155,8 +155,7 @@ wifi:
     static_ip: !secret development_static_ip
     gateway: !secret gateway
     subnet: !secret subnet
-#  ap:
-#    ssid: $upper_name
+#  ap: {}
     
 mqtt:
   broker: !secret mqtt_broker
