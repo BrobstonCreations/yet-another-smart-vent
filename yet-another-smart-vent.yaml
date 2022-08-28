@@ -7,7 +7,7 @@ globals:
     initial_value: '0'
   - id: servo_distance_to_move
     type: float
-    initial_value: '0.02'
+    initial_value: '0.01'
   - id: previous_potentiometer_value1
     type: int
     initial_value: '999999'
@@ -58,7 +58,7 @@ esphome:
           - servo.write:
               id: vent_servo
               level: !lambda 'return id(move_servo_to_position);'
-          - delay: 25ms
+          - delay: 50ms
           - globals.set:
               id: move_servo_to_position
               value: !lambda 'return id(move_servo_to_position) + id(servo_distance_to_move);'
@@ -117,7 +117,7 @@ esphome:
           - servo.write:
               id: vent_servo
               level: !lambda 'return id(move_servo_to_position);'
-          - delay: 25ms
+          - delay: 50ms
           - globals.set:
               id: move_servo_to_position
               value: !lambda 'return id(move_servo_to_position) - id(servo_distance_to_move);'
@@ -152,6 +152,7 @@ esphome:
                 - globals.set:
                     id: opened_potentionmeter_position
                     value: !lambda 'return id(previous_potentiometer_value1);'
+    - servo.detach: vent_servo
     - delay: 1s
     - servo.detach: vent_servo
     - lambda: 'ESP_LOGD("custom", "closed_position: %f | closed_potentionmeter_position: %d", id(closed_position), id(closed_potentionmeter_position));'
