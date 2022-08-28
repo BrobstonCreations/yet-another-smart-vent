@@ -27,13 +27,13 @@ globals:
     type: float
     initial_value: '0'
   - id: closed_potentionmeter_position
-    type: int
+    type: float
     initial_value: '0'
   - id: opened_position
     type: float
     initial_value: '0'
   - id: opened_potentionmeter_position
-    type: int
+    type: float
     initial_value: '0'
   - id: position_error_tolerance
     type: float
@@ -72,7 +72,6 @@ esphome:
           - globals.set:
               id: previous_potentiometer_value1
               value: !lambda 'return analogRead(A0);'
-          - lambda: 'ESP_LOGD("custom", "%d | %d | %d", id(previous_potentiometer_value1), id(previous_potentiometer_value2), id(previous_potentiometer_value3));'
           - if:
               condition:
                 lambda: |-
@@ -84,7 +83,6 @@ esphome:
                   return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
                     && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
               then: 
-                - logger.log: 'opened | TRUE!'
                 - globals.set:
                     id: max_closed_position
                     value: !lambda 'return id(move_servo_to_position);'
@@ -130,7 +128,6 @@ esphome:
           - globals.set:
               id: previous_potentiometer_value1
               value: !lambda 'return analogRead(A0);'
-          - lambda: 'ESP_LOGD("custom", "%d | %d | %d", id(previous_potentiometer_value1), id(previous_potentiometer_value2), id(previous_potentiometer_value3));'
           - if:
               condition:
                 lambda: |-
@@ -142,7 +139,6 @@ esphome:
                   return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
                     && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
               then: 
-                - logger.log: 'closed | TRUE!'
                 - globals.set:
                     id: max_opened_position
                     value: !lambda 'return id(move_servo_to_position);'
@@ -155,8 +151,6 @@ esphome:
     - servo.detach: vent_servo
     - delay: 1s
     - servo.detach: vent_servo
-    - lambda: 'ESP_LOGD("custom", "closed_position: %f | closed_potentionmeter_position: %d", id(closed_position), id(closed_potentionmeter_position));'
-    - lambda: 'ESP_LOGD("custom", "opened_position: %f | opened_potentionmeter_position: %d", id(opened_position), id(opened_potentionmeter_position));'
 
 wifi:
   ssid: !secret wifi_ssid
@@ -189,7 +183,9 @@ cover:
           id: vent_servo
           level: !lambda 'return id(closed_position);'
     # stop_action:
-    #   - switch.turn_on: stop_cover_switch
+    #   - servo.write:
+    #       id: vent_servo
+    #       level: !lambda 'return map(analogRead(A0), opened_potentionmeter_position, closed_potentionmeter_position, opened_position, closed_position);'
 
 servo:
   - id: vent_servo
