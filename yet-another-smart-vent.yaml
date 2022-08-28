@@ -4,7 +4,7 @@ substitutions:
 globals:
   - id: move_servo_to_position
     type: float
-    initial_value: '0'
+    initial_value: '-0.2'
   - id: previous_potentiometer_value1
     type: int
     initial_value: '999999'
@@ -41,6 +41,10 @@ esphome:
   on_boot:
     priority: -100
     then:
+    - servo.write:
+        id: vent_servo
+        level: !lambda 'return id(move_servo_to_position);'
+    - delay: 1s
     - while:
         condition:
           lambda: 'return id(move_servo_to_position) < id(max_closed_position);'
@@ -74,7 +78,10 @@ esphome:
                 - logger.log: 'opened | FALSE!'
     - globals.set:
         id: move_servo_to_position
-        value: '0'
+        value: '-0.2'
+    - servo.write:
+        id: vent_servo
+        level: !lambda 'return id(move_servo_to_position);'
     - globals.set:
         id: previous_potentiometer_value3
         value: '999997'
@@ -84,10 +91,7 @@ esphome:
     - globals.set:
         id: previous_potentiometer_value1
         value: '999999'
-    - servo.write:
-        id: vent_servo
-        level: !lambda 'return id(move_servo_to_position);'
-    - delay: 500ms
+    - delay: 1s
     - while:
         condition:
           lambda: 'return id(move_servo_to_position) > id(max_opened_position);'
