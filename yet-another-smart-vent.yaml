@@ -177,6 +177,13 @@ cover:
       - servo.write:
           id: vent_servo
           level: !lambda 'return id(closed_position);'
+    stop_action:
+      - servo.write:
+          id: vent_servo
+          level: !lambda |-
+              return (id(vent_servo_potentiometer).state - id(opened_potentiometer_position)) 
+                * (id(closed_position) - id(opened_position)) / (id(closed_potentiometer_position) 
+                - id(opened_potentiometer_position)) + id(opened_position);
     lambda: |-
       const float current_position = id(vent_servo_potentiometer).state;
       const float closed_position = id(closed_potentiometer_position);
@@ -192,7 +199,7 @@ sensor:
   - platform: adc
     id: vent_servo_potentiometer
     pin: A0
-    update_interval: 1s
+    update_interval: 250ms
 
 servo:
   - id: vent_servo
