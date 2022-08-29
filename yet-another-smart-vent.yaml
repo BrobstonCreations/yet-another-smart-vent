@@ -180,10 +180,7 @@ cover:
     stop_action:
       - servo.write:
           id: vent_servo
-          level: !lambda |-
-              return (id(vent_servo_potentiometer).state - id(opened_potentiometer_position)) 
-                * (id(closed_position) - id(opened_position)) / (id(closed_potentiometer_position) 
-                - id(opened_potentiometer_position)) + id(opened_position);
+          level: !lambda 'return remap(id(vent_servo_potentiometer).state, id(opened_potentiometer_position), id(closed_potentiometer_position), id(opened_position), id(closed_position));'
     lambda: |-
       const float current_position = id(vent_servo_potentiometer).state;
       const float closed_position = id(closed_potentiometer_position);
