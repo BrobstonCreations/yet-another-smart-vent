@@ -177,13 +177,22 @@ cover:
       - servo.write:
           id: vent_servo
           level: !lambda 'return id(closed_position);'
-    optimistic: true
+    lambda: |-
+      const float current_position = id(vent_servo_potentiometer).state;
+      const float closed_position = id(closed_potentiometer_position);
+      const float tolerance = 0.015;
+      const float upper_tolerance = closed_position + tolerance;
+      const float lower_tolerance = closed_position - tolerance;
+      if (current_position >= lower_tolerance && current_position <= upper_tolerance) {
+        return COVER_CLOSED;
+      }
+      return COVER_OPEN;
 
 sensor:
   - platform: adc
     id: vent_servo_potentiometer
     pin: A0
-    update_interval: never
+    update_interval: 1s
 
 servo:
   - id: vent_servo
