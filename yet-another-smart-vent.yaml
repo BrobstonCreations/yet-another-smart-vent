@@ -25,15 +25,15 @@ globals:
     initial_value: '-1'
   - id: closed_position
     type: float
-  - id: closed_potentionmeter_position
+  - id: closed_potentiometer_position
     type: float
   - id: opened_position
     type: float
-  - id: opened_potentionmeter_position
+  - id: opened_potentiometer_position
     type: float
   - id: position_error_tolerance
     type: float
-    initial_value: '1'
+    initial_value: '1.5'
 
 esp8266:
   board: d1_mini
@@ -59,92 +59,93 @@ esphome:
           - globals.set:
               id: move_servo_to_position
               value: !lambda 'return id(move_servo_to_position) + id(servo_distance_to_move);'
-          - globals.set:
-              id: previous_potentiometer_value3
-              value: !lambda 'return id(previous_potentiometer_value2);'
-          - globals.set:
-              id: previous_potentiometer_value2
-              value: !lambda 'return id(previous_potentiometer_value1);'
-          - globals.set:
-              id: previous_potentiometer_value1
-              value: !lambda 'return analogRead(A0);'
-          - if:
-              condition:
-                lambda: |-
-                  const int current_position = id(previous_potentiometer_value1);
-                  const int upper_tolerance1 = id(previous_potentiometer_value2) + id(position_error_tolerance);
-                  const int lower_tolerance1 = id(previous_potentiometer_value2) - id(position_error_tolerance);
-                  const int upper_tolerance2 = id(previous_potentiometer_value3) + id(position_error_tolerance);
-                  const int lower_tolerance2 = id(previous_potentiometer_value3) - id(position_error_tolerance);
-                  return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
-                    && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
-              then: 
-                - globals.set:
-                    id: max_closed_position
-                    value: !lambda 'return id(move_servo_to_position);'
-                - globals.set:
-                    id: closed_position
-                    value: !lambda 'return id(move_servo_to_position);'
-                - globals.set:
-                    id: closed_potentionmeter_position
-                    value: !lambda 'return id(previous_potentiometer_value1);'
-    - globals.set:
-        id: move_servo_to_position
-        value: '0'
-    - globals.set:
-        id: previous_potentiometer_value3
-        value: '999997'
-    - globals.set:
-        id: previous_potentiometer_value2
-        value: '999998'
-    - globals.set:
-        id: previous_potentiometer_value1
-        value: '999999'
-    - servo.write:
-        id: vent_servo
-        level: !lambda 'return id(move_servo_to_position);'
-    - delay: 200ms
-    - while:
-        condition:
-          lambda: 'return id(move_servo_to_position) > id(max_opened_position);'
-        then:
-          - servo.write:
-              id: vent_servo
-              level: !lambda 'return id(move_servo_to_position);'
-          - delay: 50ms
-          - globals.set:
-              id: move_servo_to_position
-              value: !lambda 'return id(move_servo_to_position) - id(servo_distance_to_move);'
-          - globals.set:
-              id: previous_potentiometer_value3
-              value: !lambda 'return id(previous_potentiometer_value2);'
-          - globals.set:
-              id: previous_potentiometer_value2
-              value: !lambda 'return id(previous_potentiometer_value1);'
-          - globals.set:
-              id: previous_potentiometer_value1
-              value: !lambda 'return analogRead(A0);'
-          - if:
-              condition:
-                lambda: |-
-                  const int current_position = id(previous_potentiometer_value1);
-                  const int upper_tolerance1 = id(previous_potentiometer_value2) + id(position_error_tolerance);
-                  const int lower_tolerance1 = id(previous_potentiometer_value2) - id(position_error_tolerance);
-                  const int upper_tolerance2 = id(previous_potentiometer_value3) + id(position_error_tolerance);
-                  const int lower_tolerance2 = id(previous_potentiometer_value3) - id(position_error_tolerance);
-                  return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
-                    && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
-              then: 
-                - globals.set:
-                    id: max_opened_position
-                    value: !lambda 'return id(move_servo_to_position);'
-                - globals.set:
-                    id: opened_position
-                    value: !lambda 'return id(move_servo_to_position);'
-                - globals.set:
-                    id: opened_potentionmeter_position
-                    value: !lambda 'return id(previous_potentiometer_value1);'
-    - servo.detach: vent_servo
+          - lambda: 'ESP_LOGD("custom", "Potentiometer reading: %f", id(vent_servo_potentiometer).sample());'
+    #       - globals.set:
+    #           id: previous_potentiometer_value3
+    #           value: !lambda 'return id(previous_potentiometer_value2);'
+    #       - globals.set:
+    #           id: previous_potentiometer_value2
+    #           value: !lambda 'return id(previous_potentiometer_value1);'
+    #       - globals.set:
+    #           id: previous_potentiometer_value1
+    #           value: !lambda 'return analogRead(A0);'
+    #       - if:
+    #           condition:
+    #             lambda: |-
+    #               const int current_position = id(previous_potentiometer_value1);
+    #               const int upper_tolerance1 = id(previous_potentiometer_value2) + id(position_error_tolerance);
+    #               const int lower_tolerance1 = id(previous_potentiometer_value2) - id(position_error_tolerance);
+    #               const int upper_tolerance2 = id(previous_potentiometer_value3) + id(position_error_tolerance);
+    #               const int lower_tolerance2 = id(previous_potentiometer_value3) - id(position_error_tolerance);
+    #               return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
+    #                 && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
+    #           then: 
+    #             - globals.set:
+    #                 id: max_closed_position
+    #                 value: !lambda 'return id(move_servo_to_position);'
+    #             - globals.set:
+    #                 id: closed_position
+    #                 value: !lambda 'return id(move_servo_to_position);'
+    #             - globals.set:
+    #                 id: closed_potentiometer_position
+    #                 value: !lambda 'return id(previous_potentiometer_value1);'
+    # - globals.set:
+    #     id: move_servo_to_position
+    #     value: '0'
+    # - globals.set:
+    #     id: previous_potentiometer_value3
+    #     value: '999997'
+    # - globals.set:
+    #     id: previous_potentiometer_value2
+    #     value: '999998'
+    # - globals.set:
+    #     id: previous_potentiometer_value1
+    #     value: '999999'
+    # - servo.write:
+    #     id: vent_servo
+    #     level: !lambda 'return id(move_servo_to_position);'
+    # - delay: 200ms
+    # - while:
+    #     condition:
+    #       lambda: 'return id(move_servo_to_position) > id(max_opened_position);'
+    #     then:
+    #       - servo.write:
+    #           id: vent_servo
+    #           level: !lambda 'return id(move_servo_to_position);'
+    #       - delay: 50ms
+    #       - globals.set:
+    #           id: move_servo_to_position
+    #           value: !lambda 'return id(move_servo_to_position) - id(servo_distance_to_move);'
+    #       - globals.set:
+    #           id: previous_potentiometer_value3
+    #           value: !lambda 'return id(previous_potentiometer_value2);'
+    #       - globals.set:
+    #           id: previous_potentiometer_value2
+    #           value: !lambda 'return id(previous_potentiometer_value1);'
+    #       - globals.set:
+    #           id: previous_potentiometer_value1
+    #           value: !lambda 'return analogRead(A0);'
+    #       - if:
+    #           condition:
+    #             lambda: |-
+    #               const int current_position = id(previous_potentiometer_value1);
+    #               const int upper_tolerance1 = id(previous_potentiometer_value2) + id(position_error_tolerance);
+    #               const int lower_tolerance1 = id(previous_potentiometer_value2) - id(position_error_tolerance);
+    #               const int upper_tolerance2 = id(previous_potentiometer_value3) + id(position_error_tolerance);
+    #               const int lower_tolerance2 = id(previous_potentiometer_value3) - id(position_error_tolerance);
+    #               return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
+    #                 && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
+    #           then: 
+    #             - globals.set:
+    #                 id: max_opened_position
+    #                 value: !lambda 'return id(move_servo_to_position);'
+    #             - globals.set:
+    #                 id: opened_position
+    #                 value: !lambda 'return id(move_servo_to_position);'
+    #             - globals.set:
+    #                 id: opened_potentiometer_position
+    #                 value: !lambda 'return id(previous_potentiometer_value1);'
+    # - servo.detach: vent_servo
     - delay: 1s
     - servo.detach: vent_servo
 
@@ -155,21 +156,19 @@ wifi:
     static_ip: !secret development_static_ip
     gateway: !secret gateway
     subnet: !secret subnet
-#  ap: {}
+#  ap:
+#    ssid: $upper_name
     
-mqtt:
-  broker: !secret mqtt_broker
-  username: !secret mqtt_username
-  password: !secret mqtt_password
-
-# mdns:
-#   disabled: false
+# mqtt:
+#   broker: !secret mqtt_broker
+#   username: !secret mqtt_username
+#   password: !secret mqtt_password
 
 cover:
   - platform: template
     device_class: damper
+    id: vent
     name: Vent
-    # lambda: 'return analogRead(A0) == id(closed_potentionmeter_position) ? COVER_CLOSED : COVER_OPEN;'
     open_action:
       - servo.write:
           id: vent_servo
@@ -178,23 +177,19 @@ cover:
       - servo.write:
           id: vent_servo
           level: !lambda 'return id(closed_position);'
-    # stop_action:
-    #   - servo.write:
-    #       id: vent_servo
-    #       level: !lambda 'return map(analogRead(A0), long(opened_potentionmeter_position), long(closed_potentionmeter_position), long(opened_position), long(closed_position));'
     optimistic: true
+
+sensor:
+  - platform: adc
+    id: vent_servo_potentiometer
+    pin: A0
+    update_interval: never
 
 servo:
   - id: vent_servo
     output: vent_servo_output
     transition_length: 3s
     auto_detach_time: 250ms
-    
-# sensor:
-#   - platform: adc
-#     pin: A0
-#     name: Potentiometer
-#     update_interval: 50ms
 
 output:
   - platform: esp8266_pwm
