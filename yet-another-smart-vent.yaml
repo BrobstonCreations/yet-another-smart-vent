@@ -31,9 +31,12 @@ globals:
     type: float
   - id: opened_potentiometer_position
     type: float
-  - id: position_error_tolerance
+  - id: closed_position_error_tolerance
     type: float
-    initial_value: '0'
+    initial_value: '0.0015'
+  - id: opened_position_error_tolerance
+    type: float
+    initial_value: '0.001'
 
 esp8266:
   board: d1_mini
@@ -71,7 +74,16 @@ esphome:
           - lambda: 'ESP_LOGD("custom", "%f | %f | %f", id(previous_potentiometer_value1), id(previous_potentiometer_value2), id(previous_potentiometer_value3));'
           - if:
               condition:
-                lambda: 'return id(previous_potentiometer_value1) == id(previous_potentiometer_value2) && id(previous_potentiometer_value1) == id(previous_potentiometer_value3);'
+                lambda: |-
+                    const float current_position = id(previous_potentiometer_value1);
+                    const float upper_tolerance1 = id(previous_potentiometer_value2) + id(closed_position_error_tolerance);
+                    const float lower_tolerance1 = id(previous_potentiometer_value2) - id(closed_position_error_tolerance);
+                    ESP_LOGD("custom", "current_position: %f | upper_tolerance1: %f | lower_tolerance1: %f", current_position, upper_tolerance1, lower_tolerance1);
+                    const float upper_tolerance2 = id(previous_potentiometer_value3) + id(closed_position_error_tolerance);
+                    const float lower_tolerance2 = id(previous_potentiometer_value3) - id(closed_position_error_tolerance);
+                    ESP_LOGD("custom", "current_position: %f | upper_tolerance2: %f | lower_tolerance2: %f", current_position, upper_tolerance2, lower_tolerance2);
+                    return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
+                      && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
               then: 
                 - globals.set:
                     id: max_closed_position
@@ -122,7 +134,16 @@ esphome:
           - lambda: 'ESP_LOGD("custom", "%f | %f | %f", id(previous_potentiometer_value1), id(previous_potentiometer_value2), id(previous_potentiometer_value3));'
           - if:
               condition:
-                lambda: 'return id(previous_potentiometer_value1) == id(previous_potentiometer_value2) && id(previous_potentiometer_value1) == id(previous_potentiometer_value3);'
+                lambda: |-
+                    const float current_position = id(previous_potentiometer_value1);
+                    const float upper_tolerance1 = id(previous_potentiometer_value2) + id(opened_position_error_tolerance);
+                    const float lower_tolerance1 = id(previous_potentiometer_value2) - id(opened_position_error_tolerance);
+                    ESP_LOGD("custom", "current_position: %f | upper_tolerance1: %f | lower_tolerance1: %f", current_position, upper_tolerance1, lower_tolerance1);
+                    const float upper_tolerance2 = id(previous_potentiometer_value3) + id(opened_position_error_tolerance);
+                    const float lower_tolerance2 = id(previous_potentiometer_value3) - id(opened_position_error_tolerance);
+                    ESP_LOGD("custom", "current_position: %f | upper_tolerance2: %f | lower_tolerance2: %f", current_position, upper_tolerance2, lower_tolerance2);
+                    return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
+                      && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
               then: 
                 - globals.set:
                     id: max_opened_position
