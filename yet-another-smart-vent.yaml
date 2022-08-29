@@ -71,17 +71,14 @@ esphome:
           - globals.set:
               id: previous_potentiometer_value1
               value: !lambda 'return id(vent_servo_potentiometer).sample();'
-          - lambda: 'ESP_LOGD("custom", "%f | %f | %f", id(previous_potentiometer_value1), id(previous_potentiometer_value2), id(previous_potentiometer_value3));'
           - if:
               condition:
                 lambda: |-
                     const float current_position = id(previous_potentiometer_value1);
                     const float upper_tolerance1 = id(previous_potentiometer_value2) + id(closed_position_error_tolerance);
                     const float lower_tolerance1 = id(previous_potentiometer_value2) - id(closed_position_error_tolerance);
-                    ESP_LOGD("custom", "current_position: %f | upper_tolerance1: %f | lower_tolerance1: %f", current_position, upper_tolerance1, lower_tolerance1);
                     const float upper_tolerance2 = id(previous_potentiometer_value3) + id(closed_position_error_tolerance);
                     const float lower_tolerance2 = id(previous_potentiometer_value3) - id(closed_position_error_tolerance);
-                    ESP_LOGD("custom", "current_position: %f | upper_tolerance2: %f | lower_tolerance2: %f", current_position, upper_tolerance2, lower_tolerance2);
                     return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
                       && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
               then: 
@@ -94,7 +91,6 @@ esphome:
                 - globals.set:
                     id: closed_potentiometer_position
                     value: !lambda 'return id(previous_potentiometer_value1);'
-                - lambda: 'ESP_LOGD("custom", "TRUE");'
     - globals.set:
         id: move_servo_to_position
         value: '0'
@@ -131,17 +127,14 @@ esphome:
           - globals.set:
               id: previous_potentiometer_value1
               value: !lambda 'return id(vent_servo_potentiometer).sample();'
-          - lambda: 'ESP_LOGD("custom", "%f | %f | %f", id(previous_potentiometer_value1), id(previous_potentiometer_value2), id(previous_potentiometer_value3));'
           - if:
               condition:
                 lambda: |-
                     const float current_position = id(previous_potentiometer_value1);
                     const float upper_tolerance1 = id(previous_potentiometer_value2) + id(opened_position_error_tolerance);
                     const float lower_tolerance1 = id(previous_potentiometer_value2) - id(opened_position_error_tolerance);
-                    ESP_LOGD("custom", "current_position: %f | upper_tolerance1: %f | lower_tolerance1: %f", current_position, upper_tolerance1, lower_tolerance1);
                     const float upper_tolerance2 = id(previous_potentiometer_value3) + id(opened_position_error_tolerance);
                     const float lower_tolerance2 = id(previous_potentiometer_value3) - id(opened_position_error_tolerance);
-                    ESP_LOGD("custom", "current_position: %f | upper_tolerance2: %f | lower_tolerance2: %f", current_position, upper_tolerance2, lower_tolerance2);
                     return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
                       && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
               then: 
@@ -154,9 +147,6 @@ esphome:
                 - globals.set:
                     id: opened_potentiometer_position
                     value: !lambda 'return id(previous_potentiometer_value1);'
-                - lambda: 'ESP_LOGD("custom", "TRUE");'
-    - servo.detach: vent_servo
-    - delay: 1s
     - servo.detach: vent_servo
 
 wifi:
@@ -199,7 +189,7 @@ servo:
   - id: vent_servo
     output: vent_servo_output
     transition_length: 3s
-    auto_detach_time: 250ms
+    auto_detach_time: 200ms
 
 output:
   - platform: esp8266_pwm
