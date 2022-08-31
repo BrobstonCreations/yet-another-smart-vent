@@ -60,6 +60,8 @@ script:
           condition:
             lambda: 'return id(position_to_move_servo_to) < id(max_closed_position);'
           then:
+            - script.execute: increment_position_to_move_servo_to
+            - script.wait: increment_position_to_move_servo_to
             - script.execute: move_servo_to_position
             - script.wait: move_servo_to_position
             - script.execute: update_previous_potentiometer_values
@@ -84,8 +86,6 @@ script:
                   - globals.set:
                       id: closed_potentiometer_position
                       value: !lambda 'return id(previous_potentiometer_value1);'
-            - script.execute: increment_position_to_move_servo_to
-            - script.wait: increment_position_to_move_servo_to
       - if:
           condition:
             lambda: 'return id(closed_position) == 0 && id(closed_potentiometer_position) == 0;'
@@ -107,6 +107,8 @@ script:
           condition:
             lambda: 'return id(position_to_move_servo_to) > id(max_opened_position);'
           then:
+            - script.execute: decrement_position_to_move_servo_to
+            - script.wait: decrement_position_to_move_servo_to
             - script.execute: move_servo_to_position
             - script.wait: move_servo_to_position
             - script.execute: update_previous_potentiometer_values
@@ -131,8 +133,6 @@ script:
                   - globals.set:
                       id: opened_potentiometer_position
                       value: !lambda 'return id(previous_potentiometer_value1);'
-            - script.execute: decrement_position_to_move_servo_to
-            - script.wait: decrement_position_to_move_servo_to
       - if:
           condition:
             lambda: 'return id(opened_position) == 0 && id(opened_potentiometer_position) == 0;'
