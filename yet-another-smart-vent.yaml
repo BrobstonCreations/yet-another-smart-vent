@@ -174,7 +174,19 @@ script:
           id: previous_potentiometer_value3
           value: '0'
       - globals.set:
+          id: upper_previous_potentiometer_value3
+          value: '0'
+      - globals.set:
+          id: lower_previous_potentiometer_value3
+          value: '0'
+      - globals.set:
           id: previous_potentiometer_value2
+          value: '0'
+      - globals.set:
+          id: upper_previous_potentiometer_value2
+          value: '0'
+      - globals.set:
+          id: lower_previous_potentiometer_value2
           value: '0'
       - globals.set:
           id: previous_potentiometer_value1
