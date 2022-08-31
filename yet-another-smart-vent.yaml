@@ -15,7 +15,7 @@ esphome:
         args: ['id(closed_potentiometer_position)', 'id(closed_position)', 'id(opened_potentiometer_position)', 'id(opened_position)']
 
 globals:
-  - id: move_servo_to_position
+  - id: position_to_move_servo_to
     type: float
     initial_value: '0'
   - id: servo_distance_to_move
@@ -58,12 +58,10 @@ script:
       - script.wait: move_to_zero
       - while:
           condition:
-            lambda: 'return id(move_servo_to_position) < id(max_closed_position);'
+            lambda: 'return id(position_to_move_servo_to) < id(max_closed_position);'
           then:
-            - servo.write:
-                id: vent_servo
-                level: !lambda 'return id(move_servo_to_position);'
-            - delay: 50ms
+            - script.execute: move_servo_to_position
+            - script.wait: move_servo_to_position
             - script.execute: update_previous_potentiometer_values
             - script.wait: update_previous_potentiometer_values
             - if:
@@ -79,23 +77,23 @@ script:
                 then: 
                   - globals.set:
                       id: max_closed_position
-                      value: !lambda 'return id(move_servo_to_position);'
+                      value: !lambda 'return id(position_to_move_servo_to);'
                   - globals.set:
                       id: closed_position
-                      value: !lambda 'return id(move_servo_to_position);'
+                      value: !lambda 'return id(position_to_move_servo_to);'
                   - globals.set:
                       id: closed_potentiometer_position
                       value: !lambda 'return id(previous_potentiometer_value1);'
             - globals.set:
-                id: move_servo_to_position
-                value: !lambda 'return id(move_servo_to_position) + id(servo_distance_to_move);'     
+                id: position_to_move_servo_to
+                value: !lambda 'return id(position_to_move_servo_to) + id(servo_distance_to_move);'     
       - if:
           condition:
             lambda: 'return id(closed_position) == 0 && id(closed_potentiometer_position) == 0;'
           then:
             - globals.set:
                 id: closed_position
-                value: !lambda 'return id(move_servo_to_position);'
+                value: !lambda 'return id(position_to_move_servo_to);'
             - globals.set:
                 id: closed_potentiometer_position
                 value: !lambda 'return id(previous_potentiometer_value1);'
@@ -108,12 +106,10 @@ script:
       - script.wait: move_to_zero
       - while:
           condition:
-            lambda: 'return id(move_servo_to_position) > id(max_opened_position);'
+            lambda: 'return id(position_to_move_servo_to) > id(max_opened_position);'
           then:
-            - servo.write:
-                id: vent_servo
-                level: !lambda 'return id(move_servo_to_position);'
-            - delay: 50ms
+            - script.execute: move_servo_to_position
+            - script.wait: move_servo_to_position
             - script.execute: update_previous_potentiometer_values
             - script.wait: update_previous_potentiometer_values
             - if:
@@ -129,29 +125,35 @@ script:
                 then: 
                   - globals.set:
                       id: max_opened_position
-                      value: !lambda 'return id(move_servo_to_position);'
+                      value: !lambda 'return id(position_to_move_servo_to);'
                   - globals.set:
                       id: opened_position
-                      value: !lambda 'return id(move_servo_to_position);'
+                      value: !lambda 'return id(position_to_move_servo_to);'
                   - globals.set:
                       id: opened_potentiometer_position
                       value: !lambda 'return id(previous_potentiometer_value1);'
             - globals.set:
-                id: move_servo_to_position
-                value: !lambda 'return id(move_servo_to_position) - id(servo_distance_to_move);'
+                id: position_to_move_servo_to
+                value: !lambda 'return id(position_to_move_servo_to) - id(servo_distance_to_move);'
       - if:
           condition:
             lambda: 'return id(opened_position) == 0 && id(opened_potentiometer_position) == 0;'
           then: 
             - globals.set:
                 id: opened_position
-                value: !lambda 'return id(move_servo_to_position);'
+                value: !lambda 'return id(position_to_move_servo_to);'
             - globals.set:
                 id: opened_potentiometer_position
                 value: !lambda 'return id(previous_potentiometer_value1);'
       - script.execute: reset_servo_position_values
       - script.wait: reset_servo_position_values
       - servo.detach: vent_servo
+  - id: move_servo_to_position
+    then:
+      - servo.write:
+          id: vent_servo
+          level: !lambda 'return id(position_to_move_servo_to);'
+      - delay: 50ms
   - id: move_to_zero
     then:
       - servo.write:
@@ -172,7 +174,7 @@ script:
   - id: reset_servo_position_values
     then:
       - globals.set:
-          id: move_servo_to_position
+          id: position_to_move_servo_to
           value: '0'
       - globals.set:
           id: previous_potentiometer_value3
