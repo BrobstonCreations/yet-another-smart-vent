@@ -91,6 +91,16 @@ esphome:
                 - globals.set:
                     id: closed_potentiometer_position
                     value: !lambda 'return id(previous_potentiometer_value1);'
+    - if:
+        condition:
+          lambda: 'return id(closed_position) == 0 && id(closed_potentiometer_position) == 0;'
+        then:
+          - globals.set:
+              id: closed_position
+              value: !lambda 'return id(move_servo_to_position);'
+          - globals.set:
+              id: closed_potentiometer_position
+              value: !lambda 'return id(previous_potentiometer_value1);'
     - globals.set:
         id: move_servo_to_position
         value: '0'
@@ -147,7 +157,20 @@ esphome:
                 - globals.set:
                     id: opened_potentiometer_position
                     value: !lambda 'return id(previous_potentiometer_value1);'
+    - if:
+        condition:
+          lambda: 'return id(opened_position) == 0 && id(opened_potentiometer_position) == 0;'
+        then: 
+          - globals.set:
+              id: opened_position
+              value: !lambda 'return id(move_servo_to_position);'
+          - globals.set:
+              id: opened_potentiometer_position
+              value: !lambda 'return id(previous_potentiometer_value1);'
     - servo.detach: vent_servo
+    - logger.log:
+        format: "closed_potentiometer_position: %f | closed_position: %f | opened_potentiometer_position: %f | opened_position: %f"
+        args: ['id(closed_potentiometer_position)', 'id(closed_position)', 'id(opened_potentiometer_position)', 'id(opened_position)']
 
 wifi:
   ssid: !secret wifi_ssid
