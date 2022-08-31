@@ -44,12 +44,9 @@ globals:
     type: float
   - id: opened_potentiometer_position
     type: float
-  - id: closed_position_error_tolerance
+  - id: position_error_tolerance
     type: float
     initial_value: '0.0015'
-  - id: opened_position_error_tolerance
-    type: float
-    initial_value: '0.001'
 
 script:
   - id: calibrate_close
@@ -70,10 +67,10 @@ script:
                 condition:
                   lambda: |-
                       const float current_position = id(previous_potentiometer_value1);
-                      const float upper_tolerance1 = id(previous_potentiometer_value2) + id(closed_position_error_tolerance);
-                      const float lower_tolerance1 = id(previous_potentiometer_value2) - id(closed_position_error_tolerance);
-                      const float upper_tolerance2 = id(previous_potentiometer_value3) + id(closed_position_error_tolerance);
-                      const float lower_tolerance2 = id(previous_potentiometer_value3) - id(closed_position_error_tolerance);
+                      const float upper_tolerance1 = id(previous_potentiometer_value2) + id(position_error_tolerance);
+                      const float lower_tolerance1 = id(previous_potentiometer_value2) - id(position_error_tolerance);
+                      const float upper_tolerance2 = id(previous_potentiometer_value3) + id(position_error_tolerance);
+                      const float lower_tolerance2 = id(previous_potentiometer_value3) - id(position_error_tolerance);
                       return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
                         && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
                 then: 
@@ -117,10 +114,10 @@ script:
                 condition:
                   lambda: |-
                       const float current_position = id(previous_potentiometer_value1);
-                      const float upper_tolerance1 = id(previous_potentiometer_value2) + id(opened_position_error_tolerance);
-                      const float lower_tolerance1 = id(previous_potentiometer_value2) - id(opened_position_error_tolerance);
-                      const float upper_tolerance2 = id(previous_potentiometer_value3) + id(opened_position_error_tolerance);
-                      const float lower_tolerance2 = id(previous_potentiometer_value3) - id(opened_position_error_tolerance);
+                      const float upper_tolerance1 = id(previous_potentiometer_value2) + id(position_error_tolerance);
+                      const float lower_tolerance1 = id(previous_potentiometer_value2) - id(position_error_tolerance);
+                      const float upper_tolerance2 = id(previous_potentiometer_value3) + id(position_error_tolerance);
+                      const float lower_tolerance2 = id(previous_potentiometer_value3) - id(position_error_tolerance);
                       return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
                         && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
                 then: 
