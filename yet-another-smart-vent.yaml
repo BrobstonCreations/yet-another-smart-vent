@@ -46,7 +46,6 @@ esphome:
   on_boot:
     priority: -100
     then:
-    - delay: 5s
     - servo.write:
         id: vent_servo
         level: !lambda 'return id(move_servo_to_position);'
