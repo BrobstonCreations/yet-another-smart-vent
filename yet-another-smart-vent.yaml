@@ -13,47 +13,7 @@ esphome:
     - logger.log:
         format: "closed_potentiometer_position: %f | closed_position: %f | opened_potentiometer_position: %f | opened_position: %f"
         args: ['id(closed_potentiometer_position)', 'id(closed_position)', 'id(opened_potentiometer_position)', 'id(opened_position)']
-
-globals:
-  - id: position_to_move_servo_to
-    type: float
-    initial_value: '0'
-  - id: servo_distance_to_move
-    type: float
-    initial_value: '0.01'
-  - id: previous_potentiometer_value1
-    type: float
-    initial_value: '0'
-  - id: previous_potentiometer_value2
-    type: float
-  - id: upper_previous_potentiometer_value2
-    type: float
-  - id: lower_previous_potentiometer_value2
-    type: float
-  - id: upper_previous_potentiometer_value3
-    type: float
-  - id: lower_previous_potentiometer_value3
-    type: float
-  - id: previous_potentiometer_value3
-    type: float
-    initial_value: '0'
-  - id: max_closed_position
-    type: float
-    initial_value: '1'
-  - id: max_opened_position
-    type: float
-    initial_value: '-1'
-  - id: closed_position
-    type: float
-  - id: closed_potentiometer_position
-    type: float
-  - id: opened_position
-    type: float
-  - id: opened_potentiometer_position
-    type: float
-  - id: position_error_tolerance
-    type: float
-    initial_value: '0.0015'
+        level: INFO
 
 script:
   - id: calibrate_close
@@ -265,6 +225,48 @@ output:
     id: vent_servo_output
     pin: D3
     frequency: 50 Hz
+    
+
+globals:
+  - id: position_to_move_servo_to
+    type: float
+    initial_value: '0'
+  - id: servo_distance_to_move
+    type: float
+    initial_value: '0.01'
+  - id: previous_potentiometer_value1
+    type: float
+    initial_value: '0'
+  - id: previous_potentiometer_value2
+    type: float
+  - id: upper_previous_potentiometer_value2
+    type: float
+  - id: lower_previous_potentiometer_value2
+    type: float
+  - id: upper_previous_potentiometer_value3
+    type: float
+  - id: lower_previous_potentiometer_value3
+    type: float
+  - id: previous_potentiometer_value3
+    type: float
+    initial_value: '0'
+  - id: max_closed_position
+    type: float
+    initial_value: '1'
+  - id: max_opened_position
+    type: float
+    initial_value: '-1'
+  - id: closed_position
+    type: float
+  - id: closed_potentiometer_position
+    type: float
+  - id: opened_position
+    type: float
+  - id: opened_potentiometer_position
+    type: float
+  - id: position_error_tolerance
+    type: float
+    initial_value: '0.0015'
 
 wifi:
   ssid: !secret wifi_ssid
@@ -288,4 +290,4 @@ api:
 ota:
 
 logger:
-  level: DEBUG
+  level: INFO
