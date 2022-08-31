@@ -78,15 +78,8 @@ script:
                         && id(previous_potentiometer_value1) >= id(lower_previous_potentiometer_value3) 
                         && id(previous_potentiometer_value1) <= id(upper_previous_potentiometer_value3);
                 then: 
-                  - globals.set:
-                      id: max_closed_position
-                      value: !lambda 'return id(position_to_move_servo_to);'
-                  - globals.set:
-                      id: closed_position
-                      value: !lambda 'return id(position_to_move_servo_to);'
-                  - globals.set:
-                      id: closed_potentiometer_position
-                      value: !lambda 'return id(previous_potentiometer_value1);'
+                  - script.execute: break_and_set_closed_positions
+                  - script.wait: break_and_set_closed_positions
       - if:
           condition:
             lambda: 'return id(closed_position) == 0 && id(closed_potentiometer_position) == 0;'
@@ -122,15 +115,8 @@ script:
                         && id(previous_potentiometer_value1) >= id(lower_previous_potentiometer_value3) 
                         && id(previous_potentiometer_value1) <= id(upper_previous_potentiometer_value3);
                 then: 
-                  - globals.set:
-                      id: max_opened_position
-                      value: !lambda 'return id(position_to_move_servo_to);'
-                  - globals.set:
-                      id: opened_position
-                      value: !lambda 'return id(position_to_move_servo_to);'
-                  - globals.set:
-                      id: opened_potentiometer_position
-                      value: !lambda 'return id(previous_potentiometer_value1);'
+                  - script.execute: break_and_set_opened_positions
+                  - script.wait: break_and_set_opened_positions
       - if:
           condition:
             lambda: 'return id(opened_position) == 0 && id(opened_potentiometer_position) == 0;'
@@ -189,6 +175,28 @@ script:
       - globals.set:
           id: previous_potentiometer_value1
           value: !lambda 'return id(vent_servo_potentiometer).sample();'
+  - id: break_and_set_closed_positions
+    then:
+        - globals.set:
+            id: max_closed_position
+            value: !lambda 'return id(position_to_move_servo_to);'
+        - globals.set:
+            id: closed_position
+            value: !lambda 'return id(position_to_move_servo_to);'
+        - globals.set:
+            id: closed_potentiometer_position
+            value: !lambda 'return id(previous_potentiometer_value1);'
+  - id: break_and_set_opened_positions
+    then:
+        - globals.set:
+            id: max_opened_position
+            value: !lambda 'return id(position_to_move_servo_to);'
+        - globals.set:
+            id: opened_position
+            value: !lambda 'return id(position_to_move_servo_to);'
+        - globals.set:
+            id: opened_potentiometer_position
+            value: !lambda 'return id(previous_potentiometer_value1);'
   - id: reset_servo_position_values
     then:
       - globals.set:
