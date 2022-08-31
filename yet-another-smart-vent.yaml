@@ -84,9 +84,8 @@ script:
                   - globals.set:
                       id: closed_potentiometer_position
                       value: !lambda 'return id(previous_potentiometer_value1);'
-            - globals.set:
-                id: position_to_move_servo_to
-                value: !lambda 'return id(position_to_move_servo_to) + id(servo_distance_to_move);'     
+            - script.execute: increment_position_to_move_servo_to
+            - script.wait: increment_position_to_move_servo_to
       - if:
           condition:
             lambda: 'return id(closed_position) == 0 && id(closed_potentiometer_position) == 0;'
@@ -132,9 +131,8 @@ script:
                   - globals.set:
                       id: opened_potentiometer_position
                       value: !lambda 'return id(previous_potentiometer_value1);'
-            - globals.set:
-                id: position_to_move_servo_to
-                value: !lambda 'return id(position_to_move_servo_to) - id(servo_distance_to_move);'
+            - script.execute: decrement_position_to_move_servo_to
+            - script.wait: decrement_position_to_move_servo_to
       - if:
           condition:
             lambda: 'return id(opened_position) == 0 && id(opened_potentiometer_position) == 0;'
@@ -160,6 +158,16 @@ script:
           id: vent_servo
           level: 0
       - delay: 200ms
+  - id: increment_position_to_move_servo_to
+    then:
+      - globals.set:
+          id: position_to_move_servo_to
+          value: !lambda 'return id(position_to_move_servo_to) + id(servo_distance_to_move);'
+  - id: decrement_position_to_move_servo_to
+    then:
+      - globals.set:
+          id: position_to_move_servo_to
+          value: !lambda 'return id(position_to_move_servo_to) - id(servo_distance_to_move);'
   - id: update_previous_potentiometer_values
     then:
       - globals.set:
