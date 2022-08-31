@@ -18,8 +18,8 @@ esphome:
 script:
   - id: calibrate_close
     then:
-      - script.execute: move_to_zero
-      - script.wait: move_to_zero
+      - script.execute: move_servo_to_zero
+      - script.wait: move_servo_to_zero
       - while:
           condition:
             lambda: 'return id(position_to_move_servo_to) < id(max_closed_position);'
@@ -47,8 +47,8 @@ script:
       - servo.detach: vent_servo
   - id: calibrate_open
     then:
-      - script.execute: move_to_zero
-      - script.wait: move_to_zero
+      - script.execute: move_servo_to_zero
+      - script.wait: move_servo_to_zero
       - while:
           condition:
             lambda: 'return id(position_to_move_servo_to) > id(max_opened_position);'
@@ -80,7 +80,7 @@ script:
           id: vent_servo
           level: !lambda 'return id(position_to_move_servo_to);'
       - delay: 50ms
-  - id: move_to_zero
+  - id: move_servo_to_zero
     then:
       - servo.write:
           id: vent_servo
