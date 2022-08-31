@@ -73,9 +73,10 @@ script:
             - if:
                 condition:
                   lambda: |-
-                      const float current_position = id(previous_potentiometer_value1);
-                      return current_position >= id(lower_previous_potentiometer_value2) && current_position <= id(upper_previous_potentiometer_value2)
-                        && current_position >= id(lower_previous_potentiometer_value3) && current_position <= id(upper_previous_potentiometer_value3);
+                      return id(previous_potentiometer_value1) >= id(lower_previous_potentiometer_value2) 
+                        && id(previous_potentiometer_value1) <= id(upper_previous_potentiometer_value2)
+                        && id(previous_potentiometer_value1) >= id(lower_previous_potentiometer_value3) 
+                        && id(previous_potentiometer_value1) <= id(upper_previous_potentiometer_value3);
                 then: 
                   - globals.set:
                       id: max_closed_position
@@ -116,9 +117,10 @@ script:
             - if:
                 condition:
                   lambda: |-
-                      const float current_position = id(previous_potentiometer_value1);
-                      return current_position >= id(lower_previous_potentiometer_value2) && current_position <= id(upper_previous_potentiometer_value2)
-                        && current_position >= id(lower_previous_potentiometer_value3) && current_position <= id(upper_previous_potentiometer_value3);
+                      return id(previous_potentiometer_value1) >= id(lower_previous_potentiometer_value2) 
+                        && id(previous_potentiometer_value1) <= id(upper_previous_potentiometer_value2)
+                        && id(previous_potentiometer_value1) >= id(lower_previous_potentiometer_value3) 
+                        && id(previous_potentiometer_value1) <= id(upper_previous_potentiometer_value3);
                 then: 
                   - globals.set:
                       id: max_opened_position
