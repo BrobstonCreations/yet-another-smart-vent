@@ -1,11 +1,8 @@
-substitutions:
-  name: yet-another-smart-vent
-
 esp8266:
   board: d1_mini
 
 esphome:
-  name: $name
+  name: yet-another-smart-vent
   on_boot:
     priority: -100
     then:
