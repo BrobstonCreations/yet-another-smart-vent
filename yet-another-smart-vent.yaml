@@ -48,10 +48,6 @@ esphome:
     then:
     - script.execute: calibrate_close
     - script.wait: calibrate_close
-    - servo.write:
-        id: vent_servo
-        level: !lambda 'return id(move_servo_to_position);'
-    - delay: 200ms
     - script.execute: calibrate_open
     - script.wait: calibrate_open
     - servo.detach: vent_servo
@@ -77,6 +73,10 @@ wifi:
 script:
   - id: calibrate_close
     then:
+      - servo.write:
+          id: vent_servo
+          level: !lambda 'return id(move_servo_to_position);'
+      - delay: 200ms
       - while:
           condition:
             lambda: 'return id(move_servo_to_position) < id(max_closed_position);'
@@ -124,6 +124,10 @@ script:
       - script.wait: reset_servo_position_values
   - id: calibrate_open
     then:
+      - servo.write:
+          id: vent_servo
+          level: !lambda 'return id(move_servo_to_position);'
+      - delay: 200ms
       - while:
           condition:
             lambda: 'return id(move_servo_to_position) > id(max_opened_position);'
