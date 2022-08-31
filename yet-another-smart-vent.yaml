@@ -26,7 +26,14 @@ globals:
     initial_value: '0'
   - id: previous_potentiometer_value2
     type: float
-    initial_value: '0'
+  - id: upper_previous_potentiometer_value2
+    type: float
+  - id: lower_previous_potentiometer_value2
+    type: float
+  - id: upper_previous_potentiometer_value3
+    type: float
+  - id: lower_previous_potentiometer_value3
+    type: float
   - id: previous_potentiometer_value3
     type: float
     initial_value: '0'
@@ -67,12 +74,8 @@ script:
                 condition:
                   lambda: |-
                       const float current_position = id(previous_potentiometer_value1);
-                      const float upper_tolerance1 = id(previous_potentiometer_value2) + id(position_error_tolerance);
-                      const float lower_tolerance1 = id(previous_potentiometer_value2) - id(position_error_tolerance);
-                      const float upper_tolerance2 = id(previous_potentiometer_value3) + id(position_error_tolerance);
-                      const float lower_tolerance2 = id(previous_potentiometer_value3) - id(position_error_tolerance);
-                      return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
-                        && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
+                      return current_position >= id(lower_previous_potentiometer_value2) && current_position <= id(upper_previous_potentiometer_value2)
+                        && current_position >= id(lower_previous_potentiometer_value3) && current_position <= id(upper_previous_potentiometer_value3);
                 then: 
                   - globals.set:
                       id: max_closed_position
@@ -114,12 +117,8 @@ script:
                 condition:
                   lambda: |-
                       const float current_position = id(previous_potentiometer_value1);
-                      const float upper_tolerance1 = id(previous_potentiometer_value2) + id(position_error_tolerance);
-                      const float lower_tolerance1 = id(previous_potentiometer_value2) - id(position_error_tolerance);
-                      const float upper_tolerance2 = id(previous_potentiometer_value3) + id(position_error_tolerance);
-                      const float lower_tolerance2 = id(previous_potentiometer_value3) - id(position_error_tolerance);
-                      return current_position >= lower_tolerance1 && current_position <= upper_tolerance1
-                        && current_position >= lower_tolerance2 && current_position <= upper_tolerance2;
+                      return current_position >= id(lower_previous_potentiometer_value2) && current_position <= id(upper_previous_potentiometer_value2)
+                        && current_position >= id(lower_previous_potentiometer_value3) && current_position <= id(upper_previous_potentiometer_value3);
                 then: 
                   - globals.set:
                       id: max_opened_position
@@ -171,8 +170,20 @@ script:
           id: previous_potentiometer_value3
           value: !lambda 'return id(previous_potentiometer_value2);'
       - globals.set:
+          id: upper_previous_potentiometer_value3
+          value: !lambda 'return id(previous_potentiometer_value3) + id(position_error_tolerance);'
+      - globals.set:
+          id: lower_previous_potentiometer_value3
+          value: !lambda 'return id(previous_potentiometer_value3) - id(position_error_tolerance);'
+      - globals.set:
           id: previous_potentiometer_value2
           value: !lambda 'return id(previous_potentiometer_value1);'
+      - globals.set:
+          id: upper_previous_potentiometer_value2
+          value: !lambda 'return id(previous_potentiometer_value2) + id(position_error_tolerance);'
+      - globals.set:
+          id: lower_previous_potentiometer_value2
+          value: !lambda 'return id(previous_potentiometer_value2) - id(position_error_tolerance);'
       - globals.set:
           id: previous_potentiometer_value1
           value: !lambda 'return id(vent_servo_potentiometer).sample();'
