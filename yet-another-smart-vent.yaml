@@ -50,7 +50,6 @@ esphome:
     - script.wait: calibrate_close
     - script.execute: calibrate_open
     - script.wait: calibrate_open
-    - servo.detach: vent_servo
     - logger.log:
         format: "closed_potentiometer_position: %f | closed_position: %f | opened_potentiometer_position: %f | opened_position: %f"
         args: ['id(closed_potentiometer_position)', 'id(closed_position)', 'id(opened_potentiometer_position)', 'id(opened_position)']
@@ -122,6 +121,7 @@ script:
                 value: !lambda 'return id(previous_potentiometer_value1);'
       - script.execute: reset_servo_position_values
       - script.wait: reset_servo_position_values
+      - servo.detach: vent_servo
   - id: calibrate_open
     then:
       - servo.write:
@@ -173,6 +173,7 @@ script:
                 value: !lambda 'return id(previous_potentiometer_value1);'
       - script.execute: reset_servo_position_values
       - script.wait: reset_servo_position_values
+      - servo.detach: vent_servo
   - id: update_previous_potentiometer_values
     then:
       - globals.set:
