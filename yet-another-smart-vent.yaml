@@ -54,10 +54,8 @@ globals:
 script:
   - id: calibrate_close
     then:
-      - servo.write:
-          id: vent_servo
-          level: !lambda 'return id(move_servo_to_position);'
-      - delay: 200ms
+      - script.execute: move_to_zero
+      - script.wait: move_to_zero
       - while:
           condition:
             lambda: 'return id(move_servo_to_position) < id(max_closed_position);'
@@ -106,10 +104,8 @@ script:
       - servo.detach: vent_servo
   - id: calibrate_open
     then:
-      - servo.write:
-          id: vent_servo
-          level: !lambda 'return id(move_servo_to_position);'
-      - delay: 200ms
+      - script.execute: move_to_zero
+      - script.wait: move_to_zero
       - while:
           condition:
             lambda: 'return id(move_servo_to_position) > id(max_opened_position);'
@@ -156,6 +152,12 @@ script:
       - script.execute: reset_servo_position_values
       - script.wait: reset_servo_position_values
       - servo.detach: vent_servo
+  - id: move_to_zero
+    then:
+      - servo.write:
+          id: vent_servo
+          level: 0
+      - delay: 200ms
   - id: update_previous_potentiometer_values
     then:
       - globals.set:
