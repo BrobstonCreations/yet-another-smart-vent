@@ -46,10 +46,6 @@ esphome:
   on_boot:
     priority: -100
     then:
-    - servo.write:
-        id: vent_servo
-        level: !lambda 'return id(move_servo_to_position);'
-    - delay: 1s
     - script.execute: calibrate_close
     - script.wait: calibrate_close
     - script.execute: reset_servo_position_values
