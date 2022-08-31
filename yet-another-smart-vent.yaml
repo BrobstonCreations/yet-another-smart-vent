@@ -1,6 +1,22 @@
 substitutions:
   name: yet-another-smart-vent
 
+esp8266:
+  board: d1_mini
+
+esphome:
+  name: $name
+  on_boot:
+    priority: -100
+    then:
+    - script.execute: calibrate_close
+    - script.wait: calibrate_close
+    - script.execute: calibrate_open
+    - script.wait: calibrate_open
+    - logger.log:
+        format: "closed_potentiometer_position: %f | closed_position: %f | opened_potentiometer_position: %f | opened_position: %f"
+        args: ['id(closed_potentiometer_position)', 'id(closed_position)', 'id(opened_potentiometer_position)', 'id(opened_position)']
+
 globals:
   - id: move_servo_to_position
     type: float
@@ -37,37 +53,6 @@ globals:
   - id: opened_position_error_tolerance
     type: float
     initial_value: '0.001'
-
-esp8266:
-  board: d1_mini
-
-esphome:
-  name: $name
-  on_boot:
-    priority: -100
-    then:
-    - script.execute: calibrate_close
-    - script.wait: calibrate_close
-    - script.execute: calibrate_open
-    - script.wait: calibrate_open
-    - logger.log:
-        format: "closed_potentiometer_position: %f | closed_position: %f | opened_potentiometer_position: %f | opened_position: %f"
-        args: ['id(closed_potentiometer_position)', 'id(closed_position)', 'id(opened_potentiometer_position)', 'id(opened_position)']
-
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
-  manual_ip:
-    static_ip: !secret development_static_ip
-    gateway: !secret gateway
-    subnet: !secret subnet
-#  ap:
-#    ssid: $upper_name
-    
-# mqtt:
-#   broker: !secret mqtt_broker
-#   username: !secret mqtt_username
-#   password: !secret mqtt_password
 
 script:
   - id: calibrate_close
@@ -245,6 +230,21 @@ output:
     id: vent_servo_output
     pin: D3
     frequency: 50 Hz
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  manual_ip:
+    static_ip: !secret development_static_ip
+    gateway: !secret gateway
+    subnet: !secret subnet
+#  ap:
+#    ssid: $upper_name
+    
+# mqtt:
+#   broker: !secret mqtt_broker
+#   username: !secret mqtt_username
+#   password: !secret mqtt_password
 
 web_server:
 
