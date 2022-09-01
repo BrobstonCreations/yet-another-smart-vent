@@ -1,3 +1,55 @@
+globals:
+  - id: position_to_move_servo_to
+    type: float
+    initial_value: '0'
+  - id: servo_distance_to_move
+    type: float
+    initial_value: '0.01'
+
+  - id: previous_potentiometer_value1
+    type: float
+    initial_value: '0'
+  - id: previous_potentiometer_value2
+    type: float
+    initial_value: '0'
+  - id: previous_potentiometer_value3
+    type: float
+    initial_value: '0'
+  - id: upper_previous_potentiometer_value2
+    type: float
+  - id: lower_previous_potentiometer_value2
+    type: float
+  - id: upper_previous_potentiometer_value3
+    type: float
+  - id: lower_previous_potentiometer_value3
+    type: float
+
+  - id: max_closed_position
+    type: float
+    initial_value: '1'
+  - id: original_max_closed_position
+    type: float
+    initial_value: '1'
+  - id: max_opened_position
+    type: float
+    initial_value: '-1'
+
+  - id: closed_position
+    type: float
+  - id: closed_potentiometer_position
+    type: float
+  - id: opened_position
+    type: float
+  - id: opened_potentiometer_position
+    type: float
+
+  - id: position_error_tolerance
+    type: float
+    initial_value: '0.0014'
+  - id: original_position_error_tolerance
+    type: float
+    initial_value: '0.0014'
+
 esp8266:
   board: d1_mini
 
@@ -290,54 +342,6 @@ output:
     id: vent_servo_output
     pin: D3
     frequency: 50 Hz
-    
-
-globals:
-  - id: position_to_move_servo_to
-    type: float
-    initial_value: '0'
-  - id: servo_distance_to_move
-    type: float
-    initial_value: '0.01'
-  - id: previous_potentiometer_value1
-    type: float
-    initial_value: '0'
-  - id: previous_potentiometer_value2
-    type: float
-  - id: upper_previous_potentiometer_value2
-    type: float
-  - id: lower_previous_potentiometer_value2
-    type: float
-  - id: upper_previous_potentiometer_value3
-    type: float
-  - id: lower_previous_potentiometer_value3
-    type: float
-  - id: previous_potentiometer_value3
-    type: float
-    initial_value: '0'
-  - id: max_closed_position
-    type: float
-    initial_value: '1'
-  - id: original_max_closed_position
-    type: float
-    initial_value: '1'
-  - id: max_opened_position
-    type: float
-    initial_value: '-1'
-  - id: closed_position
-    type: float
-  - id: closed_potentiometer_position
-    type: float
-  - id: opened_position
-    type: float
-  - id: opened_potentiometer_position
-    type: float
-  - id: position_error_tolerance
-    type: float
-    initial_value: '0.0014'
-  - id: original_position_error_tolerance
-    type: float
-    initial_value: '0.0014'
 
 wifi:
   ssid: !secret wifi_ssid
