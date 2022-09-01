@@ -27,10 +27,13 @@ globals:
   - id: max_closed_position
     type: float
     initial_value: '1'
+  - id: max_opened_position
+    type: float
+    initial_value: '-1'
   - id: original_max_closed_position
     type: float
     initial_value: '1'
-  - id: max_opened_position
+  - id: original_max_opened_position
     type: float
     initial_value: '-1'
 
@@ -45,10 +48,17 @@ globals:
 
   - id: position_error_tolerance
     type: float
-    initial_value: '0.0014'
+    initial_value: '0.0013'
   - id: original_position_error_tolerance
     type: float
-    initial_value: '0.0014'
+    initial_value: '0.0013'
+    
+  - id: foo
+    type: float
+    initial_value: '0.25'
+  - id: foo_decrease
+    type: float
+    initial_value: '0.08'
 
 esp8266:
   board: d1_mini
@@ -60,48 +70,26 @@ esphome:
     then:
     - script.execute: calibrate_close
     - script.wait: calibrate_close
-    
-    - globals.set:
-        id: position_to_move_servo_to
-        value: !lambda 'return id(closed_position) - 0.25;'
-    - globals.set:
-        id: max_closed_position
-        value: !lambda 'return id(original_max_closed_position);'
-    - globals.set:
-        id: position_error_tolerance
-        value: !lambda 'return id(position_error_tolerance) * 1.25;'
-    - script.execute: move_servo_to_position
-    - script.wait: move_servo_to_position
-    - script.execute: calibrate_close
-    - script.wait: calibrate_close
-    
-    - globals.set:
-        id: position_to_move_servo_to
-        value: !lambda 'return id(closed_position) - 0.18;'
-    - globals.set:
-        id: max_closed_position
-        value: !lambda 'return id(original_max_closed_position);'
-    - globals.set:
-        id: position_error_tolerance
-        value: !lambda 'return id(position_error_tolerance) * 1.25;'
-    - script.execute: move_servo_to_position
-    - script.wait: move_servo_to_position
-    - script.execute: calibrate_close
-    - script.wait: calibrate_close
-    
-    - globals.set:
-        id: position_to_move_servo_to
-        value: !lambda 'return id(closed_position) - 0.11;'
-    - globals.set:
-        id: max_closed_position
-        value: !lambda 'return id(original_max_closed_position);'
-    - globals.set:
-        id: position_error_tolerance
-        value: !lambda 'return id(position_error_tolerance) * 1.25;'
-    - script.execute: move_servo_to_position
-    - script.wait: move_servo_to_position
-    - script.execute: calibrate_close
-    - script.wait: calibrate_close
+    - while:
+        condition:
+          lambda: 'return id(foo) >= 0;'
+        then:
+          - globals.set:
+              id: position_to_move_servo_to
+              value: !lambda 'return id(closed_position) - 0.25;'
+          - globals.set:
+              id: max_closed_position
+              value: !lambda 'return id(original_max_closed_position);'
+          - globals.set:
+              id: position_error_tolerance
+              value: !lambda 'return id(position_error_tolerance) * 1.25;'
+          - script.execute: move_servo_to_position
+          - script.wait: move_servo_to_position
+          - script.execute: calibrate_close
+          - script.wait: calibrate_close
+          - globals.set:
+              id: foo
+              value: !lambda 'return id(foo) - id(foo_decrease);'
     
     - globals.set:
         id: position_error_tolerance
