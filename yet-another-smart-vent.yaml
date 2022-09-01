@@ -8,18 +8,63 @@ esphome:
     then:
     - script.execute: calibrate_close
     - script.wait: calibrate_close
+    - globals.set:
+        id: position_to_move_servo_to
+        value: !lambda 'return id(closed_position) - 0.25;'
+    - globals.set:
+        id: max_closed_position
+        value: !lambda 'return id(original_max_closed_position);'
+    - globals.set:
+        id: position_error_tolerance
+        value: !lambda 'return id(position_error_tolerance) * 1.25;'
+    - script.execute: move_servo_to_position
+    - script.wait: move_servo_to_position
+    - script.execute: calibrate_close
+    - script.wait: calibrate_close
+    - globals.set:
+        id: position_to_move_servo_to
+        value: !lambda 'return id(closed_position) - 0.18;'
+    - globals.set:
+        id: max_closed_position
+        value: !lambda 'return id(original_max_closed_position);'
+    - globals.set:
+        id: position_error_tolerance
+        value: !lambda 'return id(position_error_tolerance) * 1.25;'
+    - script.execute: move_servo_to_position
+    - script.wait: move_servo_to_position
+    - script.execute: calibrate_close
+    - script.wait: calibrate_close
+    - globals.set:
+        id: position_to_move_servo_to
+        value: !lambda 'return id(closed_position) - 0.11;'
+    - globals.set:
+        id: max_closed_position
+        value: !lambda 'return id(original_max_closed_position);'
+    - globals.set:
+        id: position_error_tolerance
+        value: !lambda 'return id(position_error_tolerance) * 1.25;'
+    - script.execute: move_servo_to_position
+    - script.wait: move_servo_to_position
+    - script.execute: calibrate_close
+    - script.wait: calibrate_close
+    - globals.set:
+        id: position_error_tolerance
+        value: !lambda 'return id(original_position_error_tolerance);'
+    - script.execute: move_servo_to_zero
+    - script.wait: move_servo_to_zero
     - script.execute: calibrate_open
     - script.wait: calibrate_open
     - logger.log:
         format: "closed_potentiometer_position: %f | closed_position: %f | opened_potentiometer_position: %f | opened_position: %f"
         args: ['id(closed_potentiometer_position)', 'id(closed_position)', 'id(opened_potentiometer_position)', 'id(opened_position)']
         level: INFO
+    
 
 script:
   - id: calibrate_close
     then:
-      - script.execute: move_servo_to_zero
-      - script.wait: move_servo_to_zero
+      # - script.execute: move_servo_to_zero
+      # - script.wait: move_servo_to_zero
       - while:
           condition:
             lambda: 'return id(position_to_move_servo_to) < id(max_closed_position);'
@@ -47,8 +92,8 @@ script:
       - servo.detach: vent_servo
   - id: calibrate_open
     then:
-      - script.execute: move_servo_to_zero
-      - script.wait: move_servo_to_zero
+      # - script.execute: move_servo_to_zero
+      # - script.wait: move_servo_to_zero
       - while:
           condition:
             lambda: 'return id(position_to_move_servo_to) > id(max_opened_position);'
@@ -79,13 +124,15 @@ script:
       - servo.write:
           id: vent_servo
           level: !lambda 'return id(position_to_move_servo_to);'
-      - delay: 50ms
+      - delay: 75ms
   - id: move_servo_to_zero
     then:
-      - servo.write:
-          id: vent_servo
-          level: 0
-      - delay: 200ms
+      - globals.set:
+          id: position_to_move_servo_to
+          value: '0'
+      - script.execute: move_servo_to_position
+      - script.wait: move_servo_to_position
+      - delay: 150ms
   - id: increment_position_to_move_servo_to
     then:
       - globals.set:
@@ -126,7 +173,8 @@ script:
             value: !lambda 'return id(position_to_move_servo_to);'
         - globals.set:
             id: closed_position
-            value: !lambda 'return id(position_to_move_servo_to);'
+            value: !lambda 'return id(position_to_move_servo_to) - 0.04;'
+            # value: !lambda 'return id(position_to_move_servo_to);' change this back later
         - globals.set:
             id: closed_potentiometer_position
             value: !lambda 'return id(previous_potentiometer_value1);'
@@ -167,9 +215,9 @@ script:
                 value: !lambda 'return id(previous_potentiometer_value1);'
   - id: reset_servo_position_values
     then:
-      - globals.set:
-          id: position_to_move_servo_to
-          value: '0'
+      # - globals.set:
+      #     id: position_to_move_servo_to
+      #     value: '0'
       - globals.set:
           id: previous_potentiometer_value3
           value: '0'
@@ -265,6 +313,9 @@ globals:
   - id: max_closed_position
     type: float
     initial_value: '1'
+  - id: original_max_closed_position
+    type: float
+    initial_value: '1'
   - id: max_opened_position
     type: float
     initial_value: '-1'
@@ -278,7 +329,10 @@ globals:
     type: float
   - id: position_error_tolerance
     type: float
-    initial_value: '0.0015'
+    initial_value: '0.0014'
+  - id: original_position_error_tolerance
+    type: float
+    initial_value: '0.0014'
 
 wifi:
   ssid: !secret wifi_ssid
