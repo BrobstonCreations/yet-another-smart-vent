@@ -58,13 +58,13 @@ globals:
 
   - id: distance_to_back_off
     type: float
-    initial_value: '0.25'
+    initial_value: '0.20'
   - id: original_distance_to_back_off
     type: float
-    initial_value: '0.25'
+    initial_value: '0.20'
   - id: decrease_per_loop
     type: float
-    initial_value: '0.05'
+    initial_value: '0.04'
 
 esp8266:
   board: d1_mini
