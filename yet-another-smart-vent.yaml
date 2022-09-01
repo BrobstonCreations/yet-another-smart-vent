@@ -48,17 +48,16 @@ globals:
 
   - id: position_error_tolerance
     type: float
-    initial_value: '0.0013'
+    initial_value: '0.00125'
   - id: original_position_error_tolerance
     type: float
-    initial_value: '0.0013'
-    
-  - id: foo
+    initial_value: '0.00125'
+  - id: distance_to_back_off
     type: float
     initial_value: '0.25'
-  - id: foo_decrease
+  - id: decrease_per_loop
     type: float
-    initial_value: '0.08'
+    initial_value: '0.05'
 
 esp8266:
   board: d1_mini
@@ -72,11 +71,11 @@ esphome:
     - script.wait: calibrate_close
     - while:
         condition:
-          lambda: 'return id(foo) >= 0;'
+          lambda: 'return id(distance_to_back_off) >= 0;'
         then:
           - globals.set:
               id: position_to_move_servo_to
-              value: !lambda 'return id(closed_position) - 0.25;'
+              value: !lambda 'return id(closed_position) - id(distance_to_back_off);'
           - globals.set:
               id: max_closed_position
               value: !lambda 'return id(original_max_closed_position);'
@@ -88,8 +87,8 @@ esphome:
           - script.execute: calibrate_close
           - script.wait: calibrate_close
           - globals.set:
-              id: foo
-              value: !lambda 'return id(foo) - id(foo_decrease);'
+              id: distance_to_back_off
+              value: !lambda 'return id(distance_to_back_off) - id(decrease_per_loop);'
     
     - globals.set:
         id: position_error_tolerance
