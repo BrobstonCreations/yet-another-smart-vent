@@ -8,6 +8,7 @@ esphome:
     then:
     - script.execute: calibrate_close
     - script.wait: calibrate_close
+    
     - globals.set:
         id: position_to_move_servo_to
         value: !lambda 'return id(closed_position) - 0.25;'
@@ -21,6 +22,7 @@ esphome:
     - script.wait: move_servo_to_position
     - script.execute: calibrate_close
     - script.wait: calibrate_close
+    
     - globals.set:
         id: position_to_move_servo_to
         value: !lambda 'return id(closed_position) - 0.18;'
@@ -34,6 +36,7 @@ esphome:
     - script.wait: move_servo_to_position
     - script.execute: calibrate_close
     - script.wait: calibrate_close
+    
     - globals.set:
         id: position_to_move_servo_to
         value: !lambda 'return id(closed_position) - 0.11;'
@@ -47,6 +50,7 @@ esphome:
     - script.wait: move_servo_to_position
     - script.execute: calibrate_close
     - script.wait: calibrate_close
+    
     - globals.set:
         id: position_error_tolerance
         value: !lambda 'return id(original_position_error_tolerance);'
@@ -54,6 +58,7 @@ esphome:
     - script.wait: move_servo_to_zero
     - script.execute: calibrate_open
     - script.wait: calibrate_open
+
     - logger.log:
         format: "closed_potentiometer_position: %f | closed_position: %f | opened_potentiometer_position: %f | opened_position: %f"
         args: ['id(closed_potentiometer_position)', 'id(closed_position)', 'id(opened_potentiometer_position)', 'id(opened_position)']
@@ -173,11 +178,11 @@ script:
             value: !lambda 'return id(position_to_move_servo_to);'
         - globals.set:
             id: closed_position
-            value: !lambda 'return id(position_to_move_servo_to) - 0.04;'
+            value: !lambda 'return id(position_to_move_servo_to) - (id(servo_distance_to_move) * 2);'
             # value: !lambda 'return id(position_to_move_servo_to);' change this back later
         - globals.set:
             id: closed_potentiometer_position
-            value: !lambda 'return id(previous_potentiometer_value1);'
+            value: !lambda 'return id(previous_potentiometer_value3);'
   - id: break_and_set_opened_positions
     then:
         - globals.set:
@@ -185,10 +190,10 @@ script:
             value: !lambda 'return id(position_to_move_servo_to);'
         - globals.set:
             id: opened_position
-            value: !lambda 'return id(position_to_move_servo_to);'
+            value: !lambda 'return id(position_to_move_servo_to) + (id(servo_distance_to_move) * 2);'
         - globals.set:
             id: opened_potentiometer_position
-            value: !lambda 'return id(previous_potentiometer_value1);'
+            value: !lambda 'return id(previous_potentiometer_value3);'
   - id: set_closed_positions_if_not_set
     then:
       - if:
