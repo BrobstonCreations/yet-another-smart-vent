@@ -52,7 +52,14 @@ globals:
   - id: original_position_error_tolerance
     type: float
     initial_value: '0.00125'
+  - id: position_error_tolerance_multiplier
+    type: float
+    initial_value: '0.00125'
+
   - id: distance_to_back_off
+    type: float
+    initial_value: '0.25'
+  - id: original_distance_to_back_off
     type: float
     initial_value: '0.25'
   - id: decrease_per_loop
@@ -81,7 +88,7 @@ esphome:
               value: !lambda 'return id(original_max_closed_position);'
           - globals.set:
               id: position_error_tolerance
-              value: !lambda 'return id(position_error_tolerance) * 1.25;'
+              value: !lambda 'return id(position_error_tolerance) * id(position_error_tolerance_multiplier);'
           - script.execute: move_servo_to_position
           - script.wait: move_servo_to_position
           - script.execute: calibrate_close
@@ -90,13 +97,38 @@ esphome:
               id: distance_to_back_off
               value: !lambda 'return id(distance_to_back_off) - id(decrease_per_loop);'
     
+    - script.execute: move_servo_to_zero
+    - script.wait: move_servo_to_zero
+
     - globals.set:
         id: position_error_tolerance
         value: !lambda 'return id(original_position_error_tolerance);'
-    - script.execute: move_servo_to_zero
-    - script.wait: move_servo_to_zero
+    - globals.set:
+        id: distance_to_back_off
+        value: !lambda 'return id(original_distance_to_back_off);'
+
     - script.execute: calibrate_open
     - script.wait: calibrate_open
+    - while:
+        condition:
+          lambda: 'return id(distance_to_back_off) >= 0;'
+        then:
+          - globals.set:
+              id: position_to_move_servo_to
+              value: !lambda 'return id(opened_position) + id(distance_to_back_off);'
+          - globals.set:
+              id: max_opened_position
+              value: !lambda 'return id(original_max_opened_position);'
+          - globals.set:
+              id: position_error_tolerance
+              value: !lambda 'return id(position_error_tolerance) * id(position_error_tolerance_multiplier);'
+          - script.execute: move_servo_to_position
+          - script.wait: move_servo_to_position
+          - script.execute: calibrate_open
+          - script.wait: calibrate_open
+          - globals.set:
+              id: distance_to_back_off
+              value: !lambda 'return id(distance_to_back_off) - id(decrease_per_loop);'
 
     - logger.log:
         format: "closed_potentiometer_position: %f | closed_position: %f | opened_potentiometer_position: %f | opened_position: %f"
