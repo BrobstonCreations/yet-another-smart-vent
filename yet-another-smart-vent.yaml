@@ -54,7 +54,7 @@ globals:
     initial_value: '0.00125'
   - id: position_error_tolerance_multiplier
     type: float
-    initial_value: '0.00125'
+    initial_value: '1.26'
 
   - id: distance_to_back_off
     type: float
