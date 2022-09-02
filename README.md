@@ -70,6 +70,3 @@ Pull Requests are always welcome. I would recommend starting with an [issue](htt
 
 ## Issues
 Feel free to open an [issue](https://github.com/TonyBrobston/yet-another-smart-vent/issues) and I will respond as I have time. The hope is to create a system that gives consumers what they want, your feedback is important. 
-
-## References
-This repo is a modifcation of [Hypfer's Midea Dehumidifier](https://github.com/Hypfer/esp8266-midea-dehumidifier).
