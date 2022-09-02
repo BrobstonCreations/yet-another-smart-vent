@@ -76,17 +76,8 @@ esphome:
     then:
     - script.execute: calibrate_close
     - script.wait: calibrate_close
-    
-    - globals.set:
-        id: position_error_tolerance
-        value: !lambda 'return id(original_position_error_tolerance);'
-    - globals.set:
-        id: distance_to_back_off
-        value: !lambda 'return id(original_distance_to_back_off);'
-
     - script.execute: calibrate_open
     - script.wait: calibrate_open
-
     - logger.log:
         format: "closed_potentiometer_position: %f | closed_position: %f | opened_potentiometer_position: %f | opened_position: %f"
         args: ['id(closed_potentiometer_position)', 'id(closed_position)', 'id(opened_potentiometer_position)', 'id(opened_position)']
@@ -95,6 +86,10 @@ esphome:
 script:
   - id: calibrate_close
     then:
+      - script.execute: reset_position_error_tolerance
+      - script.wait: reset_position_error_tolerance
+      - script.execute: reset_distance_to_back_off
+      - script.wait: reset_distance_to_back_off
       - script.execute: move_servo_to_zero
       - script.wait: move_servo_to_zero
       - script.execute: find_close_endstop
@@ -121,6 +116,10 @@ script:
                 value: !lambda 'return id(distance_to_back_off) - id(decrease_per_loop);'
   - id: calibrate_open
     then:
+      - script.execute: reset_position_error_tolerance
+      - script.wait: reset_position_error_tolerance
+      - script.execute: reset_distance_to_back_off
+      - script.wait: reset_distance_to_back_off
       - script.execute: move_servo_to_zero
       - script.wait: move_servo_to_zero
       - script.execute: find_open_endstop
@@ -295,9 +294,6 @@ script:
                 value: !lambda 'return id(previous_potentiometer_value1);'
   - id: reset_servo_position_values
     then:
-      # - globals.set:
-      #     id: position_to_move_servo_to
-      #     value: '0'
       - globals.set:
           id: previous_potentiometer_value3
           value: '0'
@@ -319,6 +315,17 @@ script:
       - globals.set:
           id: previous_potentiometer_value1
           value: '0'
+  - id: reset_position_error_tolerance
+    then:
+      - globals.set:
+          id: position_error_tolerance
+          value: !lambda 'return id(original_position_error_tolerance);'
+  - id: reset_distance_to_back_off
+    then:
+      - globals.set:
+          id: distance_to_back_off
+          value: !lambda 'return id(original_distance_to_back_off);'
+    
 
 cover:
   - platform: template
