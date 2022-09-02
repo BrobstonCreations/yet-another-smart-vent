@@ -48,32 +48,21 @@ This project contains most everything needed to 3D print, assemble, and flash an
 - If the previous recommendation is not possible, it may be possible to partially mitigate the static pressure issue by only closing vents (that are in a closed state) to 80% closed, when the number of closed vents is greater than 75%. This will be a feature implemented in [mqtt-hvac-vent-control](https://github.com/TonyBrobston/mqtt-hvac-vent-control) in the future.
 
 ## Future Features
-- Investigate ESPHome as a potential option to decrease this project's complexity.
-- Make open/close calibration slightly less sensitive.
 - Add the ability to move the vent to a specific position between 0% and 100%.
 - Test vents when furnace is heating. (I'm currently printing with [3DFuel Pro PLA+](https://www.3dfuel.com/collections/pro-pla/products/pro-pla-midnight-black-1-75mm) which should work just fine)
 - Integrate a lever to manually open/close vent louvers.
 - Investigate power saving options for battery pack use.
-- Subscribe to an MQTT topic to clear the configuration.
-- Subscribe to an MQTT topic to rerun the initial open/close calibration.
-- Subscribe to an MQTT topic published by the central vent system to open the vent when that system is offline.
-- Publish automatic configuration. [example](https://github.com/Hypfer/esp8266-midea-dehumidifier/blob/ff869266c660657da25dc90e801d583ad34b6a8d/src/esp8266-midea-dehumidifier/esp8266-midea-dehumidifier.ino#L270)
-- Publish debug information to an MQTT topic for easier troubleshooting.
-- Add retain as an option to initial WiFi/MQTT setup.
-- Implement ArduinoOTA.
-- Update repo to use latest dependencies.
-- Use PlatformIO for dependencies.
+- Add functionality to open vent if the central vent control system goes offline.
 - Publish a distributable to Releases.
 - Experiment with 12x12 vent.
 
 ## Philosophy
 - Local Control
 - External Integration
-- Easy of Use (this will improve over time)
+- Easy of Use (with improvments over time)
 - Community Feedback
 - Community Contributions
 - Agile, Lean, and Extreme Programming Practices
-- Test Driven Development (hopefully in the future)
 - Mostly Decentralized Manufacturing.
 
 ## Pull Requests
