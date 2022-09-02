@@ -71,6 +71,7 @@ esp8266:
 
 esphome:
   name: yet-another-smart-vent
+  name_add_mac_suffix: true
   on_boot:
     priority: -100
     then:
@@ -325,7 +326,6 @@ script:
       - globals.set:
           id: distance_to_back_off
           value: !lambda 'return id(original_distance_to_back_off);'
-    
 
 cover:
   - platform: template
@@ -374,15 +374,14 @@ output:
     frequency: 50 Hz
 
 wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
-  manual_ip:
-    static_ip: !secret development_static_ip
-    gateway: !secret gateway
-    subnet: !secret subnet
-#  ap:
-#    ssid: $upper_name
-    
+  ap: {}
+  # ssid: !secret wifi_ssid
+  # password: !secret wifi_password
+  # manual_ip:
+  #   static_ip: !secret static_ip
+  #   gateway: !secret gateway
+  #   subnet: !secret subnet
+
 # mqtt:
 #   broker: !secret mqtt_broker
 #   username: !secret mqtt_username
