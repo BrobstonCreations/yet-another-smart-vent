@@ -254,7 +254,6 @@ script:
         - globals.set:
             id: closed_position
             value: !lambda 'return id(position_to_move_servo_to) - (id(servo_distance_to_move) * 2);'
-            # value: !lambda 'return id(position_to_move_servo_to);' change this back later
         - globals.set:
             id: closed_potentiometer_position
             value: !lambda 'return id(previous_potentiometer_value3);'
