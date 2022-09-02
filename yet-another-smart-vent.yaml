@@ -373,6 +373,8 @@ output:
     pin: D3
     frequency: 50 Hz
 
+captive_portal:
+
 wifi:
   ap: {}
   # ssid: !secret wifi_ssid
