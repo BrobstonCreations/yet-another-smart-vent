@@ -37,11 +37,9 @@ This project contains most everything needed to 3D print, assemble, and flash an
         - [ESP D1 Mini Shield Solder Spacer](https://www.printables.com/model/259295-esp-d1-mini-shield-solder-spacer)
     - [Assembly Instructions](/docs/VENT_ASSEMBLY.md)
 3. [Compile and Upload Instructions](/docs/COMPILE_AND_UPLOAD.md)
-4. MQTT Broker:
-    - [Everything Smart Home](https://www.youtube.com/c/EverythingSmartHome) has a good [MQTT Broker Setup Video](https://www.youtube.com/watch?v=dqTn-Gk4Qeo).
-5. [Setup](/docs/SETUP.md)
-6. [Testing](/docs/TESTING.md)
-7. [Implementation Options](/docs/IMPLEMENTATION_OPTIONS.md)
+4. [Setup](/docs/SETUP.md)
+5. [Testing](/docs/TESTING.md)
+6. [Implementation Options](/docs/IMPLEMENTATION_OPTIONS.md)
 
 ## Important Recommendations 
 - It is recommended to have a [Static Pressure Regulating Damper](https://www.zonefirst.com/product/sprddd/) installed between the main return and the main plenum. This will even out the static pressure that changes in the ducting, from opening or closing vents.
