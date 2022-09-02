@@ -25,7 +25,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
     - [Assembly Instructions](/docs/ELECTRONICS_ASSEMBLY.md)
 2. 3D Printing:
     - [Printing Advice](/docs/VENT_PRINTING.md)
-    - [STLs](https://www.printables.com/social/337332-tonyb/collections/241144):
+    - [STLs](https://www.printables.com/social/337332-tonyb/collections/241144?o=download_count):
         - [2x10 Vent](https://www.printables.com/model/259777-yet-another-smart-vent-2x10)
         - [2x12 Vent](https://www.printables.com/model/260300-yet-another-smart-vent-2x12) (now with two-piece shell)
         - [3x10 Vent](https://www.printables.com/model/262311-yet-another-smart-vent-3x10) (needs testing)
@@ -43,11 +43,13 @@ This project contains most everything needed to 3D print, assemble, and flash an
 6. [Testing](/docs/TESTING.md)
 7. [Implementation Options](/docs/IMPLEMENTATION_OPTIONS.md)
 
-## Other Notes
+## Important Recommendations 
 - It is recommended to have a [Static Pressure Regulating Damper](https://www.zonefirst.com/product/sprddd/) installed between the main return and the main plenum. This will even out the static pressure that changes in the ducting, from opening or closing vents.
-- If the previous recommendation is not possible, it may be possible to partially mitigate the static pressure issue by only closing vents (that are in a closed state) to 80% closed, when the number of closed vents is greater than 75%. This will be a feature implemented in [mqtt-hvac-vent-control](https://github.com/TonyBrobston/mqtt-hvac-vent-control) in the future.
+- If the previous recommendation is not possible, it may be possible to partially mitigate the static pressure issue by only closing vents (that are in a closed state) to something like 80% closed, when the number of closed vents is greater than, say... 75%. This will be a feature implemented in [mqtt-hvac-vent-control](https://github.com/TonyBrobston/mqtt-hvac-vent-control) in the future.
+- It is recommended that you pair this vent with a system that can [measure and monitor Delta T](https://www.youtube.com/watch?v=_pD-rRCNv8k) (the difference in temperature of the air between the return plenum and the main plenum).
 
 ## Future Features
+- Look into supporting [DMS-MG90-A](https://www.mouser.com/ProductDetail/DFRobot/SER0046?qs=vHuUswq2%252BsyGXvdy%2FXoNTA%3D%3D) Servo Motor.
 - Add the ability to move the vent to a specific position between 0% and 100%.
 - Test vents when furnace is heating. (I'm currently printing with [3DFuel Pro PLA+](https://www.3dfuel.com/collections/pro-pla/products/pro-pla-midnight-black-1-75mm) which should work just fine)
 - Integrate a lever to manually open/close vent louvers.
