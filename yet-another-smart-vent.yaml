@@ -343,6 +343,11 @@ cover:
       - servo.write:
           id: vent_servo
           level: !lambda 'return remap(id(vent_servo_potentiometer).state, id(opened_potentiometer_position), id(closed_potentiometer_position), id(opened_position), id(closed_position));'
+    tilt_action:
+      - servo.write:
+          id: vent_servo
+          level: !lambda 'return remap(tilt, float(1), float(0), id(opened_position), id(closed_position));'
+    tilt_lambda: !lambda 'return remap(id(vent_servo_potentiometer).state, id(opened_potentiometer_position), id(closed_potentiometer_position), float(1), float(0));'
     lambda: |-
       const float current_position = id(vent_servo_potentiometer).state;
       const float closed_position = id(closed_potentiometer_position);
