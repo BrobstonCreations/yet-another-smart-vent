@@ -46,13 +46,13 @@ This project contains most everything needed to 3D print, assemble, and flash an
 - It is recommended that you pair this vent with a system that can [measure and monitor Delta T](https://www.youtube.com/watch?v=_pD-rRCNv8k) (the difference in temperature of the air between the return plenum and the main plenum).
 
 ## Future Features
+- Publish a distributable to Releases.
 - Look into supporting [DMS-MG90-A](https://www.mouser.com/ProductDetail/DFRobot/SER0046?qs=vHuUswq2%252BsyGXvdy%2FXoNTA%3D%3D) Servo Motor.
-- Add the ability to move the vent to a specific position between 0% and 100%.
+- Fix a small bug where ESPHome's Servo Position does not match up with the Servo's Potentiometer's position.
 - Test vents when furnace is heating. (I'm currently printing with [3DFuel Pro PLA+](https://www.3dfuel.com/collections/pro-pla/products/pro-pla-midnight-black-1-75mm) which should work just fine)
 - Integrate a lever to manually open/close vent louvers.
 - Investigate power saving options for battery pack use.
 - Add functionality to open vent if the central vent control system goes offline.
-- Publish a distributable to Releases.
 - Experiment with 12x12 vent.
 
 ## Philosophy
