@@ -5,7 +5,7 @@ This project uses ESPHome.
   *Note: if you want to use MQTT, you will need to use the ESPHome Dashboard.*
 
   Flash device with `.bin` file:
-  1. Download the `.bin` file from [Releases](https://github.com/TonyBrobston/yet-another-smart-vent/releases) (coming soon).
+  1. Download the `.bin` file from [Releases](https://github.com/TonyBrobston/yet-another-smart-vent/releases).
   2. Plug a micro-usb cable into your ESP8266 D1 Mini (usb port on the bottom of the vent). It is important that you use a micro-usb data cable, not one that is for only power/charging.
   3. Open https://web.esphome.io
   4. Click `CONNECT`.
