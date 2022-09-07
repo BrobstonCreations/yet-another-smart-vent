@@ -58,7 +58,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 ## Philosophy
 - Local Control
 - External Integration
-- Easy of Use (with improvments over time)
+- Easy of Use (with improvements over time)
 - Community Feedback
 - Community Contributions
 - Agile, Lean, and Extreme Programming Practices
