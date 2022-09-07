@@ -8,20 +8,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 
 ## Getting Started
 1. Electronics:
-    - Components:
-        - D1 Mini ESP8266
-        - D1 Mini DC Power Shield
-        - Batan B2122
-        - Power Source Options:
-            - AC Adapter
-            - Centralized Power Supply Components (consult an electrician if needed) (eventually I'll put out an STL for an enclosure for the Power Supply):
-                - DC 24V15A 360W Switching Power Supply
-                - [Power Supply Fused Power Injection Board](https://www.holidaycoro.com/product-p/1308.htm) (needs testing)
-                - IEC Fused Power Socket and Switch
-                - IEC Power Cable 5ft
-                - Fork spade crimp terminals, fully insulated female spade terminal, and some stranded wire for load/neutral/ground between the IEC Socket and the Power Supply.
-                - [Wiring to run through duct work](https://github.com/TonyBrobston/yet-another-smart-vent/issues/7#issuecomment-1221660336).
-            - Battery Pack (not currently recommended, needs development for power saving mode).
+    - [Components Kit](https://brobston-creations.mybigcommerce.com/yet-another-smart-vent-electronics-and-fasteners-kit/) or [Components List](/docs/ELECTRONIC_COMPONENTS.md)
     - [Assembly Instructions](/docs/ELECTRONICS_ASSEMBLY.md)
 2. 3D Printing:
     - [Printing Advice](/docs/VENT_PRINTING.md)
