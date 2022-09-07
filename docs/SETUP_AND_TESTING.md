@@ -1,4 +1,4 @@
-## Setup  
+## Setup and Testing
   *In either of the first two options, you will need to go into your router/wifi/network device and find the IP address of your device*
 
   Control your device through its ESPHome Web Server:
