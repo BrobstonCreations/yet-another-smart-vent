@@ -381,7 +381,7 @@ output:
     frequency: 50 Hz
     
 dashboard_import:
-  package_import_url: github://brobstoncreations/yet-another-smart-vent/yet-another-smart-vent.yaml@v1
+  package_import_url: github://brobstoncreations/yet-another-smart-vent/yet-another-smart-vent.yaml
 
 captive_portal:
 
