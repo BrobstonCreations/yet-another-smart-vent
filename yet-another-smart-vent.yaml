@@ -72,6 +72,9 @@ esp8266:
 esphome:
   name: yet-another-smart-vent
   name_add_mac_suffix: true
+  project:
+    name: esphome.project-template
+    version: "1.0"
   on_boot:
     priority: -100
     then:
@@ -376,6 +379,9 @@ output:
     id: vent_servo_output
     pin: D3
     frequency: 50 Hz
+    
+dashboard_import:
+  package_import_url: github://brobstoncreations/yet-another-smart-vent/yet-another-smart-vent.yaml@v1
 
 captive_portal:
 
