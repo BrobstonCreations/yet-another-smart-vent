@@ -37,8 +37,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
         - [ESP D1 Mini Shield Solder Spacer](https://www.printables.com/model/259295-esp-d1-mini-shield-solder-spacer)
     - [Assembly Instructions](/docs/VENT_ASSEMBLY.md)
 3. [Compile and Upload Instructions](/docs/COMPILE_AND_UPLOAD.md)
-4. [Setup](/docs/SETUP.md)
-5. [Testing](/docs/TESTING.md)
+4. [Setup and Testing](/docs/SETUP_AND_TESTING.md)
 6. [Implementation Options](/docs/IMPLEMENTATION_OPTIONS.md)
 
 ## Important Recommendations 
