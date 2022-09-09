@@ -16,6 +16,10 @@ This project uses ESPHome.
   9. Select the `.bin` file you downloaded in step #1.
   10. Click `INSTALL`.
   11. The install should begin. You will likely have to "Keep this page visible to prevent slow down".
+  12. Soon after your flash finishes, the D1 Mini should broadcast a WiFi access point as the name from the configuration followed up the beginning of the MAC address (ex: `yet-another-smart-vent-122de8`).
+  13. Connect to this WiFi access point.
+  14. The captive portal should open automatically. If it does not, navigate to 192.168.4.1 in your browser.
+  15. Enter the WiFi SSID/Password of the 2.4 GHz wireless network that you would like this device to connect to. 
 
 Install using ESPHome Dashboard:
   1. You will need to have an ESPHome dashboard running. I use [their docker image](https://hub.docker.com/r/esphome/esphome), but there are other ways to get this running. I would recommend looking at [ESPHome's Getting Started](https://esphome.io/).
