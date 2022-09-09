@@ -2,7 +2,7 @@
   *In either of the first two options, you will need to go into your router/wifi/network device and find the IP address of your device*
 
   Control your device through its ESPHome Web Server:
-  1. Navigate to the device by enter the IP address of the device into your web brower.
+  1. Navigate to the device by entering the IP address of the device into your web brower.
   2. The rest should be self-explanatory. There should be controls that correspond to the type ESPHome device you have configured.
 
   Control your device through Home Assistant:
