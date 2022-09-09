@@ -3,7 +3,7 @@
 - All *Yet Another Smart Vent*'s assemble in a very similar manner.
 - Be sure to drill out the holes in the vent shell that the louvers rotate on. Use a 9/32 drill bit.
 - Taps may not be required, more than likely you can use the screws as a tap. However using a tap will make the screw thread much easier and if you're doing quite a few vents, this will make assembly go faster and smoother.
-- It is important to attach the wiper at the center point of the Servo's range. Upload [this configuration](/turn-to-middle.yaml) in order to tell ESPHome to move the servo to the middle (servo position 0). 
+- It is important to attach the wiper at the center point of the Servo's range. To tell ESPHome to move the servo to the middle (servo position 0), you can either upload [this configuration](/turn-to-middle.yaml) to ESPHome your flash your D1 Mini with the `turn-to-middle-factory.bin` in [Releases](https://github.com/TonyBrobston/yet-another-smart-vent/releases). In either case, follow [these directions](/docs/COMPILE_AND_UPLOAD.md#install-options).
 - Some vent size variations have snap-together vent shells. It is easiest to add the vent shell half that is opposite of the electronics enclosure after installing the electronics, the enclosure, and all the louvers. It is easiest to attach this vent shell with the shell flipped face down, snapping one side in place, then aligning the louver end holes with the vent shell, then snap the other side into place.
 
 Tools:
