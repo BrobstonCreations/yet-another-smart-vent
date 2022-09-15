@@ -9,7 +9,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 ## Getting Started
 1. Electronics:
     - Components:
-        - [Components Kit](https://brobston-creations.mybigcommerce.com/yet-another-smart-vent-electronics-and-fasteners-kit/) (This directly supports me, which affords me the time develop this project and the future systems that will built around it.)
+        - [Components Kit](https://brobston-creations.mybigcommerce.com/yet-another-smart-vent-electronics-and-fasteners-kit/) (This directly supports me, which affords me the time develop this project and the future systems that will be built around it. Please consider ordering from me.)
         - [Components List](/docs/ELECTRONIC_COMPONENTS.md)
     - [Assembly Instructions](/docs/ELECTRONICS_ASSEMBLY.md)
 2. 3D Printing:
