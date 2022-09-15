@@ -13,4 +13,4 @@
           - [Wiring to run through duct work](https://github.com/TonyBrobston/yet-another-smart-vent/issues/7#issuecomment-1221660336).
       - [Battery Pack](https://amzn.to/3RIe2ED) (not currently recommended, needs development for power saving mode).
 
-*This page contains some Amazon Affiliate links, they help me support this project at no cost to you
+*This page contains some Amazon Affiliate links, they help me support this project at no cost to you.
