@@ -47,7 +47,7 @@ esphome:
     - servo.write:
         id: vent_servo
         level: !lambda 'return id(position_to_move_servo_to) + 0.77;'
-    - delay: 225ms
+    - delay: 1s
     - globals.set:
         id: opened_position
         value: !lambda 'return id(position_to_move_servo_to) + 0.77;'
