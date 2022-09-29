@@ -29,10 +29,18 @@ esphome:
                 id: vent_servo
                 level: !lambda 'return id(position_to_move_servo_to);'
             - delay: 75ms
+            - logger.log: id(position_to_move_servo_to)
+    - servo.write:
+        id: vent_servo
+        level: !lambda 'return id(position_to_move_servo_to) + 0.77;'
 
 binary_sensor:
   - platform: gpio
-    pin: 15
+    pin: 
+      number: 16
+      mode:
+        input: true
+        pulldown: true
     id: closed_limit_switch
     name: "Closed Limit Switch"
   
