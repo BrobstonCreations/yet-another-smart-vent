@@ -5,12 +5,20 @@ globals:
   - id: servo_distance_to_move
     type: float
     initial_value: '0.01'
+  - id: closed_position
+    type: float
+  - id: closed_potentiometer_position
+    type: float
+  - id: opened_position
+    type: float
+  - id: opened_potentiometer_position
+    type: float
 
 esp8266:
   board: d1_mini
 
 esphome:
-  name: yet-another-smart-vent
+  name: "yet-another-smart-vent"
   on_boot:
     priority: -100
     then:
@@ -29,10 +37,60 @@ esphome:
                 id: vent_servo
                 level: !lambda 'return id(position_to_move_servo_to);'
             - delay: 75ms
-            - logger.log: id(position_to_move_servo_to)
+    - globals.set:
+        id: closed_position
+        value: !lambda 'return id(position_to_move_servo_to);'
+    - globals.set:
+        id: closed_potentiometer_position
+        value: !lambda 'return id(vent_servo_potentiometer).sample();'
+    - delay: 225ms
     - servo.write:
         id: vent_servo
         level: !lambda 'return id(position_to_move_servo_to) + 0.77;'
+    - delay: 225ms
+    - globals.set:
+        id: opened_position
+        value: !lambda 'return id(position_to_move_servo_to) + 0.77;'
+    - globals.set:
+        id: opened_potentiometer_position
+        value: !lambda 'return id(vent_servo_potentiometer).sample();'
+    - logger.log:
+        format: "closed_potentiometer_position: %f | closed_position: %f | opened_potentiometer_position: %f | opened_position: %f"
+        args: ['id(closed_potentiometer_position)', 'id(closed_position)', 'id(opened_potentiometer_position)', 'id(opened_position)']
+        level: INFO
+
+cover:
+  - platform: template
+    device_class: damper
+    id: vent
+    name: Vent
+    open_action:
+      - servo.write:
+          id: vent_servo
+          level: !lambda 'return id(opened_position);'
+    close_action:
+      - servo.write:
+          id: vent_servo
+          level: !lambda 'return id(closed_position);'
+    stop_action:
+      - servo.write:
+          id: vent_servo
+          level: !lambda 'return remap(id(vent_servo_potentiometer).state, id(opened_potentiometer_position), id(closed_potentiometer_position), id(opened_position), id(closed_position));'
+    tilt_action:
+      - servo.write:
+          id: vent_servo
+          level: !lambda 'return remap(tilt, float(1), float(0), id(opened_position), id(closed_position));'
+    tilt_lambda: !lambda 'return remap(id(vent_servo_potentiometer).state, id(opened_potentiometer_position), id(closed_potentiometer_position), float(1), float(0));'
+    lambda: |-
+      const float current_position = id(vent_servo_potentiometer).state;
+      const float closed_position = id(closed_potentiometer_position);
+      const float tolerance = 0.015;
+      const float upper_tolerance = closed_position + tolerance;
+      const float lower_tolerance = closed_position - tolerance;
+      if (current_position >= lower_tolerance && current_position <= upper_tolerance) {
+        return COVER_CLOSED;
+      }
+      return COVER_OPEN;
 
 binary_sensor:
   - platform: gpio
@@ -72,7 +130,11 @@ wifi:
 
 web_server:
 
+api:
+
+mdns:
+    
 ota:
     
 logger:
-  level: DEBUG
+  level: INFO
