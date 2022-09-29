@@ -18,7 +18,7 @@ esp8266:
   board: d1_mini
 
 esphome:
-  name: "yet-another-smart-vent"
+  name: yet-another-smart-vent
   on_boot:
     priority: -100
     then:
