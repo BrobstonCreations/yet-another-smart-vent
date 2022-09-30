@@ -47,7 +47,7 @@ esphome:
     - servo.write:
         id: vent_servo
         level: !lambda 'return id(position_to_move_servo_to) + 0.77;'
-    - delay: 1s
+    - delay: 3s
     - globals.set:
         id: opened_position
         value: !lambda 'return id(position_to_move_servo_to) + 0.77;'
@@ -111,7 +111,7 @@ sensor:
 servo:
   - id: vent_servo
     output: vent_servo_output
-    transition_length: 3s
+    transition_length: 7s
     auto_detach_time: 200ms
     
 output:
