@@ -94,7 +94,6 @@ binary_sensor:
         input: true
         pulldown: true
     id: closed_limit_switch
-    name: "Closed Limit Switch"
   
 sensor:
   - platform: adc
