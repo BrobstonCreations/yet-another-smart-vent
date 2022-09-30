@@ -57,10 +57,6 @@ esphome:
     - globals.set:
         id: opened_potentiometer_position
         value: !lambda 'return id(vent_servo_potentiometer).sample();'
-    - logger.log:
-        format: "closed_potentiometer_position: %f | closed_position: %f | opened_potentiometer_position: %f | opened_position: %f"
-        args: ['id(closed_potentiometer_position)', 'id(closed_position)', 'id(opened_potentiometer_position)', 'id(opened_position)']
-        level: INFO
 
 cover:
   - platform: template
