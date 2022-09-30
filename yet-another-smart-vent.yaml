@@ -22,6 +22,10 @@ esp8266:
 
 esphome:
   name: yet-another-smart-vent
+  name_add_mac_suffix: true
+  project:
+    name: esphome.project-template
+    version: '1.0'
   on_boot:
     priority: -100
     then:
