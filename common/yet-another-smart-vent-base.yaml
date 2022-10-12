@@ -36,7 +36,7 @@ esphome:
         then:
             - globals.set:
                 id: position_to_move_servo_to
-                value: !lambda 'return id(position_to_move_servo_to) - id(servo_distance_to_move);'
+                value: !lambda 'return id(position_to_move_servo_to) - id(servo_distance_to_move) * ${invert_value};'
             - servo.write:
                 id: vent_servo
                 level: !lambda 'return id(position_to_move_servo_to);'
@@ -50,11 +50,11 @@ esphome:
     - delay: 225ms
     - servo.write:
         id: vent_servo
-        level: !lambda 'return id(position_to_move_servo_to) + ${ninety_degree_servo_distance};'
+        level: !lambda 'return id(position_to_move_servo_to) + ${ninety_degree_servo_distance} * ${invert_value};'
     - delay: 3s
     - globals.set:
         id: opened_position
-        value: !lambda 'return id(position_to_move_servo_to) + ${ninety_degree_servo_distance};'
+        value: !lambda 'return id(position_to_move_servo_to) + ${ninety_degree_servo_distance} * ${invert_value};'
     - globals.set:
         id: opened_potentiometer_position
         value: !lambda 'return id(vent_servo_potentiometer).sample();'
