@@ -109,6 +109,8 @@ output:
     id: vent_servo_output
     pin: D3
     frequency: 50 Hz
+
+captive_portal:
     
 wifi:
   ap: {}
