@@ -1,6 +1,6 @@
 substitutions:
   ninety_degree_servo_distance: '1.25'
-  servo_transition_length: 2s
+  servo_transition_length: 3s
   invert_value: '-1'
   
 packages:
