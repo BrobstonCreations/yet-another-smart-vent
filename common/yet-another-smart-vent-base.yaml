@@ -111,13 +111,13 @@ output:
     frequency: 50 Hz
     
 wifi:
-#   ap: {}
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
-  manual_ip:
-    static_ip: !secret static_ip
-    gateway: !secret gateway
-    subnet: !secret subnet
+  ap: {}
+#  ssid: !secret wifi_ssid
+#  password: !secret wifi_password
+#  manual_ip:
+#    static_ip: !secret static_ip
+#    gateway: !secret gateway
+#    subnet: !secret subnet
 
 # mqtt:
 #   broker: !secret mqtt_broker
