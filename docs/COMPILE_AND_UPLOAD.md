@@ -6,7 +6,7 @@ This project uses ESPHome.
 
 1. Flash your device with a `.bin` file. Follow along in [this video](https://youtu.be/D073FX6kdh8?t=322) or read the [written instructions](/docs/COMPILE_AND_UPLOAD_WRITTEN.md).
  
-2. Install using ESPHome Dashboard:
+2. Install using ESPHome Dashboard (this is now slightly out of date, since there are two configurations that share a common parent configuration; you will have to manually merge these or research how to install via the Dashboard when using an [ESPHome local package](https://esphome.io/guides/configuration-types.html#local-packages):
     1. You will need to have an ESPHome dashboard running. I use [their docker image](https://hub.docker.com/r/esphome/esphome), but there are other ways to get this running. I would recommend looking at [ESPHome's Getting Started](https://esphome.io/).
     2. Navigate to your ESPHome Dashboard.
     3. Click "+ NEW DEVICE".
