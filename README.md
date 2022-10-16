@@ -35,8 +35,6 @@ This project contains most everything needed to 3D print, assemble, and flash an
 - If the previous recommendation is not possible, it may be possible to partially mitigate the static pressure issue by only closing vents (that are in a closed state) to something like 80% closed, when the number of closed vents is greater than, say... 75%. This will be a feature implemented in [mqtt-hvac-vent-control](https://github.com/TonyBrobston/mqtt-hvac-vent-control) in the future.
 
 ## Future Features
-- Explore adding a limit switch for the closed position, which will increase accuracy and reliability of the calibration process.
-- Look into supporting [DMS-MG90-A](https://www.mouser.com/ProductDetail/DFRobot/SER0046?qs=vHuUswq2%252BsyGXvdy%2FXoNTA%3D%3D) Servo Motor.
 - Fix a small bug where ESPHome's Servo Position does not match up with the Servo's Potentiometer's position.
 - Test vents when furnace is heating. (I'm currently printing with [3DFuel Pro PLA+](https://www.3dfuel.com/collections/pro-pla/products/pro-pla-midnight-black-1-75mm) which should work just fine)
 - Integrate a lever to manually open/close vent louvers.

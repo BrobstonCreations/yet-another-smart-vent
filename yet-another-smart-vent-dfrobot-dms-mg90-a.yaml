@@ -1,0 +1,7 @@
+substitutions:
+  ninety_degree_servo_distance: '0.77'
+  servo_transition_length: 7s
+  invert_value: '1'
+  
+packages:
+  device_base: !include common/yet-another-smart-vent-base.yaml

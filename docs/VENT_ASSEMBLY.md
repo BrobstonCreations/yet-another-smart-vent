@@ -17,6 +17,7 @@ Tools:
 Fasteners:
 - (2) M5x0.8 6mm Long Socket Head Screw
 - (4) M3x0.5 6mm Long Flat Head Machine Screws Inner Hex Screw
+- (1) M2xAny 6mm Long Socket Head Screw
 
 
 ![1-components-and-tools](https://user-images.githubusercontent.com/4724577/184462531-667b9df4-d63b-407b-8c9b-19ecc8d036df.jpg)

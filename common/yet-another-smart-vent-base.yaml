@@ -1,0 +1,138 @@
+globals:
+  - id: position_to_move_servo_to
+    type: float
+    initial_value: '0'
+  - id: servo_distance_to_move
+    type: float
+    initial_value: '0.01'
+  - id: closed_position
+    type: float
+  - id: closed_potentiometer_position
+    type: float
+  - id: opened_position
+    type: float
+  - id: opened_potentiometer_position
+    type: float
+
+esp8266:
+  board: d1_mini
+
+esphome:
+  name: yet-another-smart-vent
+  name_add_mac_suffix: true
+  project:
+    name: esphome.project-template
+    version: '1.0'
+  on_boot:
+    priority: -100
+    then:
+    - servo.write:
+        id: vent_servo
+        level: 0
+    - delay: 225ms
+    - while:
+        condition:
+          lambda: 'return !id(closed_limit_switch).state;'
+        then:
+            - globals.set:
+                id: position_to_move_servo_to
+                value: !lambda 'return id(position_to_move_servo_to) - id(servo_distance_to_move) * ${invert_value};'
+            - servo.write:
+                id: vent_servo
+                level: !lambda 'return id(position_to_move_servo_to);'
+            - delay: 75ms
+    - globals.set:
+        id: closed_position
+        value: !lambda 'return id(position_to_move_servo_to);'
+    - globals.set:
+        id: closed_potentiometer_position
+        value: !lambda 'return id(vent_servo_potentiometer).sample();'
+    - delay: 225ms
+    - servo.write:
+        id: vent_servo
+        level: !lambda 'return id(position_to_move_servo_to) + ${ninety_degree_servo_distance} * ${invert_value};'
+    - delay: 3s
+    - globals.set:
+        id: opened_position
+        value: !lambda 'return id(position_to_move_servo_to) + ${ninety_degree_servo_distance} * ${invert_value};'
+    - globals.set:
+        id: opened_potentiometer_position
+        value: !lambda 'return id(vent_servo_potentiometer).sample();'
+
+cover:
+  - platform: template
+    device_class: damper
+    id: vent
+    name: Vent
+    open_action:
+      - servo.write:
+          id: vent_servo
+          level: !lambda 'return id(opened_position);'
+    close_action:
+      - servo.write:
+          id: vent_servo
+          level: !lambda 'return id(closed_position);'
+    stop_action:
+      - servo.write:
+          id: vent_servo
+          level: !lambda 'return remap(id(vent_servo_potentiometer).state, id(opened_potentiometer_position), id(closed_potentiometer_position), id(opened_position), id(closed_position));'
+    tilt_action:
+      - servo.write:
+          id: vent_servo
+          level: !lambda 'return remap(tilt, float(1), float(0), id(opened_position), id(closed_position));'
+    tilt_lambda: !lambda 'return remap(id(vent_servo_potentiometer).state, id(opened_potentiometer_position), id(closed_potentiometer_position), float(1), float(0));'
+    lambda: 'return id(closed_limit_switch).state ? COVER_CLOSED : COVER_OPEN;'
+
+binary_sensor:
+  - platform: gpio
+    pin: 
+      number: 16
+      mode:
+        input: true
+        pulldown: true
+    id: closed_limit_switch
+  
+sensor:
+  - platform: adc
+    id: vent_servo_potentiometer
+    pin: A0
+    update_interval: 250ms
+
+servo:
+  - id: vent_servo
+    output: vent_servo_output
+    transition_length: ${servo_transition_length}
+    auto_detach_time: 200ms
+    
+output:
+  - platform: esp8266_pwm
+    id: vent_servo_output
+    pin: D3
+    frequency: 50 Hz
+
+captive_portal:
+    
+wifi:
+  ap: {}
+#  ssid: !secret wifi_ssid
+#  password: !secret wifi_password
+#  manual_ip:
+#    static_ip: !secret static_ip
+#    gateway: !secret gateway
+#    subnet: !secret subnet
+
+# mqtt:
+#   broker: !secret mqtt_broker
+#   username: !secret mqtt_username
+#   password: !secret mqtt_password
+
+web_server:
+
+api:
+
+mdns:
+    
+ota:
+    
+logger:
+  level: INFO
