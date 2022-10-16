@@ -16,3 +16,9 @@ Feel free to follow along in [this video](https://www.youtube.com/watch?v=D073FX
 10. Strip 1/4-3/8 of an inch of insulation off the end of each wire on the Batan B2122.
 11. Tin the wires on the Batan B2122 and each of the corresponding pins on the top of the Power Shield (5V, GND, D3, and A0).
 12. Solder the red wire to 5V, the brown wire to GND, the yellow wire to D3, and the white wire to A0.
+13. Cut two of the left over wires to the length of 2-2.5 inches.
+14. Strip 1/4-3/8 of an inch of insulation off both ends of each wire.
+15. Tin the wires.
+16. Insert the wires through the limit switch pin holes.
+17. Solder the wires to the limit switch pins.
+18. Solder the other ends to 3V3 and D0. It does not matter which is connected to which.
