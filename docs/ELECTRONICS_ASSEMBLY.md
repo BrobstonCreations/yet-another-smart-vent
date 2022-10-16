@@ -12,10 +12,12 @@ Feel free to follow along in [this video which is slightly out of date](https://
 ![4-electronics-and-spacer-inserted-side](https://user-images.githubusercontent.com/4724577/184462880-a24e45a4-a4ad-46f9-a712-220e4b8e3bc7.jpg)
 7. Solder the pins to the DC Power Shield.
 8. Remove the spacer.
-9. Cut the wires on the Batan B2122 to a length of 2-2.5 inches.
-10. Strip 1/4-3/8 of an inch of insulation off the end of each wire on the Batan B2122.
-11. Tin the wires on the Batan B2122 and each of the corresponding pins on the top of the Power Shield (5V, GND, D3, and A0).
-12. Solder the red wire to 5V, the brown wire to GND, the yellow wire to D3, and the white wire to A0.
+9. Cut the wires on the Servo Motor to a length of 2-2.5 inches.
+10. Strip 1/4-3/8 of an inch of insulation off the end of each wire on the Servo Motor.
+11. Tin the wires on the Servo Motor and each of the corresponding pins on the top of the Power Shield (5V, GND, D3, and A0).
+12. Solder the wires to the top of the Power Shield:
+    - DFRobot DMS-MG90-A: red wire to 5V, the black wire to GND, the white wire to D3, and the brown wire to A0.
+    - Batan B2122: red wire to 5V, the brown wire to GND, the yellow wire to D3, and the white wire to A0.
 13. Cut two of the left over wires to the length of 2-2.5 inches.
 14. Strip 1/4-3/8 of an inch of insulation off both ends of each wire.
 15. Tin the wires.
