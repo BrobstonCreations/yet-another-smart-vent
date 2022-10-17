@@ -27,6 +27,7 @@ Fasteners:
 ![8-levers-and-linkage-with-long-louvers-inserted](https://user-images.githubusercontent.com/4724577/184462877-9377bc6c-6fc8-495e-b406-9b42a3cc4db1.jpg)
 ![9-levers-and-linkage-with-all-louvers-inserted](https://user-images.githubusercontent.com/4724577/184462878-51cd6b13-c3ee-4725-99c2-7410f0e2ecbe.jpg)
 ![10-lever-with-relief-for-servo-wiper-arm-green-arrow](https://user-images.githubusercontent.com/4724577/184462879-4adee34b-79e2-4ce6-a004-337ccf77c1b9.jpg)
+It is not pictured, but there will now be a limit switch attached to the top of the Power Shield, that will need inserted behind the end lever, in the enclosure, and attached with a screw.
 ![11-louvers-linkage-and-levers-with-servo-wiper-inserted](https://user-images.githubusercontent.com/4724577/184462896-a3828875-347e-4179-bc41-33672f6d913d.jpg)
 ![12-levers-linkage-louvers-and-electronics-inserted-in-enclosure-bottom](https://user-images.githubusercontent.com/4724577/184462897-a1f66901-ae13-462b-a94c-76d0e2a3cfe2.jpg)
 ![13-barrel-connector-inserted-through-enclosure-bottom](https://user-images.githubusercontent.com/4724577/184462898-f96d9e06-87a7-475f-950c-dc15a6324474.jpg)
