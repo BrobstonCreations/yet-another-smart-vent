@@ -1,7 +1,7 @@
 ## Components
   - [D1 Mini ESP8266](https://amzn.to/3RKfhDr)
   - [D1 Mini DC Power Shield](https://amzn.to/3x4fysX)
-  - [DMS-MG90A](https://www.mouser.com/ProductDetail/DFRobot/SER0046?qs=vHuUswq2%252BsyGXvdy%2FXoNTA%3D%3D) or [Batan B2122](https://www.adafruit.com/product/1450)
+  - [DFRobot DMS-MG90-A](https://www.mouser.com/ProductDetail/DFRobot/SER0046?qs=vHuUswq2%252BsyGXvdy%2FXoNTA%3D%3D) or [Batan B2122](https://www.adafruit.com/product/1450)
   - [Panasonic ESE-11HS2 Limit Switch](https://www.mouser.com/ProductDetail/Panasonic/ESE-11HS2?qs=9gtMhpKs0nED1IJHMbhnrw%3D%3D)
   - Power Source Options:
       - [AC Adapter](https://amzn.to/3qifrGf)
