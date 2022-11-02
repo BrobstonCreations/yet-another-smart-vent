@@ -12,6 +12,6 @@
           - [IEC Power Cable 5ft](https://amzn.to/3BouswU)
           - Fork spade crimp terminals, fully insulated female spade terminal, and some stranded wire for load/neutral/ground between the IEC Socket and the Power Supply.
           - [Wiring to run through duct work](https://github.com/TonyBrobston/yet-another-smart-vent/issues/7#issuecomment-1221660336).
-      - [Battery Pack](https://amzn.to/3RIe2ED) (not currently recommended, needs development for power saving mode).
+      - [Battery Pack](https://amzn.to/3RIe2ED) (needs configuration enabled in ESPHome and testing).
 
 *This page contains some Amazon Affiliate links, they help me support this project at no cost to you.
