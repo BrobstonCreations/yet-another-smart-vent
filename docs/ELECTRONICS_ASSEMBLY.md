@@ -1,7 +1,7 @@
 ## Electronics Assembly
 Feel free to follow along in [this video which is slightly out of date](https://www.youtube.com/watch?v=D073FX6kdh8) or read the written instructions below:
 
-1. Snap off header pins from one of the header pin blocks that came with your components. You will need a header pin for 5V, GND, D3, A0, and 3V3.
+1. Snap off header pins from one of the header pin blocks that came with your components. You will need a header pin for 5V, GND, D3, A0, D0, and 3V3.
 2. I would recommend pressing these header pins into a breadboard (long side down) in the correct pattern for the above noted pins on the D1 Mini, this will make soldering the pins to the D1 mini much easier.
 3. Press the D1 Mini on to the pins in the breadboard.
 4. Solder the pins to the D1 Mini.
