@@ -36,8 +36,9 @@ This project contains most everything needed to 3D print, assemble, and flash an
 
 ## Future Features
 - Fix a small bug where ESPHome's Servo Position does not match up with the Servo's Potentiometer's position after physically moving the vent's louvers.
-- Test vents when furnace is heating. (I'm currently printing with [3DFuel Pro PLA+](https://www.3dfuel.com/collections/pro-pla/products/pro-pla-midnight-black-1-75mm) which should work just fine)
+- Test vents when furnace is heating. (I'm currently printing with.
 - Integrate a lever to manually open/close vent louvers. (currently in development)
+- Create 4x14 vent variation.
 - Investigate power saving options for battery pack use.
 - Add functionality to open vent if the central vent control system goes offline.
 - Experiment with 12x12 vent.
