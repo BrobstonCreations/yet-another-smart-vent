@@ -20,6 +20,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
         - [3x10 Vent](https://www.printables.com/model/262311-yet-another-smart-vent-3x10)
         - [4x10 Vent](https://www.printables.com/model/259241-yet-another-smart-vent-4x10)
         - [4x12 Vent](https://www.printables.com/model/259924-yet-another-smart-vent-4x12)
+        - [4x14 Vent](https://www.printables.com/model/334635-yet-another-smart-vent-4x14)
         - [6x8   Vent](https://www.printables.com/model/264778-yet-another-smart-vent-6x8)
         - [6x10 Vent](https://www.printables.com/model/259323-yet-another-smart-vent-6x10)
         - [6x12 Vent](https://www.printables.com/model/259622-yet-another-smart-vent-6x12)
@@ -39,7 +40,6 @@ This project contains most everything needed to 3D print, assemble, and flash an
 - Fix a small bug where ESPHome's Servo Position does not match up with the Servo's Potentiometer's position after physically moving the vent's louvers.
 - Test vents when furnace is heating. (I'm currently printing with.
 - Integrate a lever to manually open/close vent louvers. (currently in development)
-- Create 4x14 vent variation.
 - Investigate power saving options for battery pack use.
 - Add functionality to open vent if the central vent control system goes offline.
 - Experiment with 12x12 vent.
