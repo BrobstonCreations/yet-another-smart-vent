@@ -15,6 +15,7 @@ This project contains most everything needed to 3D print, assemble, and flash an
 2. 3D Printing:
     - [Printing Advice](/docs/VENT_PRINTING.md)
     - [STLs](https://www.printables.com/social/337332-tonyb/collections/241144?o=download_count):
+        - [2x6 Vent](https://www.printables.com/model/347800-yet-another-smart-vent-2x6)
         - [2x10 Vent](https://www.printables.com/model/259777-yet-another-smart-vent-2x10)
         - [2x12 Vent](https://www.printables.com/model/260300-yet-another-smart-vent-2x12)
         - [3x10 Vent](https://www.printables.com/model/262311-yet-another-smart-vent-3x10)
@@ -36,7 +37,6 @@ This project contains most everything needed to 3D print, assemble, and flash an
 - If the previous recommendation is not possible, it may be possible to partially mitigate the static pressure issue by only closing vents (that are in a closed state) to something like 80% closed, when the number of closed vents is greater than, say... 75%. This will be a feature implemented in [mqtt-hvac-vent-control](https://github.com/TonyBrobston/mqtt-hvac-vent-control) in the future.
 
 ## Future Features
-- Create 2x6 vent variation.
 - Experiment with adding heat set inserts rather than threading into plastic.
 - Fix a small bug where ESPHome's Servo Position does not match up with the Servo's Potentiometer's position after physically moving the vent's louvers.
 - Test vents when furnace is heating.
