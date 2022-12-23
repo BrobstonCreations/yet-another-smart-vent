@@ -16,7 +16,7 @@ This project uses ESPHome.
     7. Click "INSTALL".
     8. Click "SKIP".
     9. Click "EDIT" on your newly created ESPHome configuration.
-    10. Copy the configuration from [here](https://raw.githubusercontent.com/BrobstonCreations/yet-another-smart-vent/blob/master/yet_another_smart_vent.yaml) and paste it into the configuration code window.
+    10. Copy the configuration and paste it into the configuration code window.
     11. You will want to update a few values:
       - Change `name` to match the name of your device (aka `vent-living-room-southeast`).
       - Comment out `name_add_mac_suffix: true` if it is present.
