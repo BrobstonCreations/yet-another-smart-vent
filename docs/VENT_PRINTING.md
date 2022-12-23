@@ -1,6 +1,5 @@
 ## Vent Printing
 
-- Currently I have been printing with [3DFuel Pro PLA+](https://www.3dfuel.com/products/pro-pla-midnight-black-1-75mm) for it's heat resistance ([85C or 185F](https://cdn.shopify.com/s/files/1/0027/5339/6848/files/3D870-charts-min_600x600.jpg?v=1614282114)). I have not had a chance to test this filament with the furnace on (it is currently summer). If anyone has experience with this sort of thing please open an issue to discuss.
 - I would recommend printing the louvers with 100% infill. I've printed everything else with 23% infill.
 - I put down a layer of glue stick everywhere that I will be printing, this does a pretty good job for bed adhesion.
 
