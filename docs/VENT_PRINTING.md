@@ -2,6 +2,7 @@
 
 - I would recommend printing the louvers with 100% infill. I've printed everything else with 23% infill.
 - I put down a layer of glue stick everywhere that I will be printing, this does a pretty good job for bed adhesion.
+- With the thin long layers on the electronics enclosure and lid I've added "brim ears" in my slicer (SuperSlicer) and then has resolved warping/curling with ABS.
 
 Here is the correct orientation to print things. Nothing in this picture requires supports, as long as bridging works fine on the inside of the female end of the louvers. What is not pictured includes: four levers (for 4x10) and the vent top.
 ![4x10-on-build-plate](https://user-images.githubusercontent.com/4724577/184463112-e18aceac-d279-469a-ad77-89d0d91e50bf.jpg)
