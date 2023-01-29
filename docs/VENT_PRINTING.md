@@ -1,7 +1,7 @@
 ## Vent Printing
 
 - I would recommend printing the louvers with 100% infill. I've printed everything else with 23% infill or less.
-- I put down a layer of glue stick everywhere that I will be printing, this does a pretty good job for bed adhesion.
+- On my Prusa I put down a layer of glue stick everywhere that I will be printing, this does a pretty good job for bed adhesion. On my RatRig with the Filament PEI, I haven't needed any gluestick.
 - With the thin long layers on the electronics enclosure and lid I've added "brim ears" when slicing (with SuperSlicer) and this has resolved warping/curling with ABS.
 
 Here is the correct orientation to print things. Nothing in this picture requires supports, as long as bridging works fine on the inside of the female end of the louvers. What is not pictured includes: four levers (for 4x10) and the vent top.
