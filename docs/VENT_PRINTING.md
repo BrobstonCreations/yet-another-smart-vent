@@ -23,4 +23,4 @@ The next time I print the levers I will add more pictures, in general the proces
 
 ### Vent Top
 - The vent top should be printed upside down.
-- Supports are needed for the corner tabs and any overhangs that are parallel with the print bed, like the overhangs that the bottom of the M5 screw head presses against when installed. These models will soon move to using sacrificial layers where possible, so supports for the last sentence may not be needed.
+- Supports are needed for any overhangs that are parallel with the print bed, like the overhangs that the bottom of the M5 screw head presses against when installed.
