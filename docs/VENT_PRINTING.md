@@ -1,6 +1,6 @@
 ## Vent Printing
 
-- I would recommend printing the louvers with 100% infill. I've printed everything else with 23% infill.
+- I would recommend printing the louvers with 100% infill. I've printed everything else with 23% infill or less.
 - I put down a layer of glue stick everywhere that I will be printing, this does a pretty good job for bed adhesion.
 - With the thin long layers on the electronics enclosure and lid I've added "brim ears" when slicing (with SuperSlicer) and this has resolved warping/curling with ABS.
 
