@@ -37,7 +37,6 @@ This project contains most everything needed to 3D print, assemble, and flash an
 
 ## Future Features
 - Create 8x14 variation.
-- Experiment with adding heat set inserts rather than threading into plastic.
 - Fix a small bug where ESPHome's Servo Position does not match up with the Servo's Potentiometer's position after physically moving the vent's louvers.
 - Test vents when furnace is heating.
 - Integrate a lever to manually open/close vent louvers. (currently in development)
