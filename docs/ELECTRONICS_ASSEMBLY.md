@@ -23,4 +23,4 @@ Feel free to follow along in [this video which is slightly out of date](https://
 15. Tin the wires.
 16. Insert the wires through the limit switch pin holes.
 17. Solder the wires to the limit switch pins.
-18. Solder the other ends to 3V3 and D0. It does not matter which is connected to which.
+18. Solder the other ends to **3V3** and **D0**. It does not matter which is connected to which.
