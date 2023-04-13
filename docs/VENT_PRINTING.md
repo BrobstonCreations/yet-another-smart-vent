@@ -1,5 +1,5 @@
 ## Vent Printing
-
+- I would recommend ABS or ASA or any other higher temperature filament. I cannot recommend PLA, I tested with this early on and after a winter of heat most of them have warped.
 - I would recommend printing the louvers with 100% infill. I've printed everything else with 23% infill or less.
 - On my Prusa I put down a layer of glue stick everywhere that I will be printing, this does a pretty good job for bed adhesion. On my RatRig with the Fulament PEI sheet, I haven't needed any gluestick for ABS.
 - With the thin long layers on the electronics enclosure and lid I've added "brim ears" when slicing (with SuperSlicer) and this has resolved warping/curling with ABS.
