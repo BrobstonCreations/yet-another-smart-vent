@@ -1,0 +1,21 @@
+substitutions:
+  ninety_degree_servo_distance: '0.77'
+  servo_transition_length: 7s
+  invert_value: '1'
+
+i2c:
+  sda: 4
+  scl: 5
+  scan: true
+  id: bus_a
+
+sensor:
+  - platform: aht10
+    temperature:
+      name: "Temperature"
+    humidity:
+      name: "Humidity"
+    update_interval: 60s
+
+packages:
+  device_base: !include common/yet-another-smart-vent-base.yaml
