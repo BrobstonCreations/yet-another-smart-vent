@@ -6,7 +6,7 @@ For a rough idea of how to do this, feel free to follow along in [this video whi
 3. Press the D1 Mini on to the pins in the breadboard.
 4. Solder the pins to the D1 Mini.
 5. Once these pins are soldered, I would recommend removing the D1 Mini from the breadboard and clip it into a [third hand](https://en.wikipedia.org/wiki/Helping_hand_(tool)).
-6. If you are planning to use [deep sleep functionality](https://esphome.io/components/deep_sleep.html) to save power, which is intended for battery use, you will need to cut a short length of wire, strip a small amount of insulation off each end, and from the bottom side of the board, solder **RST** to **D0**.
+6. **OPTIONAL:** If you are planning to use [deep sleep functionality](https://esphome.io/components/deep_sleep.html) to save power, which is intended for battery use, you will need to cut a short length of wire, strip a small amount of insulation off each end, and from the bottom side of the board, solder **RST** to **D0**.
 7. Now you should be able to press the DC Power Shield onto the pins you soldered to the D1 Mini. Be sure to insert the [spacer](https://www.printables.com/model/259295-esp-shield-solder-spacer) before soldering.
 8. Solder the pins to the DC Power Shield.
 9. Remove the spacer.
@@ -22,3 +22,4 @@ For a rough idea of how to do this, feel free to follow along in [this video whi
 17. Insert the wires through the limit switch pin holes.
 18. Solder the wires to the limit switch pins.
 19. Solder the other ends to **D7** and **GND**. It does not matter which is connected to which. Note: You will now have two wires soldered to **GND**.
+20. **OPTIONAL:** If you are wanting to monitor temperature and humidity entering the room, you can add an [AHT10 Sensor](https://esphome.io/components/sensor/aht10.html). You will need to use some extra wire from the servo, cut these wires to 1.25-1.5 inches, strip a small amount of insulation off each end of each wire, and solder to make these connections: **VIN** -> **3V3**, **GND** -> **GND**, **SCL** -> **D1**, **SDA** -> **D2**. Note: You will now have three wires soldered to **GND**.
