@@ -62,7 +62,7 @@ If you want to build this manually using docker, run this the command from withi
 ```
 docker run -v .:/config esphome/esphome compile yet-another-smart-vent-dfrobot-dms-mg90-a.yaml
 ```
+After this command runs, `firmware.bin` will be created at this path from the current directory: `.esphome/build/yet-another-smart-vent/.pioenvs/yet-another-smart-vent/firmware.bin`.
 
 ## Support
 If you like the work I do and want to give back, consider [buying me a coffee ☕](https://www.buymeacoffee.com/brocreates) or making a donation via [PayPal](https://www.paypal.com/donate/?hosted_button_id=BXK8JW6A2FZLE) or [Stripe](https://buy.stripe.com/7sI7t03JC9GUf4c6oo).
-After this command runs, `firmware.bin` will be created at this path from the current directory: `.esphome/build/yet-another-smart-vent/.pioenvs/yet-another-smart-vent/firmware.bin`.
