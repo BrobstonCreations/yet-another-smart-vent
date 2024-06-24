@@ -26,6 +26,11 @@ esphome:
   on_boot:
     priority: -100
     then:
+      - script.execute: calibrate_open_close
+
+script:
+  - id: calibrate_open_close
+    then:
     - servo.write:
         id: vent_servo
         level: 0
@@ -34,13 +39,13 @@ esphome:
         condition:
           lambda: 'return !id(closed_limit_switch).state;'
         then:
-            - globals.set:
-                id: position_to_move_servo_to
-                value: !lambda 'return id(position_to_move_servo_to) - id(servo_distance_to_move) * ${invert_value};'
-            - servo.write:
-                id: vent_servo
-                level: !lambda 'return id(position_to_move_servo_to);'
-            - delay: 75ms
+          - globals.set:
+              id: position_to_move_servo_to
+              value: !lambda 'return id(position_to_move_servo_to) - id(servo_distance_to_move) * ${invert_value};'
+          - servo.write:
+              id: vent_servo
+              level: !lambda 'return id(position_to_move_servo_to);'
+          - delay: 75ms
     - globals.set:
         id: closed_position
         value: !lambda 'return id(position_to_move_servo_to);'
@@ -84,12 +89,15 @@ cover:
     lambda: 'return id(closed_limit_switch).state ? COVER_CLOSED : COVER_OPEN;'
 
 binary_sensor:
+  - platform: status
+    name: "Status"
   - platform: gpio
     pin: 
-      number: 16
+      number: D7
       mode:
         input: true
-        pulldown: true
+        pullup: true
+      inverted: true
     id: closed_limit_switch
   
 sensor:
@@ -107,7 +115,7 @@ servo:
 output:
   - platform: esp8266_pwm
     id: vent_servo_output
-    pin: D3
+    pin: D5
     frequency: 50 Hz
 
 captive_portal:
