@@ -141,6 +141,7 @@ api:
 mdns:
     
 ota:
+  - platform: esphome
     
 logger:
   level: INFO
