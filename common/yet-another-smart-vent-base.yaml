@@ -31,38 +31,42 @@ esphome:
 script:
   - id: calibrate_open_close
     then:
-    - servo.write:
-        id: vent_servo
-        level: 0
-    - delay: 225ms
-    - while:
+    - if:
         condition:
-          lambda: 'return !id(closed_limit_switch).state;'
+          lambda: 'return ESP.getResetReason() != "Deep-Sleep Wake";'
         then:
-          - globals.set:
-              id: position_to_move_servo_to
-              value: !lambda 'return id(position_to_move_servo_to) - id(servo_distance_to_move) * ${invert_value};'
           - servo.write:
               id: vent_servo
-              level: !lambda 'return id(position_to_move_servo_to);'
-          - delay: 75ms
-    - globals.set:
-        id: closed_position
-        value: !lambda 'return id(position_to_move_servo_to);'
-    - globals.set:
-        id: closed_potentiometer_position
-        value: !lambda 'return id(vent_servo_potentiometer).sample();'
-    - delay: 225ms
-    - servo.write:
-        id: vent_servo
-        level: !lambda 'return id(position_to_move_servo_to) + ${ninety_degree_servo_distance} * ${invert_value};'
-    - delay: 3s
-    - globals.set:
-        id: opened_position
-        value: !lambda 'return id(position_to_move_servo_to) + ${ninety_degree_servo_distance} * ${invert_value};'
-    - globals.set:
-        id: opened_potentiometer_position
-        value: !lambda 'return id(vent_servo_potentiometer).sample();'
+              level: 0
+          - delay: 225ms
+          - while:
+              condition:
+                lambda: 'return !id(closed_limit_switch).state;'
+              then:
+                - globals.set:
+                    id: position_to_move_servo_to
+                    value: !lambda 'return id(position_to_move_servo_to) - id(servo_distance_to_move) * ${invert_value};'
+                - servo.write:
+                    id: vent_servo
+                    level: !lambda 'return id(position_to_move_servo_to);'
+                - delay: 75ms
+          - globals.set:
+              id: closed_position
+              value: !lambda 'return id(position_to_move_servo_to);'
+          - globals.set:
+              id: closed_potentiometer_position
+              value: !lambda 'return id(vent_servo_potentiometer).sample();'
+          - delay: 225ms
+          - servo.write:
+              id: vent_servo
+              level: !lambda 'return id(position_to_move_servo_to) + ${ninety_degree_servo_distance} * ${invert_value};'
+          - delay: 3s
+          - globals.set:
+              id: opened_position
+              value: !lambda 'return id(position_to_move_servo_to) + ${ninety_degree_servo_distance} * ${invert_value};'
+          - globals.set:
+              id: opened_potentiometer_position
+              value: !lambda 'return id(vent_servo_potentiometer).sample();'
 
 cover:
   - platform: template
