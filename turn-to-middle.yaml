@@ -17,7 +17,7 @@ servo:
 output:
   - platform: esp8266_pwm
     id: vent_servo_output
-    pin: D3
+    pin: D5
     frequency: 50 Hz
 
 logger:
