@@ -19,7 +19,7 @@ output:
     id: vent_servo_output
     pin: D5
     frequency: 50 Hz
-
+    
 captive_portal:
 
 wifi:
@@ -29,7 +29,7 @@ wifi:
 web_server:
 
 api:
-
+    
 ota:
 
 logger:
