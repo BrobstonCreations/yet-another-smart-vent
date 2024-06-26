@@ -23,14 +23,24 @@ output:
 captive_portal:
 
 wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
+  ap: {}
+#  ssid: !secret wifi_ssid
+#  password: !secret wifi_password
+#  manual_ip:
+#    static_ip: !secret static_ip
+#    gateway: !secret gateway
+#    subnet: !secret subnet
+# mqtt:
+#   broker: !secret mqtt_broker
+#   username: !secret mqtt_username
+#   password: !secret mqtt_password
 
 web_server:
 
 api:
     
 ota:
+  - platform: esphome
 
 logger:
   level: INFO
