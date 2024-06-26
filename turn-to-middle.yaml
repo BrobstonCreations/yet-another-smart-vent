@@ -20,5 +20,17 @@ output:
     pin: D5
     frequency: 50 Hz
 
+captive_portal:
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+web_server:
+
+api:
+
+ota:
+
 logger:
   level: INFO
