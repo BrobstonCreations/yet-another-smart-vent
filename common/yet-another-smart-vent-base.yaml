@@ -122,6 +122,10 @@ output:
     pin: D5
     frequency: 50 Hz
 
+button:
+  - platform: factory_reset
+    name: Restart with Factory Default Settings
+
 captive_portal:
     
 wifi:
