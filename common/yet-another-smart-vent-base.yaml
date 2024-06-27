@@ -7,15 +7,20 @@ globals:
     initial_value: '0.01'
   - id: closed_position
     type: float
+    restore_value: true
   - id: closed_potentiometer_position
     type: float
+    restore_value: true
   - id: opened_position
     type: float
+    restore_value: true
   - id: opened_potentiometer_position
     type: float
+    restore_value: true
 
 esp8266:
   board: d1_mini
+  restore_from_flash: true
 
 esphome:
   name: yet-another-smart-vent
@@ -115,6 +120,7 @@ servo:
     output: vent_servo_output
     transition_length: ${servo_transition_length}
     auto_detach_time: 200ms
+    restore: true
     
 output:
   - platform: esp8266_pwm
