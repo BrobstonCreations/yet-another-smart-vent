@@ -1,0 +1,20 @@
+substitutions:
+  ninety_degree_servo_distance: '0.77'
+  servo_transition_length: 7s
+  invert_value: '1'
+
+esphome:
+  on_boot:
+    then:
+      - deep_sleep.prevent: vent_deep_sleep
+      - script.execute: calibrate_open_close
+      - wait_until: wifi.connected
+      - deep_sleep.allow: vent_deep_sleep
+
+deep_sleep:
+  id: vent_deep_sleep
+  run_duration: 35s
+  sleep_duration: 10min
+
+packages:
+  device_base: !include common/yet-another-smart-vent-base.yaml
