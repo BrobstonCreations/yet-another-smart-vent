@@ -7,15 +7,20 @@ globals:
     initial_value: '0.01'
   - id: closed_position
     type: float
+    restore_value: true
   - id: closed_potentiometer_position
     type: float
+    restore_value: true
   - id: opened_position
     type: float
+    restore_value: true
   - id: opened_potentiometer_position
     type: float
+    restore_value: true
 
 esp8266:
   board: d1_mini
+  restore_from_flash: true
 
 esphome:
   name: yet-another-smart-vent
@@ -26,38 +31,54 @@ esphome:
   on_boot:
     priority: -100
     then:
-    - servo.write:
-        id: vent_servo
-        level: 0
-    - delay: 225ms
-    - while:
+      - script.execute: calibrate_open_close
+
+script:
+  - id: calibrate_open_close
+    then:
+    - if:
         condition:
-          lambda: 'return !id(closed_limit_switch).state;'
+          lambda: 'return ESP.getResetReason() != "Deep-Sleep Wake";'
         then:
-            - globals.set:
-                id: position_to_move_servo_to
-                value: !lambda 'return id(position_to_move_servo_to) - id(servo_distance_to_move) * ${invert_value};'
-            - servo.write:
-                id: vent_servo
-                level: !lambda 'return id(position_to_move_servo_to);'
-            - delay: 75ms
-    - globals.set:
-        id: closed_position
-        value: !lambda 'return id(position_to_move_servo_to);'
-    - globals.set:
-        id: closed_potentiometer_position
-        value: !lambda 'return id(vent_servo_potentiometer).sample();'
-    - delay: 225ms
-    - servo.write:
-        id: vent_servo
-        level: !lambda 'return id(position_to_move_servo_to) + ${ninety_degree_servo_distance} * ${invert_value};'
-    - delay: 3s
-    - globals.set:
-        id: opened_position
-        value: !lambda 'return id(position_to_move_servo_to) + ${ninety_degree_servo_distance} * ${invert_value};'
-    - globals.set:
-        id: opened_potentiometer_position
-        value: !lambda 'return id(vent_servo_potentiometer).sample();'
+          - while:
+              condition:
+                lambda: 'return id(closed_limit_switch).state;'
+              then:
+                - globals.set:
+                    id: position_to_move_servo_to
+                    value: !lambda 'return id(position_to_move_servo_to) + id(servo_distance_to_move) * ${invert_value};'
+                - servo.write:
+                    id: vent_servo
+                    level: !lambda 'return id(position_to_move_servo_to);'
+                - delay: 75ms
+          - while:
+              condition:
+                lambda: 'return !id(closed_limit_switch).state;'
+              then:
+                - globals.set:
+                    id: position_to_move_servo_to
+                    value: !lambda 'return id(position_to_move_servo_to) - id(servo_distance_to_move) * ${invert_value};'
+                - servo.write:
+                    id: vent_servo
+                    level: !lambda 'return id(position_to_move_servo_to);'
+                - delay: 75ms
+          - globals.set:
+              id: closed_position
+              value: !lambda 'return id(position_to_move_servo_to);'
+          - globals.set:
+              id: closed_potentiometer_position
+              value: !lambda 'return id(vent_servo_potentiometer).sample();'
+          - delay: 225ms
+          - servo.write:
+              id: vent_servo
+              level: !lambda 'return id(position_to_move_servo_to) + ${ninety_degree_servo_distance} * ${invert_value};'
+          - delay: 3s
+          - globals.set:
+              id: opened_position
+              value: !lambda 'return id(position_to_move_servo_to) + ${ninety_degree_servo_distance} * ${invert_value};'
+          - globals.set:
+              id: opened_potentiometer_position
+              value: !lambda 'return id(vent_servo_potentiometer).sample();'
 
 cover:
   - platform: template
@@ -84,12 +105,15 @@ cover:
     lambda: 'return id(closed_limit_switch).state ? COVER_CLOSED : COVER_OPEN;'
 
 binary_sensor:
+  - platform: status
+    name: "Status"
   - platform: gpio
     pin: 
-      number: 16
+      number: D7
       mode:
         input: true
-        pulldown: true
+        pullup: true
+      inverted: true
     id: closed_limit_switch
   
 sensor:
@@ -103,12 +127,17 @@ servo:
     output: vent_servo_output
     transition_length: ${servo_transition_length}
     auto_detach_time: 200ms
+    restore: true
     
 output:
   - platform: esp8266_pwm
     id: vent_servo_output
-    pin: D3
+    pin: D5
     frequency: 50 Hz
+
+button:
+  - platform: factory_reset
+    name: Restart with Factory Default Settings
 
 captive_portal:
     
@@ -133,6 +162,7 @@ api:
 mdns:
     
 ota:
+  - platform: esphome
     
 logger:
   level: INFO
